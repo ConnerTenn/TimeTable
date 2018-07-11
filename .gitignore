@@ -1,28 +1,22 @@
-# Prerequisites
-*.d
 
-# Compiled Object files
-*.slo
-*.lo
+# Directories
+[Dd]ebug/
+[Rr]elease/
+[Bb]uild/
+.vscode/
+.vs/
+
+# Object Files
 *.o
 *.obj
 
 # Precompiled Headers
-*.gch
 *.pch
 
 # Compiled Dynamic libraries
-*.so
-*.dylib
 *.dll
 
-# Fortran module files
-*.mod
-*.smod
-
 # Compiled Static libraries
-*.lai
-*.la
 *.a
 *.lib
 
@@ -30,3 +24,6 @@
 *.exe
 *.out
 *.app
+*.html
+*.sln
+*.vcx*
