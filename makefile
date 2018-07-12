@@ -4,16 +4,23 @@ GPP=g++ -std=c++17 -Wall -lncurses -lcurl -lpthread $F $T
 D=Build
 T=
 
-all: dir $D/run.exe
+all: begin dir $D/run.exe
 
-dir:
+begin:
+	echo -e "\e[1;36m == Starting Build ==\e[0m"
+
+dir: begin
 	mkdir -p $D
 
-$D/run.exe: dir $D/main.o
-	$(GPP) $D/main.o -o $D/run.exe
-	
-$D/main.o: dir main.cpp
+$D/run.exe: dir $D/main.o $D/Schedule.o
+	$(GPP) $D/main.o $D/Schedule.o -o $D/run.exe
+	echo -e "\e[1;36m == Done Build ==\e[0m\n"
+
+$D/main.o: dir main.cpp Schedule.h Parser.h
 	$(GPP) main.cpp -c -o $D/main.o
+	
+$D/Schedule.o: dir Schedule.cpp Schedule.h
+	$(GPP) Schedule.cpp -c -o $D/Schedule.o
 	
 run: all
 	$D/run.exe
