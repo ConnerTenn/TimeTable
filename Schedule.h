@@ -16,7 +16,7 @@ struct TimeSlot
 	int Start;
 	int End;
 	
-	bool Conflict(TimeSlot &other);
+	bool Conflict(TimeSlot *other);
 };
 
 struct Section
@@ -24,17 +24,18 @@ struct Section
 	std::string Number;
 	std::vector <TimeSlot> TimeSlots;
 	
-	bool Conflict(Section &other);
+	bool Conflict(Section *other);
 };
 
 struct Course
 {
 	std::string Code;
 	
-	int SelectedIndex = 0;
+	int SelectedSection = 0;
 	std::vector <Section> Sections;
 	
-	bool Conflict(Course &other);
+	//bool Conflict(Course *other);
+	Section *GetSection();
 };
 
 struct Schedule
