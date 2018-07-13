@@ -12,8 +12,8 @@ begin:
 dir: begin
 	mkdir -p $D
 
-$D/run.exe: dir $D/main.o $D/Schedule.o
-	$(GPP) $D/main.o $D/Schedule.o -o $D/run.exe
+$D/run.exe: dir $D/main.o $D/Schedule.o $D/Parser.o
+	$(GPP) $D/main.o $D/Schedule.o $D/Parser.o -o $D/run.exe
 	echo -e "\e[1;36m == Done Build ==\e[0m\n"
 
 $D/main.o: dir main.cpp Schedule.h Parser.h
@@ -21,6 +21,9 @@ $D/main.o: dir main.cpp Schedule.h Parser.h
 	
 $D/Schedule.o: dir Schedule.cpp Schedule.h
 	$(GPP) Schedule.cpp -c -o $D/Schedule.o
+	
+$D/Parser.o: dir Parser.cpp Parser.h
+	$(GPP) Parser.cpp -c -o $D/Parser.o
 	
 run: all
 	$D/run.exe
