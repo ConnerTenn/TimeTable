@@ -40,6 +40,7 @@ private:
 		E_Parent,
 		E_Child,
 		E_Sibling,
+		E_Next,
 		/*E_Value,
 		E_Content,
 		S_Name,
@@ -83,6 +84,8 @@ public:
 	
 	bool OpenHtml(std::string fileName);
 	void CloseHtml();
+	
+	void PrintRemoveTags();
 };
 
 void Parse(std::vector<std::string> CourseCodes);

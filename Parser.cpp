@@ -73,12 +73,12 @@ void HtmlParser::Traverse(HtmlEvents stopCondition)
 					if (level == 0) 
 					{ 
 						sibling++;
-						if (stopCondition == E_Sibling) { return; }
+						if (stopCondition == E_Sibling || stopCondition == E_Next) { return; }
 					}
 					//child
 					else
 					{
-						if (stopCondition == E_Child) { return; }
+						if (stopCondition == E_Child || stopCondition == E_Next) { return; }
 					}
 				}
 			}
@@ -90,7 +90,7 @@ void HtmlParser::Traverse(HtmlEvents stopCondition)
 				//parent
 				state = S_Content;
 				level--;
-				if (stopCondition == E_Parent) { return; }
+				if (stopCondition == E_Parent || stopCondition == E_Next) { return; }
 			}
 		}
 		
@@ -228,16 +228,22 @@ void Parse(std::vector<std::string> CourseCodes)
 	
 	sectionParser = parser;
 	sectionParser.NavNextSibling(); sectionParser.NavNextSibling(); sectionParser.NavNextSibling(); sectionParser.NavNextSibling(); sectionParser.NavNextSibling(); 
-	
 	contentParser = sectionParser;
 	contentParser.NavChild();  contentParser.NavChild(); 
 	
 	
-	std::cout << "Read: <"  << contentParser.GetName() << "  ";
-	std::vector<HtmlLabel> labels = contentParser.GetLabels();
-	for (int i = 0; i < (int)labels.size(); i++) { std::cout << labels[i].Label << "=\"" << labels[i].Content << "\" "; }
-	std::cout << ">\n";
+	//std::cout << "Read: <"  << contentParser.GetName() << "  ";
+	//std::vector<HtmlLabel> labels = contentParser.GetLabels();
+	//for (int i = 0; i < (int)labels.size(); i++) { std::cout << labels[i].Label << "=\"" << labels[i].Content << "\" "; }
+	//std::cout << ">\n";
 	std::cout << "Content: \"" << contentParser.GetContent() << "\"\n";
+	
+	//sectionParser = parser;
+	sectionParser.NavNextSibling(); sectionParser.NavNextSibling();
+	contentParser = sectionParser;
+	contentParser.NavChild();  contentParser.NavChild(); sectionParser.NavNextSibling(); sectionParser.NavNextSibling(); contentParser.NavChild(); 
+	std::cout << "Content: \"" << contentParser.GetContent() << "\"\n";
+	
 	
 	parser.CloseHtml();
 }
@@ -270,3 +276,16 @@ void HtmlParser::CloseHtml()
 {
 	if (Html) { delete[] Html; Html = 0; }
 }
+
+/*void HtmlParser::PrintRemoveTags()
+{
+	bool print = true;
+	int i = 0;
+	while (i < Length)
+	{
+		if (Html[i] == '<') { print = false; }
+		else if (Html[i] == '>') { print = true; }
+		else { if (print) { std::cout << Html[i]; } }
+		i++;
+	}
+}*/
