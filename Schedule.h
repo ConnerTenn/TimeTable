@@ -3,8 +3,13 @@
 #define _SCHEDULE_H_
 
 #include <iostream>
+#include <cstring>
 #include <string>
 #include <vector>
+
+#define MAX(a,b) ((a) > (b) ? (a) : (b))
+#define MIN(a,b) ((a) < (b) ? (a) : (b))
+//#define BITCOMP(var,bits,mask) ((var) & (bits) == (bits) ? true : false)
 
 typedef unsigned char u8;
 typedef unsigned short u16;

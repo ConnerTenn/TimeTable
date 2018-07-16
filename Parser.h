@@ -4,9 +4,6 @@
 
 #include "Schedule.h"
 
-#define MAX(a,b) ((a) > (b) ? (a) : (b))
-#define MIN(a,b) ((a) < (b) ? (a) : (b))
-
 struct HtmlLabel
 {
 	std::string Label;
@@ -52,6 +49,8 @@ private:
 	};
 	
 public:
+	HtmlParser();
+	HtmlParser(HtmlParser &other, bool copy = false);
 	~HtmlParser();
 	
 	inline long GetPos() { return Pos; }
