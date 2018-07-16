@@ -23,16 +23,16 @@ private:
 private:
 	enum HtmlStates
 	{
-		S_Head = 	0b00001,
-		S_Tail = 	0b00010,
-		S_Open = 	0b00100,
-		S_Close = 	0b01000,
+		S_Head = 	0b00000001,
+		S_Tail = 	0b00000010,
+		S_Open = 	0b00000100,
+		S_Close = 	0b00001000,
 		
-		S_Name = 	0b01100,
-		S_Label = 	0b100000,
-		S_Value =	0b101000,
-		S_Content =	0b110000,
-		S_Unknown = 0b111000,
+		S_Name = 	0b00010000,
+		S_Label = 	0b00100000,
+		S_Value =	0b01000000,
+		S_Content =	0b10000000,
+		//S_Unknown = 0b10000000
 	};
 
 	enum HtmlEvents

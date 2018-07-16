@@ -24,11 +24,20 @@ void HtmlParser::Traverse(HtmlEvents stopCondition)
 {	
 	u8 state = S_Head;
 	int level = 0, sibling = 0;
+	std::string name;
+	
 	Pos++;
 	while(1) //handle stop condition
 	{
 		if (state & S_Head)
 		{
+			if (isalpha(Html[Pos]) && !(state & S_Label)) { 
+				state = state | S_Name; }
+			else { name.clear(); state = S_Head | S_Label; }
+			if (state & S_Name) { 
+				name+=Html[Pos]; }
+			if (name == "input") { 
+				state = S_Tail; }
 			if (Html[Pos] == '>')
 			{
 				state = S_Content;
@@ -181,7 +190,13 @@ std::vector<HtmlLabel> HtmlParser::GetLabels()
 
 std::string HtmlParser::GetContent()
 {
-	return "";
+	std::string content;
+	int pos = Pos+1;
+	while (Html[pos] != '>') { pos++; } 
+	pos++;
+	while (Html[pos] != '<') { content+=Html[pos]; pos++; }
+	
+	return content;
 }
 
 std::string HtmlParser::ReadRaw(long len)
