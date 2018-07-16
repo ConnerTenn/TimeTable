@@ -1,51 +1,14 @@
 
 #include "Parser.h"
 
-void HtmlParser::Traverse(HtmlEvents stopCondition, int stopLevel)
+HtmlParser::~HtmlParser()
+{
+	CloseHtml();
+}
+
+
+void HtmlParser::Traverse(HtmlEvents stopCondition)
 {	
-	/*Pos += dir;
-	while(1)
-	{
-		if (state & S_Head)
-		{
-			if (state == (S_Head | S_Open))
-			{
-				while(!isalpha((*Html)[Pos])) { Pos++; }
-				state = S_Head | S_Name;
-			}
-			else if (state == (S_Head | S_Name))
-			{
-				while(isalpha((*Html)[Pos])) { Pos++; }
-				while(!isalpha((*Html)[Pos])) { Pos++; }
-				state = S_Head | S_Label;
-			}
-			else if (state == (S_Head | S_Label))
-			{
-				while((*Html)[Pos] != '=') { Pos++; }
-				Pos++;
-				state = S_Head | S_Value;
-			}
-			else if (state == (S_Head | S_Value))
-			{
-				if ((*Html)[Pos] == '"')
-				{
-					Pos++;
-					while((*Html)[Pos] != '"') { Pos++; }
-				}
-				else
-				{
-						
-				}
-				
-				state = S_Head | S_Value;
-			}
-		}
-		else if (state & S_Tail)
-		{
-			
-		}
-	}*/
-	
 	u8 state = S_Head;
 	int level = 0, sibling = 0;
 	Pos++;
@@ -53,17 +16,17 @@ void HtmlParser::Traverse(HtmlEvents stopCondition, int stopLevel)
 	{
 		if (state & S_Head)
 		{
-			if ((*Html)[Pos] == '>')
+			if (Html[Pos] == '>')
 			{
 				state = S_Content;
 			}
 		}
 		else if (state & S_Content)
 		{
-			if ((*Html)[Pos] == '<')
+			if (Html[Pos] == '<')
 			{
 				Pos++;
-				if ((*Html)[Pos] == '/')
+				if (Html[Pos] == '/')
 				{
 					state = S_Tail;
 				}
@@ -72,25 +35,25 @@ void HtmlParser::Traverse(HtmlEvents stopCondition, int stopLevel)
 					//child
 					state = S_Head;
 					level++;
-					if (stopCondition == E_Child && stopLevel == level) { return; }
+					if (stopCondition == E_Child) { return; }
 					
 					//sibling
 					if (level == 0) 
 					{ 
 						sibling++;
-						if (stopCondition == E_Child && stopLevel == sibling) { return; }
+						if (stopCondition == E_Child) { return; }
 					}
 				}
 			}
 		}
 		else if (state & S_Tail)
 		{
-			if ((*Html)[Pos] == '>')
+			if (Html[Pos] == '>')
 			{
 				//parent
 				state = S_Content;
 				level--;
-				if (stopCondition == E_Parent && stopLevel == -level) { return; }
+				if (stopCondition == E_Parent) { return; }
 			}
 		}
 		
@@ -107,12 +70,12 @@ void HtmlParser::NavParent()
 
 void HtmlParser::NavChild()
 {
-	
+	Traverse(E_Child);
 }
 
 void HtmlParser::NavNextSibling()
 {
-	
+	Traverse(E_Sibling);
 }
 
 void HtmlParser::NavPrevSibling()
@@ -122,7 +85,38 @@ void HtmlParser::NavPrevSibling()
 
 void HtmlParser::Alighn(int dir)
 {
+	u8 state = 0;
+	if (dir < 0)
+	{
+		while (Pos > 0)
+		{
+			if (state == 1 && isalpha(Html[Pos])) 
+			{
+				state = 1;
+			}
+			
+		}
+	}
+}
+
+bool HtmlParser::Find(std::string str)
+{
+	long i = 0, offset = 0, start = -1;
 	
+	while (i < (int)str.size() && Pos + offset < Length)
+	{
+		if (Html[Pos+offset] == str[i]) 
+		{ 
+			i++; 
+			if (start < 0) { start = Pos + offset; }
+			offset++; 
+		}
+		else if (i > 0) { i = 0; start = -1; }
+		else { offset++; }
+	}
+	
+	if ( i == (int)str.size() && start >= 0 && start < Length ) { Pos = start; return true; }
+	else { return false; }
 }
 
 
@@ -141,6 +135,11 @@ std::string HtmlParser::GetContent()
 	return "";
 }
 
+std::string HtmlParser::ReadRaw(long len)
+{
+	return std::string(Html+Pos, len);
+}
+
 
 void Parse(std::vector<std::string> CourseCodes)
 {
@@ -149,4 +148,33 @@ void Parse(std::vector<std::string> CourseCodes)
 	
 	
 	
+}
+
+bool HtmlParser::OpenHtml(std::string fileName)
+{
+	if (Html) { CloseHtml(); }
+	
+	Pos = 0;
+	Length = 0;
+	
+	FILE *file = 0;
+	
+	file = fopen(fileName.c_str(), "r");
+	if (!file) { return false; }	
+	
+	fseek(file, 0, SEEK_END);
+	Length = ftell(file);
+	fseek(file, 0, SEEK_SET);
+	
+	Html = new char[Length];
+	fread(Html, 1, Length, file);
+	
+	fclose(file);
+	
+	return true;
+}
+
+void HtmlParser::CloseHtml()
+{
+	if (Html) { delete[] Html; Html = 0; }
 }

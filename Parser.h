@@ -4,6 +4,9 @@
 
 #include "Schedule.h"
 
+#define MAX(a,b) ((a) > (b) ? (a) : (b))
+#define MIN(a,b) ((a) < (b) ? (a) : (b))
+
 struct HtmlLabel
 {
 	std::string Label;
@@ -16,8 +19,9 @@ class HtmlParser
 {
 public:
 private:	
-	std::string *Html;
-	int Pos;
+	char *Html = 0;
+	long Length = 0;
+	long Pos = 0;
 	
 private:
 	enum HtmlStates
@@ -47,26 +51,37 @@ private:
 		S_Content,*/
 	};
 	
-	void Traverse(HtmlEvents stopCondition, int stopLevel = 0);
+public:
+	~HtmlParser();
+	
+	inline long GetPos() { return Pos; }
+	void SetPos(long pos) { Pos = MIN(MAX(pos, Length), 0); }
+	void OffsetPos(long offset) { SetPos(Pos + offset); }
+	
+private:	
+	void Traverse(HtmlEvents stopCondition);
 	
 public:
+
 	void NavParent();
 	void NavChild();
 	void NavNextSibling();
 	void NavPrevSibling();
 	
 	void Alighn(int dir = -1);
+	bool Find(std::string str);
 	
 	std::string GetName();
 	std::vector<HtmlLabel> GetLabels();
 	std::string GetContent();
+	std::string ReadRaw(long len);
 	
 	/*HtmlParser GetAtParent();
 	HtmlParser GetAtChild();
 	HtmlParser GetAtNextSibling();
 	HtmlParser GetAtPrevSibling();*/
 	
-	void OpenHtml();
+	bool OpenHtml(std::string fileName);
 	void CloseHtml();
 };
 
