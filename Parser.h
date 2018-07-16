@@ -10,7 +10,7 @@ struct HtmlLabel
 	std::string Content;
 };
 
-
+//#define BITCONT(a, b) ((a) & (b) == (b) ? 1 : 0)
 
 class HtmlParser
 {
@@ -39,11 +39,15 @@ private:
 		E_Parent,
 		E_Child,
 		E_Sibling,
-		E_Value,
+		/*E_Value,
 		E_Content,
+		S_Name,
+		S_Label,
+		S_Value,
+		S_Content,*/
 	};
 	
-	void Traverse(HtmlEvents stopCondition, int dir = 1, u8 state = S_Head | S_Open);
+	void Traverse(HtmlEvents stopCondition, int stopLevel = 0);
 	
 public:
 	void NavParent();
