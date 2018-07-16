@@ -3,9 +3,14 @@
 
 HtmlParser::HtmlParser() { }
 
-HtmlParser::HtmlParser(HtmlParser &other, bool copy)
+HtmlParser::HtmlParser(HtmlParser &other, bool duplicate)
 {
-	if (!copy) { Html = other.Html; }
+	if (!duplicate) 
+	{ 
+		Html = other.Html; 
+		Pos = other.Pos; 
+		Length = other.Length; 
+	}
 	else
 	{
 		Length = other.Length;
@@ -17,6 +22,13 @@ HtmlParser::HtmlParser(HtmlParser &other, bool copy)
 HtmlParser::~HtmlParser()
 {
 	//CloseHtml();
+}
+
+void HtmlParser::operator=(HtmlParser &other)
+{
+	Html = other.Html; 
+	Pos = other.Pos; 
+	Length = other.Length; 
 }
 
 
@@ -207,11 +219,27 @@ std::string HtmlParser::ReadRaw(long len)
 
 void Parse(std::vector<std::string> CourseCodes)
 {
-	//Jump to initial point
-	//<table summary="WSS.COURSE.SECTIONS">
+	HtmlParser parser, sectionParser, contentParser;
+	
+	parser.OpenHtml("CIS 2430.html");
+	parser.Find("<table summary=\"WSS.COURSE.SECTIONS\">");
+	
+	parser.NavChild(); parser.NavChild(); parser.NavNextSibling(); parser.NavChild(); 
+	
+	sectionParser = parser;
+	sectionParser.NavNextSibling(); sectionParser.NavNextSibling(); sectionParser.NavNextSibling(); sectionParser.NavNextSibling(); sectionParser.NavNextSibling(); 
+	
+	contentParser = sectionParser;
+	contentParser.NavChild();  contentParser.NavChild(); 
 	
 	
+	std::cout << "Read: <"  << contentParser.GetName() << "  ";
+	std::vector<HtmlLabel> labels = contentParser.GetLabels();
+	for (int i = 0; i < (int)labels.size(); i++) { std::cout << labels[i].Label << "=\"" << labels[i].Content << "\" "; }
+	std::cout << ">\n";
+	std::cout << "Content: \"" << contentParser.GetContent() << "\"\n";
 	
+	parser.CloseHtml();
 }
 
 bool HtmlParser::OpenHtml(std::string fileName)

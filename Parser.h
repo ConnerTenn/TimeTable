@@ -50,8 +50,9 @@ private:
 	
 public:
 	HtmlParser();
-	HtmlParser(HtmlParser &other, bool copy = false);
+	HtmlParser(HtmlParser &other, bool duplicate = false);
 	~HtmlParser();
+	void operator=(HtmlParser &other);
 	
 	inline long GetPos() { return Pos; }
 	void SetPos(long pos) { Pos = MIN(MAX(pos, Length), 0); }

@@ -6,20 +6,7 @@ int main()
 {
 	std::cout << "## Start ##\n";
 	
-	HtmlParser parser;
-	std::cout << "Open File:" << parser.OpenHtml("CIS 2430.html") << "\n";
-	std::cout << "Find:" << parser.Find("<table summary=\"WSS.COURSE.SECTIONS\">") << " Pos:" << parser.GetPos() << "\n";
-	std::cout << "Found: \"" << parser.ReadRaw(37) << "\"\n";
-	parser.NavChild(); parser.NavChild(); parser.NavNextSibling(); parser.NavChild(); 
-	parser.NavNextSibling(); parser.NavNextSibling(); parser.NavNextSibling(); parser.NavNextSibling(); parser.NavNextSibling(); parser.NavChild();  parser.NavChild(); 
-	//std::cout << "Read: \"" << parser.ReadRaw(50) << "\"\n";
-	std::cout << "Read: <"  << parser.GetName() << "  ";
-	std::vector<HtmlLabel> labels = parser.GetLabels();
-	for (int i = 0; i < (int)labels.size(); i++) { std::cout << labels[i].Label << "=\"" << labels[i].Content << "\" "; }
-	std::cout << ">\n";
-	std::cout << "Content: \"" << parser.GetContent() << "\"\n";
-	
-	parser.CloseHtml();
+	Parse({});
 	
 	std::cout << "## End ##\n";
 	
