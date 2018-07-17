@@ -91,6 +91,8 @@ public:
 	void PrintRemoveTags();
 };
 
+void GetCourseInfo(std::string src, std::string *code, std::string *name, std::string *sectionNumber);
+TimeSlot GetTimeSlot(std::string days, std::string times);
 
 void ParseSection(HtmlParser parser);
 

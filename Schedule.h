@@ -18,9 +18,9 @@ typedef unsigned long u64;
 
 struct TimeSlot
 {
-	u8 Days;
-	int Start;
-	int End;
+	u8 Days = 0;
+	int Start = 0;
+	int End = 0;
 	
 	bool Conflict(TimeSlot *other);
 };
@@ -36,6 +36,7 @@ struct Section
 struct Course
 {
 	std::string Code;
+	std::string Name;
 	
 	int SelectedSection = 0;
 	std::vector <Section> Sections;
