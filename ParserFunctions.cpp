@@ -52,7 +52,10 @@ TimeSlot GetTimeSlot(std::string days, std::string times)
 
 void ParseSection(HtmlParser parser)
 {
-	
+	Course *course;
+	Section section;
+	std::string code, name, sectionNumber; 
+		
 	HtmlParser sectionParser = parser;
 	sectionParser.NavToKey("windowIdx");
 	std::cout << sectionParser.GetContent() << "\n";
@@ -64,7 +67,13 @@ void ParseSection(HtmlParser parser)
 	std::cout << sectionParser.GetContent() << "\n";
 	
 	sectionParser.NavToKey("SEC_SHORT_TITLE left "); sectionParser.NavChild(); sectionParser.NavChild();
-	std::cout << sectionParser.GetContent() << "\n";
+	//std::cout << sectionParser.GetContent() << "\n";
+	GetCourseInfo(sectionParser.GetContent(), &code, &name, &sectionNumber);
+	std::cout << code << " " << sectionNumber << " " << name << "\n";
+	course = GetCourseFromList(code);
+	course->Code = code;
+	course->Name = name;
+	section.Number = sectionNumber;
 	
 	sectionParser.NavToKey("SEC_LOCATION left "); sectionParser.NavChild(); sectionParser.NavChild();
 	std::cout << sectionParser.GetContent() << "\n";
@@ -77,10 +86,16 @@ void ParseSection(HtmlParser parser)
 		{ std::vector<HtmlLabel> labels = contentParser.GetLabels(); for (int i = 0; i < (int)labels.size(); i++) { if (labels[i].Content.find("meet ") != std::string::npos) { valid = true; } } }
 		if (valid)
 		{
+			std::string days, times;
 			contentParser.NavChild();
 			std::cout << contentParser.GetContent() << "\n";
+			days = contentParser.GetContent();
 			contentParser.NavNextSibling();
 			std::cout << "   " << contentParser.GetContent() << "\n";
+			times = contentParser.GetContent();
+			
+			section.TimeSlots.push_back(GetTimeSlot(days, times));
+			
 			contentParser.NavNextSibling(); 
 			if (contentParser.NavChild())
 			{
@@ -100,6 +115,8 @@ void ParseSection(HtmlParser parser)
 	
 	sectionParser.NavToKey("LIST_VAR3 left "); sectionParser.NavChild(); sectionParser.NavChild();
 	std::cout << sectionParser.GetContent() << "\n";
+	
+	course->Sections.push_back(section);
 }
 
 void Parse(std::vector<std::string> CourseCodes)

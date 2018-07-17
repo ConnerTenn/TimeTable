@@ -56,4 +56,6 @@ extern std::vector<Schedule> ValidSchedules;
 
 void GenerateSchedules();
 
+Course *GetCourseFromList(std::string code);
+
 #endif
