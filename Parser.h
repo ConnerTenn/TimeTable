@@ -10,7 +10,7 @@ struct HtmlLabel
 	std::string Content;
 };
 
-//#define BITCONT(a, b) ((a) & (b) == (b) ? 1 : 0)
+std::string RemPrePostWhite(std::string str);
 
 class HtmlParser
 {
@@ -91,7 +91,6 @@ public:
 	void PrintRemoveTags();
 };
 
-std::string RemPrePostWhite(std::string str);
 
 void ParseSection(HtmlParser parser);
 
