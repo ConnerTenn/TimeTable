@@ -39,7 +39,7 @@ bool HtmlParser::Traverse(HtmlEvents stopCondition)
 	std::string name;
 	
 	Pos++;
-	while(1) //handle stop condition
+	while(Pos < Length)
 	{
 		if (state & S_Head)
 		{
@@ -102,6 +102,8 @@ bool HtmlParser::Traverse(HtmlEvents stopCondition)
 		
 		
 	}
+	
+	return false;
 }
 
 bool HtmlParser::NavNext()
@@ -144,17 +146,15 @@ bool HtmlParser::NavToKey(std::string key)
 
 void HtmlParser::Alighn(int dir)
 {
-	u8 state = 0;
+	if (dir < -1) { Pos--; }
+	if (dir > 1) { Pos++; }
 	if (dir < 0)
 	{
-		while (Pos > 0)
-		{
-			if (state == 1 && isalpha(Html[Pos])) 
-			{
-				state = 1;
-			}
-			
-		}
+		while (Pos > 0 && !(Html[Pos] == '<' && isalpha(Html[Pos+1]))) { Pos--; }
+	}
+	else if (dir > 0)
+	{
+		while (Pos < Length && !(Html[Pos] == '<' && isalpha(Html[Pos+1]))) { Pos++; }
 	}
 }
 
@@ -306,6 +306,14 @@ void HtmlParser::PrintRemoveTags()
 
 
 
+std::string RemPrePostWhite(std::string str)
+{
+	int start = 0, stop = str.size() - 1;
+	while (str[start] == ' ' || str[start] == '\n' || str[start] == '\t') { start++; }
+	while (str[stop] == ' ' || str[stop] == '\n' || str[stop] == '\t') { stop--; }
+	return str.substr(start, stop - start);
+}
+
 void ParseSection(HtmlParser parser)
 {
 	
@@ -344,30 +352,37 @@ void ParseSection(HtmlParser parser)
 	std::cout << "Content: \"" << contentParser.GetContent() << "\"\n";*/
 	
 	HtmlParser sectionParser = parser;
+	sectionParser.NavToKey("windowIdx");
+	std::cout << sectionParser.GetContent() << "\n";
 	
 	sectionParser.NavToKey("LIST_VAR2_");
-	std::cout << "Content: \"" << sectionParser.GetContent() << "\"\n";
+	std::cout << sectionParser.GetContent() << "\n";
 	
-	sectionParser.NavToKey("SEC_SHORT_TITLE left oddrow"); sectionParser.NavChild(); sectionParser.NavChild();
-	std::cout << "Content: \"" << sectionParser.GetContent() << "\"\n";
+	sectionParser.NavToKey("SEC_SHORT_TITLE left "); sectionParser.NavChild(); sectionParser.NavChild();
+	std::cout << sectionParser.GetContent() << "\n";
 	
-	sectionParser.NavToKey("SEC_LOCATION left oddrow"); sectionParser.NavChild(); sectionParser.NavChild();
-	std::cout << "Content: \"" << sectionParser.GetContent() << "\"\n";
+	sectionParser.NavToKey("SEC_LOCATION left "); sectionParser.NavChild(); sectionParser.NavChild();
+	std::cout << sectionParser.GetContent() << "\"\n";
 	
-	sectionParser.NavToKey("SEC_MEETING_INFO left oddrow"); sectionParser.NavChild(); sectionParser.NavChild(); sectionParser.NavNextSibling(); 
+	sectionParser.NavToKey("SEC_MEETING_INFO left "); sectionParser.NavChild(); sectionParser.NavChild(); sectionParser.NavNextSibling(); 
 	while (sectionParser.NavNextSibling())
 	{
 		HtmlParser contentParser = sectionParser;
 		contentParser.NavChild();
-		std::cout << "Content: \"" << contentParser.GetContent() << "\"\n          ";
+		std::cout << contentParser.GetContent() << "\n";
 		contentParser.NavNextSibling();
-		std::cout << "\"" << contentParser.GetContent() << "\"\n          ";
+		std::cout << "   " << contentParser.GetContent() << "\n";
 		contentParser.NavNextSibling(); contentParser.NavChild();
-		std::cout << "\"" << contentParser.GetContent() << "\"\n";
+		std::cout << "   " << contentParser.GetContent() << "\n";
+		contentParser.Alighn(-2);
+		std::cout << "   " << RemPrePostWhite(contentParser.GetContent()) << "\n";
 	}
 
 	sectionParser.NavToKey("SEC_FACULTY_INFO_"); 
-	std::cout << "Content: \"" << sectionParser.GetContent() << "\"\n";
+	std::cout << sectionParser.GetContent() << "\n";
+	
+	sectionParser.NavToKey("LIST_VAR3 left "); sectionParser.NavChild(); sectionParser.NavChild();
+	std::cout << sectionParser.GetContent() << "\n";
 }
 
 void Parse(std::vector<std::string> CourseCodes)
@@ -377,10 +392,13 @@ void Parse(std::vector<std::string> CourseCodes)
 	parser.OpenHtml("CIS 2430.html");
 	parser.Find("<table summary=\"WSS.COURSE.SECTIONS\">");
 	
-	parser.NavChild(); parser.NavChild(); parser.NavNextSibling(); 
+	parser.NavChild(); parser.NavChild(); 
 	
-	
-	ParseSection(parser);
+	while (parser.NavNextSibling())
+	{
+		ParseSection(parser);	
+		std::cout << "\n\n";
+	}
 	
 	//parser.PrintRemoveTags();
 	

@@ -91,6 +91,7 @@ public:
 	void PrintRemoveTags();
 };
 
+std::string RemPrePostWhite(std::string str);
 
 void ParseSection(HtmlParser parser);
 
