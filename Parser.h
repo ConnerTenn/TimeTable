@@ -77,7 +77,6 @@ public:
 	std::string GetName();
 	std::vector<HtmlLabel> GetLabels();
 	std::string GetContent();
-	std::string ReadRaw(long len);
 	
 	/*HtmlParser GetAtParent();
 	HtmlParser GetAtChild();
@@ -87,6 +86,7 @@ public:
 	bool OpenHtml(std::string fileName);
 	void CloseHtml();
 	
+	std::string GetRaw(long len);
 	void PrintTag();
 	void PrintRemoveTags();
 };

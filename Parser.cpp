@@ -94,7 +94,7 @@ bool HtmlParser::Traverse(HtmlEvents stopCondition)
 				state = S_Content;
 				level--;
 				//if (stopCondition == E_Parent) { return true; }
-				if (stopCondition == E_Sibling && level < -1) { return false; }
+				if ((stopCondition == E_Sibling || stopCondition == E_Child) && level < -1) { return false; }
 			}
 		}
 		
@@ -108,7 +108,13 @@ bool HtmlParser::Traverse(HtmlEvents stopCondition)
 
 bool HtmlParser::NavNext()
 {
-	return Traverse(E_Next);
+	HtmlParser parser = *this;
+	if (parser.Traverse(E_Next))
+	{
+		Pos = parser.Pos;
+		return true;
+	}
+	return false;
 }
 
 bool HtmlParser::NavParent()
@@ -118,12 +124,24 @@ bool HtmlParser::NavParent()
 
 bool HtmlParser::NavChild()
 {
-	return Traverse(E_Child);
+	HtmlParser parser = *this;
+	if (parser.Traverse(E_Child))
+	{
+		Pos = parser.Pos;
+		return true;
+	}
+	return false;
 }
 
 bool HtmlParser::NavNextSibling()
 {
-	return Traverse(E_Sibling);
+	HtmlParser parser = *this;
+	if (parser.Traverse(E_Sibling))
+	{
+		Pos = parser.Pos;
+		return true;
+	}
+	return false;
 }
 
 bool HtmlParser::NavPrevSibling()
@@ -247,11 +265,6 @@ std::string HtmlParser::GetContent()
 	return content;
 }
 
-std::string HtmlParser::ReadRaw(long len)
-{
-	return std::string(Html+Pos, len);
-}
-
 bool HtmlParser::OpenHtml(std::string fileName)
 {
 	if (Html) { CloseHtml(); }
@@ -279,6 +292,11 @@ bool HtmlParser::OpenHtml(std::string fileName)
 void HtmlParser::CloseHtml()
 {
 	if (Html) { delete[] Html; Html = 0; }
+}
+
+std::string HtmlParser::GetRaw(long len)
+{
+	return std::string(Html+Pos, len);
 }
 
 void HtmlParser::PrintTag()
@@ -317,42 +335,11 @@ std::string RemPrePostWhite(std::string str)
 void ParseSection(HtmlParser parser)
 {
 	
-	/*HtmlParser sectionParser, contentParser;
-	
-	sectionParser = parser;
-	sectionParser.NavChild(); sectionParser.NavNextSibling(); sectionParser.NavNextSibling(); sectionParser.NavNextSibling(); sectionParser.NavNextSibling(); sectionParser.NavNextSibling(); 
-	
-	//course code
-	contentParser = sectionParser;
-	contentParser.NavChild();  contentParser.NavChild();
-	std::cout << "Content: \"" << contentParser.GetContent() << "\"\n";
-	
-	sectionParser.NavNextSibling(); sectionParser.NavNextSibling();
-	
-	//day
-	contentParser = sectionParser;
-	contentParser.NavChild();  contentParser.NavChild(); contentParser.NavNextSibling(); contentParser.NavNextSibling(); contentParser.NavChild();
-	std::cout << "Content: \"" << contentParser.GetContent() << "\"\n";
-	//time
-	contentParser.NavNextSibling();
-	std::cout << "Content: \"" << contentParser.GetContent() << "\"\n";
-	//room
-	contentParser.NavNextSibling(); //contentParser.NavChild();
-	std::cout << "Content: \"" << contentParser.GetContent() << "\"\n";
-	
-	//day
-	contentParser = sectionParser;
-	contentParser.NavChild();  contentParser.NavChild(); contentParser.NavNextSibling(); contentParser.NavNextSibling(); contentParser.NavNextSibling(); contentParser.NavChild();
-	std::cout << "Content: \"" << contentParser.GetContent() << "\"\n";
-	//time
-	contentParser.NavNextSibling();
-	std::cout << "Content: \"" << contentParser.GetContent() << "\"\n";
-	//room
-	contentParser.NavNextSibling(); //contentParser.NavChild();
-	std::cout << "Content: \"" << contentParser.GetContent() << "\"\n";*/
-	
 	HtmlParser sectionParser = parser;
 	sectionParser.NavToKey("windowIdx");
+	std::cout << sectionParser.GetContent() << "\n";
+	
+	sectionParser.NavToKey("SEC_TERM_");
 	std::cout << sectionParser.GetContent() << "\n";
 	
 	sectionParser.NavToKey("LIST_VAR2_");
@@ -362,20 +349,32 @@ void ParseSection(HtmlParser parser)
 	std::cout << sectionParser.GetContent() << "\n";
 	
 	sectionParser.NavToKey("SEC_LOCATION left "); sectionParser.NavChild(); sectionParser.NavChild();
-	std::cout << sectionParser.GetContent() << "\"\n";
+	std::cout << sectionParser.GetContent() << "\n";
 	
 	sectionParser.NavToKey("SEC_MEETING_INFO left "); sectionParser.NavChild(); sectionParser.NavChild(); sectionParser.NavNextSibling(); 
 	while (sectionParser.NavNextSibling())
 	{
 		HtmlParser contentParser = sectionParser;
-		contentParser.NavChild();
-		std::cout << contentParser.GetContent() << "\n";
-		contentParser.NavNextSibling();
-		std::cout << "   " << contentParser.GetContent() << "\n";
-		contentParser.NavNextSibling(); contentParser.NavChild();
-		std::cout << "   " << contentParser.GetContent() << "\n";
-		contentParser.Alighn(-2);
-		std::cout << "   " << RemPrePostWhite(contentParser.GetContent()) << "\n";
+		bool valid = false;
+		{ std::vector<HtmlLabel> labels = contentParser.GetLabels(); for (int i = 0; i < (int)labels.size(); i++) { if (labels[i].Content.find("meet ") != std::string::npos) { valid = true; } } }
+		if (valid)
+		{
+			contentParser.NavChild();
+			std::cout << contentParser.GetContent() << "\n";
+			contentParser.NavNextSibling();
+			std::cout << "   " << contentParser.GetContent() << "\n";
+			contentParser.NavNextSibling(); 
+			if (contentParser.NavChild())
+			{
+				std::cout << "   " << contentParser.GetContent();
+				contentParser.Alighn(-2);
+				std::cout << " " << RemPrePostWhite(contentParser.GetContent()) << "\n";
+			}
+			else
+			{
+				std::cout << "   " << contentParser.GetContent() << "\n";
+			}
+		}
 	}
 
 	sectionParser.NavToKey("SEC_FACULTY_INFO_"); 
@@ -389,7 +388,7 @@ void Parse(std::vector<std::string> CourseCodes)
 {
 	HtmlParser parser;
 	
-	parser.OpenHtml("CIS 2430.html");
+	parser.OpenHtml("CIS 0000.html");
 	parser.Find("<table summary=\"WSS.COURSE.SECTIONS\">");
 	
 	parser.NavChild(); parser.NavChild(); 
@@ -399,8 +398,6 @@ void Parse(std::vector<std::string> CourseCodes)
 		ParseSection(parser);	
 		std::cout << "\n\n";
 	}
-	
-	//parser.PrintRemoveTags();
 	
 	
 	parser.CloseHtml();
