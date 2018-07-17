@@ -60,14 +60,16 @@ public:
 	void OffsetPos(long offset) { SetPos(Pos + offset); }
 	
 private:	
-	void Traverse(HtmlEvents stopCondition);
+	bool Traverse(HtmlEvents stopCondition);
 	
 public:
 
-	void NavParent();
-	void NavChild();
-	void NavNextSibling();
-	void NavPrevSibling();
+	bool NavNext();
+	bool NavParent();
+	bool NavChild();
+	bool NavNextSibling();
+	bool NavPrevSibling();
+	bool NavToKey(std::string key);
 	
 	void Alighn(int dir = -1);
 	bool Find(std::string str);
@@ -85,8 +87,12 @@ public:
 	bool OpenHtml(std::string fileName);
 	void CloseHtml();
 	
+	void PrintTag();
 	void PrintRemoveTags();
 };
+
+
+void ParseSection(HtmlParser parser);
 
 void Parse(std::vector<std::string> CourseCodes);
 
