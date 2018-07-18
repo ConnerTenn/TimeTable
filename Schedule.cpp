@@ -1,6 +1,17 @@
 
 #include "Schedule.h"
 
+std::string MinSize(std::string str, int size, char fill)
+{
+	return str + std::string(MAX(size-(int)str.size(), 0), fill);
+}
+
+std::string MaxSize(std::string str, int size)
+{
+	return str.substr(0, MIN(size, (int)str.size()));
+}
+
+
 Time::Time() {}
 Time::Time(int hour, int min) { Hour=hour; Min=min; }
 void Time::CalcOverflow() { Hour+=Min/60; Min=Min%60; Hour=Hour%24; }
@@ -173,5 +184,67 @@ Course *GetCourseFromList(std::string code)
 	}
 	RequiredCourses.push_back(Course());
 	return &(RequiredCourses.back());
+}
+
+void PrintSchedule(Schedule schedule)
+{
+	//schedule.Courses
+	std::cout << "|Time |  Sunday   |  Monday   |  Tuesday  | Wednesday | Thursday  |  Friday   |\n";
+	std::cout << "|-----|-----------|-----------|-----------|-----------|-----------|-----------|\n";
+	
+	Time time;
+	do
+	{
+		std::cout << "|" << time.ToString() << "|";
+		
+		for (u8 day = 1; day < 0b01000000; day<<=1)
+		{
+			std::string daystr;
+			for (int c = 0; c < (int)schedule.Courses.size(); c++)
+			{
+				Course &course = schedule.Courses[c];
+				Section &section = course.Sections[0];
+				for (int t = 0; t < (int)section.TimeSlots.size(); t++)
+				{
+					TimeSlot &timeSlot = section.TimeSlots[t];
+					if (timeSlot.Days & day)
+					{
+						//if start now
+						if (time==timeSlot.Start)
+						{
+							daystr = "###########";
+						}
+						//if end now
+						else if (timeSlot.End-time < Time(0,30))
+						{
+							daystr = "###########";
+						}
+						//if first gap
+						else if (time == timeSlot.Start + Time(0,30))
+						{
+							daystr = "#" + MinSize(MaxSize(course.Code, 9), 9) + "#";
+						}
+						//if over now
+						else if (timeSlot.Start < time && time < timeSlot.End)
+						{
+							daystr = "#         #";
+						}
+						//no overlap
+						else
+						{
+							//daystr = "           ";
+						}
+					}
+				}
+			}
+				
+			std::cout << MinSize(MaxSize(daystr, 11), 11) << "|";
+		}
+		
+		
+		std::cout << "\n";
+		time=time+30;
+	}
+	while (time > Time());
 }
 

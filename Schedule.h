@@ -9,7 +9,11 @@
 
 #define MAX(a,b) ((a) > (b) ? (a) : (b))
 #define MIN(a,b) ((a) < (b) ? (a) : (b))
+#define ABS(a) ((a) < 0 ? -(a) : (a))
+#define SMOD(a,b) ((b)+((a)%(b)))%(b)
 //#define BITCOMP(var,bits,mask) ((var) & (bits) == (bits) ? true : false)
+std::string MinSize(std::string str, int size, char fill = ' ');
+std::string MaxSize(std::string str, int size);
 
 typedef unsigned char u8;
 typedef unsigned short u16;
@@ -79,5 +83,7 @@ extern std::vector<Schedule> ValidSchedules;
 void GenerateSchedules();
 
 Course *GetCourseFromList(std::string code);
+
+void PrintSchedule(Schedule schedule);
 
 #endif
