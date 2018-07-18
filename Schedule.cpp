@@ -193,9 +193,10 @@ void PrintSchedule(Schedule schedule)
 	std::cout << "|-----|-----------|-----------|-----------|-----------|-----------|-----------|\n";
 	
 	Time time;
+	bool gap = 0;
 	do
 	{
-		std::cout << "|" << time.ToString() << "|";
+		std::cout << "|" << (gap ? "-----" : time.ToString()) << "|";
 		
 		for (u8 day = 1; day < 0b01000000; day<<=1)
 		{
@@ -210,22 +211,22 @@ void PrintSchedule(Schedule schedule)
 					if (timeSlot.Days & day)
 					{
 						//if start now
-						if (time==timeSlot.Start)
+						if (time==timeSlot.Start && !gap)
 						{
 							daystr = "###########";
 						}
 						//if end now
-						else if (timeSlot.End-time < Time(0,30))
+						else if (timeSlot.End-time < Time(0,30) && gap)
 						{
 							daystr = "###########";
 						}
 						//if first gap
-						else if (time == timeSlot.Start + Time(0,30))
+						else if (time == timeSlot.Start  && gap)
 						{
 							daystr = "#" + MinSize(MaxSize(course.Code, 9), 9) + "#";
 						}
 						//if over now
-						else if (timeSlot.Start < time && time < timeSlot.End)
+						else if (timeSlot.Start < time && time <= timeSlot.End)
 						{
 							daystr = "#         #";
 						}
@@ -238,13 +239,14 @@ void PrintSchedule(Schedule schedule)
 				}
 			}
 				
-			std::cout << MinSize(MaxSize(daystr, 11), 11) << "|";
+			std::cout << MinSize(MaxSize(daystr, 11), 11, (gap ? '-' : ' ')) << "|";
 		}
 		
 		
 		std::cout << "\n";
-		time=time+30;
+		if (gap) {time=time+30;}
+		gap = !gap;
 	}
-	while (time > Time());
+	while (time > Time() || gap);
 }
 
