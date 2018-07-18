@@ -16,11 +16,33 @@ typedef unsigned short u16;
 typedef unsigned int u32;
 typedef unsigned long u64;
 
+struct Time
+{
+	int Hour = 0;
+	int Min = 0;
+	
+	Time();
+	Time(int hour, int min);
+	void CalcOverflow();
+	void CalcUnderflow();
+	Time operator+(int min);
+	Time operator+(Time other);
+	Time operator-(int min);
+	Time operator-(Time other);
+	void operator=(Time other);
+	bool operator==(Time other);
+	bool operator>(Time other);
+	bool operator>=(Time other);
+	bool operator<(Time other);
+	bool operator<=(Time other);
+	std::string ToString();
+};
+
 struct TimeSlot
 {
 	u8 Days = 0;
-	int Start = 0;
-	int End = 0;
+	Time Start;
+	Time End;
 	
 	bool Conflict(TimeSlot *other);
 };

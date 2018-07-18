@@ -1,6 +1,22 @@
 
 #include "Schedule.h"
 
+Time::Time() {}
+Time::Time(int hour, int min) { Hour=hour; Min=min; }
+void Time::CalcOverflow() { Hour+=Min/60; Min=Min%60; Hour=Hour%24; }
+void Time::CalcUnderflow() { if (Min<0) { Hour-=1+ABS(Min)/60; Min=SMOD(Min,60); } Hour=SMOD(Hour,24); }
+Time Time::operator+(int min) { Time time(Hour, Min+min); time.CalcOverflow(); return time; }
+Time Time::operator+(Time other) { Time time(Hour+other.Hour, Min+other.Min); time.CalcOverflow(); return time; }
+Time Time::operator-(int min) { Time time(Hour, Min-min); time.CalcUnderflow(); return time; }
+Time Time::operator-(Time other) { Time time(Hour-other.Hour, Min-other.Min); time.CalcUnderflow(); return time; }
+void Time::operator=(Time other) { Hour=other.Hour; Min=other.Min; }
+bool Time::operator==(Time other) { return Hour==other.Hour && Min==other.Min; }
+bool Time::operator>(Time other) { if (Hour>other.Hour) { return true; } else if (Hour==other.Hour && Min > other.Min) { return true; } else { return false; } }
+bool Time::operator>=(Time other) { if (Hour>other.Hour) { return true; } else if (Hour==other.Hour && Min >= other.Min) { return true; } else { return false; } }
+bool Time::operator<(Time other) { return other>*this; }
+bool Time::operator<=(Time other) { return other>=*this; }
+std::string Time::ToString() { return std::to_string(Hour/10) + std::to_string(Hour%10) + ":" + std::to_string(Min/10) + std::to_string(Min%10); }
+
 bool TimeSlot::Conflict(TimeSlot *other)
 {
 	//If they share the same day and if the times overlap

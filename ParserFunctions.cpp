@@ -26,25 +26,25 @@ void GetCourseInfo(std::string src, std::string *code, std::string *name, std::s
 TimeSlot GetTimeSlot(std::string days, std::string times)
 {
 	TimeSlot timeSlot;
-	if (days.find("Mon") != std::string::npos) { timeSlot.Days |=   0b00000001; }
-	if (days.find("Tues") != std::string::npos) { timeSlot.Days |=  0b00000010; }
-	if (days.find("Wed") != std::string::npos) { timeSlot.Days |=   0b00000100; }
-	if (days.find("Thurs") != std::string::npos) { timeSlot.Days |= 0b00001000; }
-	if (days.find("Fri") != std::string::npos) { timeSlot.Days |=   0b00010000; }
-	if (days.find("Sat") != std::string::npos) { timeSlot.Days |=   0b00100000; }
-	if (days.find("Sun") != std::string::npos) { timeSlot.Days |=   0b01000000; }
+	if (days.find("Sun") != std::string::npos) { timeSlot.Days |=   0b00000001; }
+	if (days.find("Mon") != std::string::npos) { timeSlot.Days |=   0b00000010; }
+	if (days.find("Tues") != std::string::npos) { timeSlot.Days |=  0b00000100; }
+	if (days.find("Wed") != std::string::npos) { timeSlot.Days |=   0b00001000; }
+	if (days.find("Thurs") != std::string::npos) { timeSlot.Days |= 0b00010000; }
+	if (days.find("Fri") != std::string::npos) { timeSlot.Days |=   0b00100000; }
+	if (days.find("Sat") != std::string::npos) { timeSlot.Days |=   0b01000000; }
 	
-	timeSlot.Start += 1000*(times[0] - '0');
-	timeSlot.Start += 100*(times[1] - '0');
-	timeSlot.Start += 10*(times[3] - '0');
-	timeSlot.Start += 1*(times[4] - '0');
-	timeSlot.Start += (times[5] == 'P' ? 1200 : 0);
+	timeSlot.Start.Hour += 10*(times[0] - '0');
+	timeSlot.Start.Hour += (times[1] - '0');
+	timeSlot.Start.Min += 10*(times[3] - '0');
+	timeSlot.Start.Min += (times[4] - '0');
+	timeSlot.Start.Hour += (times[5] == 'P' ? 12 : 0);
 	
-	timeSlot.End += 1000*(times[10] - '0');
-	timeSlot.End += 100*(times[11] - '0');
-	timeSlot.End += 10*(times[13] - '0');
-	timeSlot.End += 1*(times[14] - '0');
-	timeSlot.End += (times[15] == 'P' ? 1200 : 0);
+	timeSlot.End.Hour += 10*(times[10] - '0');
+	timeSlot.End.Hour += (times[11] - '0');
+	timeSlot.End.Min += 10*(times[13] - '0');
+	timeSlot.End.Min += (times[14] - '0');
+	timeSlot.End.Hour += (times[15] == 'P' ? 12 : 0);
 	
 	return timeSlot;
 }

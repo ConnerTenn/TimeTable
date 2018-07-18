@@ -17,9 +17,9 @@ int main()
 			{
 				for (int l = 0; l < 7; l++) 
 				{
-					std::cout << ((RequiredCourses[i].Sections[j].TimeSlots[k].Days >> l) & 1 ? "MTWTFSS"[l] : '_');
+					std::cout << ((RequiredCourses[i].Sections[j].TimeSlots[k].Days >> l) & 1 ? "SMTWTFS"[l] : '_');
 				}
-				std::cout << " " << RequiredCourses[i].Sections[j].TimeSlots[k].Start << " - " << RequiredCourses[i].Sections[j].TimeSlots[k].End << "\n";
+				std::cout << " " << RequiredCourses[i].Sections[j].TimeSlots[k].Start.ToString() << " - " << RequiredCourses[i].Sections[j].TimeSlots[k].End.ToString() << "\n";
 			}
 			std::cout << "\n";
 		}
