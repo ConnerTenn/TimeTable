@@ -91,6 +91,8 @@ public:
 	void PrintRemoveTags();
 };
 
+Course *GetCourseFromList(std::string code);
+
 void GetCourseInfo(std::string src, std::string *code, std::string *name, std::string *sectionNumber);
 TimeSlot GetTimeSlot(std::string days, std::string times);
 

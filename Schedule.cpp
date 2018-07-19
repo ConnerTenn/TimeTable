@@ -31,7 +31,7 @@ std::string Time::ToString() { return std::to_string(Hour/10) + std::to_string(H
 bool TimeSlot::Conflict(TimeSlot *other)
 {
 	//If they share the same day and if the times overlap
-	return Days & other->Days && (End >= other->Start || Start <= other->End);
+	return (Days & other->Days) && ((other->Start >= Start && other->Start <= End) || (other->End >= Start && other->End <= End));
 }
 
 bool Section::Conflict(Section *other)
@@ -73,22 +73,55 @@ std::vector<Course> RequiredCourses;
 
 std::vector<Schedule> ValidSchedules;
 
+void BackTrack(Course *course, int &courseIndex, bool &done)
+{
+	std::cout << "Call Backtrack\n";
+	
+	//while curent section is out of range
+	while (course->SelectedSection >= (int)course->Sections.size() && !done)
+	{
+		std::cout << "BackTrack\n";
+		//reset to first section
+		course->SelectedSection = 0;
+		
+		//remove last course from schedule
+		//schedule.Courses.pop_back();
+		
+		//move to prevous course
+		courseIndex--; 
+		if (courseIndex < 0)
+		{
+			done = true;
+		}
+		else
+		{
+			course = &RequiredCourses[courseIndex];
+			
+			//move to next section
+			course->SelectedSection++;
+			
+			std::cout << "Move to Next Section\n";
+		}
+	}
+}
 
 void GenerateSchedules()
 {
 	//Get Required courses
 	
 	ValidSchedules.clear();
-	ValidSchedules.push_back(Schedule());
+	//ValidSchedules.push_back(Schedule());
+	//Schedule workingSchedule;
+	
+	
+	int courseIndex = 0;
 	
 	bool done = false;
-	
-	
 	while (!done)
 	{
-		Schedule &schedule = ValidSchedules.back();
+		std::cout << "I:" << courseIndex << " N:" << RequiredCourses.size() << "\n";
+		Course *course = &(RequiredCourses[courseIndex]);
 		
-		int courseIndex = 0;
 		//While haven't selected all the courses
 		while (courseIndex < (int)RequiredCourses.size() && !done)
 		{
@@ -106,12 +139,30 @@ void GenerateSchedules()
 					//move to next section
 			
 			
-			Course *course = &RequiredCourses[courseIndex];
+			course = &RequiredCourses[courseIndex];
+			
+			std::cout << "Adding Course: " << course->Code << " " << course->Name << "\n";
+			std::cout << "Current Section: " << course->GetSection()->Number << "\n";
 			
 			//check if section fits existing schedule
 			bool valid = true;
 			for (int i= 0; i < courseIndex && valid; i++)
 			{
+				std::cout << "Compare Section Times:\n";
+				std::cout << "    ";
+				for (int k = 0; k < (int)course->GetSection()->TimeSlots.size(); k++)
+				{
+					for (int l = 0; l < 7; l++) { std::cout << ((course->GetSection()->TimeSlots[k].Days >> l) & 1 ? "SMTWTFS"[l] : '_') << " "; }
+					std::cout << " " << course->GetSection()->TimeSlots[k].Start.ToString() << " - " << course->GetSection()->TimeSlots[k].End.ToString() << "    ";
+				}
+				std::cout << "\n    ";
+				for (int k = 0; k < (int)RequiredCourses[i].GetSection()->TimeSlots.size(); k++)
+				{
+					for (int l = 0; l < 7; l++) { std::cout << ((RequiredCourses[i].GetSection()->TimeSlots[k].Days >> l) & 1 ? "SMTWTFS"[l] : '_') << " "; }
+					std::cout << " " << RequiredCourses[i].GetSection()->TimeSlots[k].Start.ToString() << " - " << RequiredCourses[i].GetSection()->TimeSlots[k].End.ToString() << "    ";
+				}
+				std::cout << "\n";
+				
 				if (course->GetSection()->Conflict(RequiredCourses[i].GetSection()))
 				{
 					valid = false;
@@ -120,6 +171,7 @@ void GenerateSchedules()
 			
 			if (valid)
 			{
+				std::cout << "Valid\n";
 				//add course
 				//Course newCourse;
 				//newCourse.Sections.push_back(course->Sections[course->SelectedSection]);
@@ -134,56 +186,44 @@ void GenerateSchedules()
 			}
 			else
 			{
+				std::cout << "Invalid\n";
+				
 				//move to next section
 				course->SelectedSection++;
-				
-				//while curent section is out of range
-				while (course->SelectedSection >= (int)course->Sections.size() && !done)
-				{
-					//reset to first section
-					course->SelectedSection = 0;
-					
-					//remove last course from schedule
-					//schedule.Courses.pop_back();
-					
-					//move to prevous course
-					courseIndex--; 
-					if (courseIndex < 0)
-					{
-						done = true;
-					}
-					else
-					{
-						course = &RequiredCourses[courseIndex];
-						
-						//move to next section
-						course->SelectedSection++;
-					}
-				}
+				BackTrack(course, courseIndex, done);
 			}
 			
 			
 		} //end while for adding courses
 		
-		//add courses to schedule
-		for (int i = 0; i < (int)RequiredCourses.size() && !done; i++)
-		{
-			Course newCourse;
-			newCourse.Sections.push_back(*(RequiredCourses[i].GetSection()));
-			schedule.Courses.push_back(newCourse);
+		std::cout << "Done Adding Courses\n";
+		
+		if (!done) 
+		{ 
+		
+			std::cout << "Completed a Schedule\n";
+			ValidSchedules.push_back(Schedule()); 
+			
+			//add courses to schedule
+			for (int i = 0; i < (int)RequiredCourses.size() && !done; i++)
+			{
+				Course newCourse;
+				newCourse.Name = RequiredCourses[i].Name;
+				newCourse.Code = RequiredCourses[i].Code;
+				newCourse.Sections.push_back(*(RequiredCourses[i].GetSection()));
+				
+				ValidSchedules.back().Courses.push_back(newCourse);
+			}
 		}
 		
+		//move to next section
+		courseIndex--;
+		course->SelectedSection++;
+		BackTrack(course, courseIndex, done);
+		
 	}
-}
-
-Course *GetCourseFromList(std::string code)
-{
-	for (int i = 0; i < (int)RequiredCourses.size(); i++)
-	{
-		if (RequiredCourses[i].Code == code) { return &RequiredCourses[i]; }
-	}
-	RequiredCourses.push_back(Course());
-	return &(RequiredCourses.back());
+	
+	std::cout << "Done\n";
 }
 
 void PrintSchedule(Schedule schedule)

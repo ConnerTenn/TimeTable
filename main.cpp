@@ -25,37 +25,69 @@ int main()
 		}
 	}
 	
-	std::cout << (Time(10,30)-Time(12,00)).ToString() << "\n";
-	Schedule schedule;
+	//std::cout << (Time(10,30)-Time(12,00)).ToString() << "\n";
+	//Schedule schedule;
 	{
-		Course course; Section section; TimeSlot timeSlot;
+		Course course;
+		{
+			Section section; TimeSlot timeSlot;
+			timeSlot.Days = 0b00101010; timeSlot.Start = Time(8,30); timeSlot.End = Time(10,30);
+			section.TimeSlots.push_back(timeSlot);
+			timeSlot.Days = 0b00010100; timeSlot.Start = Time(12,00); timeSlot.End = Time(13,30);
+			section.TimeSlots.push_back(timeSlot);
+			
+			section.Number = "Section1";
+			course.Sections.push_back(section);
+		}
+		{
+			Section section; TimeSlot timeSlot;
+			timeSlot.Days = 0b00101010; timeSlot.Start = Time(8,30); timeSlot.End = Time(10,30);
+			section.TimeSlots.push_back(timeSlot);
+			timeSlot.Days = 0b00010100; timeSlot.Start = Time(15,00); timeSlot.End = Time(16,30);
+			section.TimeSlots.push_back(timeSlot);
+			
+			section.Number = "Section2";
+			course.Sections.push_back(section);
+		}
 		
-		timeSlot.Days = 0b00101010; timeSlot.Start = Time(8,30); timeSlot.End = Time(10,30);
-		section.TimeSlots.push_back(timeSlot);
-		timeSlot.Days = 0b00010100; timeSlot.Start = Time(12,00); timeSlot.End = Time(13,30);
-		section.TimeSlots.push_back(timeSlot);
-		
-		section.Number = "Num";
-		course.Sections.push_back(section);
-		
-		course.Code = "CIS*2140"; course.Name = "Name";
-		schedule.Courses.push_back(course);
+		course.Code = "CIS*2140"; course.Name = "Course1";
+		//schedule.Courses.push_back(course);
+		RequiredCourses.push_back(course);
 	}
 	{
-		Course course; Section section; TimeSlot timeSlot;
+		Course course;
+		{
+			Section section; TimeSlot timeSlot;
+			timeSlot.Days = 0b00000010; timeSlot.Start = Time(13,00); timeSlot.End = Time(14,30);
+			section.TimeSlots.push_back(timeSlot);
+			timeSlot.Days = 0b00010100; timeSlot.Start = Time(15,30); timeSlot.End = Time(17,00);
+			section.TimeSlots.push_back(timeSlot);
+			
+			section.Number = "Section1";
+			course.Sections.push_back(section);
+		}
+		{
+			Section section; TimeSlot timeSlot;
+			timeSlot.Days = 0b00001000; timeSlot.Start = Time(13,00); timeSlot.End = Time(14,30);
+			section.TimeSlots.push_back(timeSlot);
+			
+			section.Number = "Section2";
+			course.Sections.push_back(section);
+		}
 		
-		timeSlot.Days = 0b00000010; timeSlot.Start = Time(13,00); timeSlot.End = Time(14,30);
-		section.TimeSlots.push_back(timeSlot);
-		timeSlot.Days = 0b00010100; timeSlot.Start = Time(15,30); timeSlot.End = Time(17,00);
-		section.TimeSlots.push_back(timeSlot);
-		
-		section.Number = "Num";
-		course.Sections.push_back(section);
-		
-		course.Code = "ENGG*2100"; course.Name = "Name";
-		schedule.Courses.push_back(course);
+		course.Code = "ENGG*2100"; course.Name = "Course2";
+		//schedule.Courses.push_back(course);
+		RequiredCourses.push_back(course);
 	}
-	PrintSchedule(schedule);
+	
+	GenerateSchedules();
+	
+	std::cout << "\n";
+	for (int i = 0; i < (int)ValidSchedules.size(); i++)
+	{
+		PrintSchedule(ValidSchedules[i]);
+		std::cout << "\n";
+	}
 	
 	std::cout << "## End ##\n";
 	

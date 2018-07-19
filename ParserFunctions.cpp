@@ -12,6 +12,15 @@ std::string RemPrePostWhite(std::string str)
 }
 
 
+Course *GetCourseFromList(std::string code)
+{
+	for (int i = 0; i < (int)RequiredCourses.size(); i++)
+	{
+		if (RequiredCourses[i].Code == code) { return &RequiredCourses[i]; }
+	}
+	RequiredCourses.push_back(Course());
+	return &(RequiredCourses.back());
+}
 
 void GetCourseInfo(std::string src, std::string *code, std::string *name, std::string *sectionNumber)
 {
