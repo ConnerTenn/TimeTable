@@ -1,75 +1,135 @@
-body {
-  background: -webkit-linear-gradient(left, #25c481, #25b7c4);
-  background: linear-gradient(to right, #25c481, #25b7c4);
-}.accordionWrapper{padding:30px;background:#fff;float:left;width:80%;box-sizing:border-box;margin:10%; box-shadow: 0 1.5em 85px 0 rgba(0, 0, 0, 0.2);}
-.accordionItem{
-    float:left;
-    display:block;
-    width:100%;
-    box-sizing: border-box;
-    font-family:'Open-sans',Arial,sans-serif;
+body 
+{
+	/*background: -webkit-linear-gradient(left, #25c481, #25b7c4);*/
+	background: linear-gradient(to right, #25c481, #25b7c4);
 }
-.accordionItemHeading{
-    cursor:pointer;
-    margin:0px 0px 10px 0px;
-    padding:10px;
-    background:#2980b9;
-    color:#fff;
-    width:100%;
-    -webkit-border-radius: 3px;
--moz-border-radius: 3px;
-border-radius: 3px;
-        box-sizing: border-box;
+
+.container
+{
+	background: #ffffff;
+	padding: 20px;
+	margin: 20px;
+	/*display: block;
+	box-sizing:border-box;*/
 }
-.close .accordionItemContent{
-    height:0px;
-    transition:height 1s ease-out;
-    -webkit-transform: scaleY(0);
-	-o-transform: scaleY(0);
-	-ms-transform: scaleY(0);
+
+.elementContainer
+{
+	background: #eeeeee;
+	padding: 20px;
+	margin: 20px;
+	/*display: block;
+	box-sizing:border-box;*/
+}
+
+.add
+{
+	cursor: pointer;
+	background: #55A5ff;
+	padding:20px;
+	margin: 20px;
+	display: inline-block;
+	position: relative;
+	left:80%;
+}
+
+.element
+{
+	background: #87ceeb;
+	padding:20px;
+	margin: 20px;
+	display: block;
+}
+
+.remove
+{
+	cursor: pointer;
+	background: #ff5555;
+	padding:20px;
+	margin: 20px;
+	display: inline-block;
+	position: relative;
+	left:70%;
+}
+
+/*
+.accordionWrapper
+{
+	padding:30px;
+	background:#fff;
+	float:left;
+	width:80%;
+	box-sizing:border-box;
+	margin:10%;
+	box-shadow: 0 1.5em 85px 0 rgba(0, 0, 0, 0.2);
+}
+
+.accordionItem
+{
+	float:left;
+	display:block;
+	width:100%;
+	box-sizing: border-box;
+	font-family:'Open-sans',Arial,sans-serif;
+}
+
+.accordionItemHeading
+{
+	cursor:pointer;
+	margin:0px 0px 10px 0px;
+	padding:20px;
+	background:#2980b9;
+	color:#fff;
+	width:100%;
+	border-radius: 3px;
+	box-sizing: border-box;
+}
+
+.button
+{
+	cursor:pointer;
+	background: #ffffff;;
+	color: #fff;
+	border: 2px solid #000000;
+	width: 15px;
+	height: 15px;
+	border-radius: 3px;
+	float: right;
+	margin: auto;
+}
+
+.close .accordionItemContent
+{
+	height:0px;
+	transition:height 1s ease-out;
 	transform: scaleY(0);
-    float:left;
-    display:block;
-    
-    
+	float:left;
+	display:block;
 }
-.open .accordionItemContent{
-        padding: 20px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    width: 100%;
-    margin: 0px 0px 10px 0px;
-    display:block;
-    -webkit-transform: scaleY(1);
-	-o-transform: scaleY(1);
-	-ms-transform: scaleY(1);
+
+.open .accordionItemContent
+{
+	padding: 20px;
+	background-color: #fff;
+	border: 1px solid #ddd;
+	width: 100%;
+	margin: 0px 0px 10px 0px;
+	display:block;
 	transform: scaleY(1);
-    -webkit-transform-origin: top;
-	-o-transform-origin: top;
-	-ms-transform-origin: top;
 	transform-origin: top;
 
-	-webkit-transition: -webkit-transform 0.4s ease-out;
-	-o-transition: -o-transform 0.4s ease;
-	-ms-transition: -ms-transform 0.4s ease;
 	transition: transform 0.4s ease;
-        box-sizing: border-box;
+	box-sizing: border-box;
 }
 
-.open .accordionItemHeading{
-    margin:0px;
-        -webkit-border-top-left-radius: 3px;
-    -webkit-border-top-right-radius: 3px;
-    -moz-border-radius-topleft: 3px;
-    -moz-border-radius-topright: 3px;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-    -webkit-border-bottom-right-radius: 0px;
-    -webkit-border-bottom-left-radius: 0px;
-    -moz-border-radius-bottomright: 0px;
-    -moz-border-radius-bottomleft: 0px;
-    border-bottom-right-radius: 0px;
-    border-bottom-left-radius: 0px;
-    background-color: #bdc3c7;
-    color: #7f8c8d;
+.open .accordionItemHeading
+{
+	margin:0px;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 0px;
+	border-bottom-left-radius: 0px;
+	background-color: #bdc3c7;
+	color: #7f8c8d;
 }
+*/
