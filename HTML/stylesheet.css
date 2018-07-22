@@ -1,23 +1,20 @@
-body 
-{
-	/*background: -webkit-linear-gradient(left, #25c481, #25b7c4);*/
-	background: linear-gradient(to right, #25c481, #25b7c4);
-}
 
 .container
 {
-	background: #ffffff;
-	padding: 20px;
-	margin: 20px;
-	/*display: block;
-	box-sizing:border-box;*/
+	/*background: #ffffff;
+	padding: 20px;*/
+	margin-left: 20px;
+	display: block;
+	width: 450px;
+	/*box-sizing:border-box;*/
+	
 }
 
 .elementContainer
 {
 	background: #eeeeee;
 	padding: 20px;
-	margin: 20px;
+	margin: 20px 0px;
 	/*display: block;
 	box-sizing:border-box;*/
 }
@@ -26,30 +23,73 @@ body
 {
 	cursor: pointer;
 	background: #55A5ff;
-	padding:20px;
-	margin: 20px;
+	padding: 15px;
+	margin-right: 5px;
 	display: inline-block;
 	position: relative;
-	left:80%;
+	/*left:80%;*/
+}
+
+.draw
+{
+	cursor: pointer;
+	background: #95A5ff;
+	padding:15px;
+	margin-right: 5px;
+	display: inline-block;
+	position: relative;
+	/*left:80%;*/
+}
+
+.elementTemplate
+{
+	/*visibility: hidden;*/
+	transform: scaleY(0);
+	display: block;
 }
 
 .element
 {
+	font-size: 12px;
 	background: #87ceeb;
-	padding:20px;
-	margin: 20px;
-	display: block;
+	padding:15px;
+	margin: 10px;
 }
 
 .remove
 {
 	cursor: pointer;
 	background: #ff5555;
-	padding:20px;
-	margin: 20px;
+	padding: 8px;
+	/*margin: 20px;*/
 	display: inline-block;
-	position: relative;
-	left:70%;
+	/*position: relative;*/
+	/*left:70%;*/
+}
+
+input
+{
+	width: 80px;
+}
+
+.outputTable
+{
+    border-collapse: collapse;
+	width: 100%;
+	/*margin-left: 500px;*/
+	margin-left: 20px;
+	display: inline-block;
+}
+
+.outputTable td, .outputTable th 
+{
+    border: 1px solid #cccccc;
+    text-align: left;
+    padding: 8px;
+}
+
+.outputTable tr:nth-child(even) {
+    background-color: #dddddd;
 }
 
 /*

@@ -1,44 +1,45 @@
 
-var addList = document.getElementsByClassName("add");
-var remList = document.getElementsByClassName("remove");
-var container = document.getElementsByClassName("elementContainer")[0];
+var AddButton = document.getElementsByClassName("add")[0];
+var Container = document.getElementsByClassName("elementContainer")[0];
+var Template = document.getElementsByClassName("elementTemplate")[0];
 
-for (i = 0; i < addList.length; i++) 
-{
-	addList[i].addEventListener('click', Add);
-}
-for (i = 0; i < remList.length; i++) 
-{
-	remList[i].addEventListener('click', Remove);
-}
+AddButton.addEventListener('click', AddElement);
 
-var elementHtml = "<div class=\"element\">< h2 class=\"remove\" > Delete</h2 ></div >";
+AddElement();
 
-function Add() 
+
+function AddElement() 
 {
-	console.log("addList");
-	/*var itemClass = this.parentNode.className;
-	for (i = 0; i < accItem.length; i++) {
-		accItem[i].className = 'accordionItem close';
-	}
-	if (itemClass == 'accordionItem close') {
-		this.parentNode.className = 'accordionItem open';
-	}*/
-	var newElem = document.createElement("div");
+	console.log("AddList");
+	/*var newElem = document.createElement("div");
 	newElem.className = "element";
 	var newElemChild = document.createElement("h2");
 	newElemChild.className = "remove";
 	newElemChild.innerHTML="Delete";
-	newElem.appendChild(newElemChild);
+	newElem.appendChild(newElemChild);*/
+	var newElem = Template.cloneNode(true);
+	newElem.className = "element";
+	Container.appendChild(newElem);
 	
-	container.appendChild(newElem);
-	
-	remList = document.getElementsByClassName("remove");
-	remList[remList.length-1].addEventListener('click', Remove);
+	newElem.getElementsByClassName("remove")[0].addEventListener('click', RemoveElement);
 }
 
-function Remove()
+function RemoveElement()
 {
 	console.log("remove");
-	container.removeChild(this.parentNode);
+	Container.removeChild(this.parentNode);
 }
+
+
+{
+	var outputTable = document.getElementsByClassName("outputTable")[0];
+	//var times = document.getElementsByClassName("times")[0];
+	
+	for (var i = 1; i <= 12; i++)
+	{
+		var newElem = document.createElement("tr");
+		newElem.innerHTML = "<td class=\"time\" num=\"" + i + "\">" + i + "</td><td class=\"chart\" num=\"" + i + "\"></td>";
+		outputTable.appendChild(newElem);
+	}
+}
+
