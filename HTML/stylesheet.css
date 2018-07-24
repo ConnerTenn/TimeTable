@@ -21,6 +21,7 @@
 
 .add
 {
+	margin-top: 500px;
 	cursor: pointer;
 	background: #55A5ff;
 	padding: 15px;
@@ -75,21 +76,39 @@ input
 .outputTable
 {
     border-collapse: collapse;
-	width: 100%;
+	/*width: 100%;*/
 	/*margin-left: 500px;*/
-	margin-left: 20px;
+	/*margin-left: 20px;
+	margin-bottom: 20px;*/
+	position: absolute;
 	display: inline-block;
+	top: 20px;
+	left: 20px;
 }
 
 .outputTable td, .outputTable th 
 {
     border: 1px solid #cccccc;
     text-align: left;
-    padding: 8px;
+	/*padding: 8px;*/
+	padding-left: 5px;
+	height: 30px;
+	
 }
 
-.outputTable tr:nth-child(even) {
+.outputTable tr:nth-child(even) 
+{
     background-color: #dddddd;
+}
+
+.tableElement
+{
+	font-size: 12px;
+	/*color: #ffffff;*/
+	background: rgb(120, 183, 255);
+	padding: 5px;
+	position: absolute;
+	display: inline-block;
 }
 
 /*
