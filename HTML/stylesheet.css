@@ -1,33 +1,96 @@
 
-.container
+.elementTemplate
 {
+	/*visibility: hidden;*/
+	transform: scaleY(0);
+	display: block;
+}
+
+
+.gridContainer
+{
+	display: grid;
+	grid-gap: 20px 20px;
+	grid-template-columns: auto 350px;
+}
+
+
+.listContainer
+{
+	grid-column: 2/2;
+	
 	/*background: #ffffff;
 	padding: 20px;*/
-	margin-left: 20px;
-	display: block;
-	width: 450px;
+	/*margin-left: 20px;
+	display: block;*/
+	/*width: 450px;*/
 	/*box-sizing:border-box;*/
 	
 }
 
-.elementContainer
+
+
+.outputTable
 {
-	background: #eeeeee;
-	padding: 20px;
-	margin: 20px 0px;
-	/*display: block;
-	box-sizing:border-box;*/
+	grid-column: 1/1;
+	
+	
+	display: grid;
+	grid-template-columns: 50px auto;
+	align-content: start;
+	text-align: center;
+	
+	border-style: solid;
+	border-collapse: collapse;
+	border-width: 1px;
+	border-color: #888888;
+	/*width: 100%;*/
+	/*margin-left: 500px;*/
+	/*margin-left: 20px;
+	margin-bottom: 20px;*/
+	/*position: absolute;
+	display: inline-block;
+	top: 20px;
+	left: 20px;*/
 }
+
+.time
+{
+	grid-column: 1/1;
+	
+	border-style: solid;
+	border-width: 1px;
+	border-color: #888888;
+}
+
+.day
+{
+	grid-row: 1/1;
+	
+	border-style: solid;
+	border-width: 1px;
+	border-color: #888888;
+}
+
+.course
+{
+	border-style: solid;
+	border-width: 1px;
+	border-color: #888888;
+}
+
+
+
 
 .add
 {
-	margin-top: 500px;
+	/*margin-top: 500px;*/
 	cursor: pointer;
 	background: #55A5ff;
 	padding: 15px;
 	margin-right: 5px;
-	display: inline-block;
-	position: relative;
+	/*display: inline-block;
+	position: relative;*/
 	/*left:80%;*/
 }
 
@@ -37,16 +100,18 @@
 	background: #95A5ff;
 	padding:15px;
 	margin-right: 5px;
-	display: inline-block;
-	position: relative;
+	/*display: inline-block;
+	position: relative;*/
 	/*left:80%;*/
 }
 
-.elementTemplate
+.listItems
 {
-	/*visibility: hidden;*/
-	transform: scaleY(0);
-	display: block;
+	background: #eeeeee;
+	padding: 5px;
+	margin: 20px 0px;
+	/*display: block;
+	box-sizing:border-box;*/
 }
 
 .element
@@ -73,43 +138,6 @@ input
 	width: 80px;
 }
 
-.outputTable
-{
-    border-collapse: collapse;
-	/*width: 100%;*/
-	/*margin-left: 500px;*/
-	/*margin-left: 20px;
-	margin-bottom: 20px;*/
-	position: absolute;
-	display: inline-block;
-	top: 20px;
-	left: 20px;
-}
-
-.outputTable td, .outputTable th 
-{
-    border: 1px solid #cccccc;
-    text-align: left;
-	/*padding: 8px;*/
-	padding-left: 5px;
-	height: 30px;
-	
-}
-
-.outputTable tr:nth-child(even) 
-{
-    background-color: #dddddd;
-}
-
-.tableElement
-{
-	font-size: 12px;
-	/*color: #ffffff;*/
-	background: rgb(120, 183, 255);
-	padding: 5px;
-	position: absolute;
-	display: inline-block;
-}
 
 /*
 .accordionWrapper
