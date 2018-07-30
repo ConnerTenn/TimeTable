@@ -13,7 +13,7 @@
 	
 	"content_scripts": [
 	{
-		"matches": ["http://*/*", "https://*/*", "http://webadvisor.uoguelph.ca/*"],
+		"matches": ["https://webadvisor.uoguelph.ca/*"],
 		"js": [ "jquery.min.js", "content.js" ]
 	}],
 	

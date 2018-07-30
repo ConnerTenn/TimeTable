@@ -16,3 +16,21 @@ function MessageHandler(msg, sender, response)
 	}
 	console.log("Done Event");
 }
+
+$(document).ready(function (){
+	console.log($(".WBST_Bars:contains(Students)").html());
+	//$(".WBST_Bars:contains(Students)").trigger("click");
+	//$(".WBST_Bars:contains(Students)").trigger("follow");
+	//$(".WBST_Bars:contains(Students)").click();
+	ClickEvent($(".WBST_Bars:contains(Students)")[0]);
+	console.log("Did it work?");
+	
+	
+});
+
+function ClickEvent(element)
+{
+	var event = document.createEvent("MouseEvents");
+	event.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+	element.dispatchEvent(event);  
+}
