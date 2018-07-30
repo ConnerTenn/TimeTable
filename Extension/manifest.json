@@ -23,6 +23,5 @@
 		"scripts": [ "background.js" ]
 	},
 	
-	/*"content_security_policy": "script-src https://ajax.googleapis.com 'self'; object-src 'self'",*/
 	"permissions": ["activeTab"]
 }

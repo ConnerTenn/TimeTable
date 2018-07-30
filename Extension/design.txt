@@ -1,0 +1,10 @@
+
+Popup
+	accesses data from background script for ui
+	signals to content script of site to recall data from the background and insert it
+Content
+	One for each university
+	One for the GYST site
+Background
+	one main one for data transfer and storrage
+	

@@ -17,7 +17,7 @@ function MessageHandler(msg, sender, response)
 	console.log("Done Event");
 }
 
-$(document).ready(function (){
+$(document).ready(function () {
 	console.log($(".WBST_Bars:contains(Students)").html());
 	//$(".WBST_Bars:contains(Students)").trigger("click");
 	//$(".WBST_Bars:contains(Students)").trigger("follow");
