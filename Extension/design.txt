@@ -2,9 +2,34 @@
 Popup
 	accesses data from background script for ui
 	signals to content script of site to recall data from the background and insert it
+	IU
+		Read Page button
+		auto navigate button
+		Auto search and select
+		Courses and section list
+		import button
 Content
 	One for each university
+		auto navigate page
+		read page content
 	One for the GYST site
+		input data
+		collect courses to search
 Background
 	one main one for data transfer and storrage
 	
+	
+Data structure
+	Course
+		CourseCode
+		SectionList
+		
+	Section
+		SectionID
+		TimeSlots
+		
+	TimeSlot
+		Days
+		Start
+		End
+

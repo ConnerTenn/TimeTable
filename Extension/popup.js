@@ -24,6 +24,7 @@ function OnceLoaded() {
 	console.log("Loaded");
 	loaded = true;
 };*/
+var loaded = true;
 
 $("button").click(DoUpdate);
 
@@ -40,4 +41,3 @@ function DoUpdate()
 				});
 	}
 }
-
