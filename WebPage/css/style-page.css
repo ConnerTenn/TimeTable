@@ -1,23 +1,35 @@
 #main-content{
   display: grid;
   grid-template-columns: auto 20%;
-  background-color: #2196F3;
+  background-color: gray;
   padding: 10px;
 }
 #left-content, #right-content {
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: darkgray;
   border: 1px solid rgba(0, 0, 0, 0.8);
   padding: 20px;
   font-size: 30px;
   text-align: center;
 }
 
+p{
+	font-color: white;
+}
+
 /* Form Styling */
+
+
 .right-content-form{
 	
 }
-.time-start {
+.time-start, .time-end {
 	width: auto;
+	display: inline-block;
+}
+
+.day-button{
+	
+	border-radius: 50px;
 }
 
 {
@@ -25,11 +37,12 @@
 }
 
 input[type=text], select, textarea {
-    width: 100%;
+    width: 100px;
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
     resize: vertical;
+	display: inline-block;
 }
 
 label {
@@ -38,7 +51,7 @@ label {
 }
 
 input[type=submit] {
-    background-color: #4CAF50;
+    background-color: orange;
     color: white;
     padding: 12px 20px;
     border: none;
@@ -83,3 +96,5 @@ input[type=submit]:hover {
         margin-top: 0;
     }
 }
+
+
