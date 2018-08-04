@@ -2,7 +2,7 @@
 
 console.log("It works");
 
-/* Dynamic Element Handlers */
+/* === Dynamic Element Handlers === */
 
 function AddCourse()
 {
@@ -39,12 +39,12 @@ function DeleteTimeSlot()
 	//if last course is being deleted, add initial empty timeslot
 }
 
-/* End Dynamic Element Handlers */
+/* === End Dynamic Element Handlers === */
 
 
-/* Accordian Handling begins here */
+/* === Accordian Handling begins here === */
 
-var acc = document.getElementsByClassName("accordion");
+/*var acc = document.getElementsByClassName("accordion");
 var i;
 
 for (i = 0; i < acc.length; i++) {
@@ -57,23 +57,36 @@ for (i = 0; i < acc.length; i++) {
       panel.style.maxHeight = panel.scrollHeight + "px";
     } 
   });
+}*/
+
+$("button.accordion").click(AccordionClick);
+
+function AccordionClick()
+{
+	this.nextElementSibling.classList.toggle("active");
 }
 
-/* Accordian Handling ends here */
+
+/* === Accordian Handling ends here === */
 
 
-/* Button Handlers */
+/* === Button Handlers === */
 
 
 /* Course */
-
 
 /* Section */
 
 /* TimeTable */
 
-/* Schedule */
+$("button.day-button").click(DayButtonClick);
 
+function DayButtonClick()
+{
+	this.classList.toggle("active");
+}
+
+/* Schedule */
 
 function GenerateSchedule()
 {
@@ -86,7 +99,7 @@ function DrawSchedule()
 }
 
 
-/* End Button Handlers */
+/* === End Button Handlers === */
 
 
 

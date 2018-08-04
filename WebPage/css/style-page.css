@@ -1,27 +1,26 @@
+
+body{
+	
+  background-color: #666666;
+}
+
 #main-content{
   display: grid;
   grid-template-columns: auto 350px;
-  background-color: gray;
-  padding: 10px;
-}
-#left-content, #right-content {
-  background-color: darkgray;
-  border: 1px solid rgba(0, 0, 0, 0.8);
-  padding: 10px;
-  text-align: center;
 }
 
-p{
-	font-color: white;
+#left-content, #right-content {
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 10px;
 }
 
 /* Form Styling */
-
 
 .right-content-form{
 	padding: 0px;
 	margin: 0px;
 }
+
 .time-start, .time-end {
 	width: auto;
 	display: inline-block;
@@ -29,71 +28,35 @@ p{
 
 .day-button{
 	border: none;
-	border-radius: 60%;
-	width: 22px;
-	height: 22px;
+	border-radius: 50%;
+	width: 24px;
+	height: 24px;
 	font-size: 14px;
+	font-weight: bold; 
 	background: blue;
 	cursor: pointer;
-	text-align: center;
-	
+	color: white	
 }
 .day-button:hover{
-	background: limegreen;
+	background: lightblue;
+}
+.day-button.active
+{
+	background: green;
+}
+.day-button.active:hover
+{
+	background: lightgreen;
 }
 
-input[type=text], select, textarea {
+input[type=text] {
     width: 60px;
     padding: 5px;
-    border: 1px solid #ccc;
+    border: none;
     border-radius: 4px;
     resize: vertical;
 	display: inline-block;
 	font-size: 10px;
-}
-
-label {
-    padding: 12px 12px 12px 0;
-    display: inline-block;
-}
-
-input[type=submit] {
-    background-color: orange;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    float: right;
-}
-
-input[type=submit]:hover {
-    background-color: #45a049;
-}
-
-.container {
-    border-radius: 5px;
-    background-color: #f2f2f2;
-    padding: 20px;
-}
-
-.col-25 {
-    float: left;
-    width: 25%;
-    margin-top: 6px;
-}
-
-.col-75 {
-    float: left;
-    width: 75%;
-    margin-top: 6px;
-}
-
-/* Clear floats after the columns */
-.row:after {
-    content: "";
-    display: table;
-    clear: both;
 }
 
 /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
@@ -106,40 +69,10 @@ input[type=submit]:hover {
 
 
 /* Accordion Styling */
-
-.accordion {
-    background-color: #eee;
-    color: #444;
-    cursor: pointer;
-    padding: 18px;
-    width: 100%;
-    border: none;
-    text-align: left;
-    outline: none;
-    font-size: 15px;
-    transition: 0.4s;
-}
-
-.active, .accordion:hover {
-    background-color: #ccc;
-}
-
-.accordion:after {
-    content: '\002B';
-    color: #777;
-    font-weight: bold;
-    float: right;
-    margin-left: 5px;
-}
-
-.active:after {
-    content: "\2212";
-}
-
 .accordionContent {
-    padding: 0 18px;
-    background-color: white;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.2s ease-out;
+	transform: scaley(1);
+}
+
+.accordionContent.active {
+	transform: scaley(0);
 }
