@@ -74,17 +74,29 @@ input[type=text] {
 
 /* Accordion Styling */
 .accordionHeader {
-	background: lightblue;
+	background: teal;
 }
-.accordionButton {
-	cursor: pointer;
-	width: 10px;
-	height: 10px;
+.accordionButton, .accordionButton-minus, .accordionButton-plus {
+	padding-top: 30%;
+	align: center;
+	background-color: teal;
+    border: none;
+    color: white;
+    padding: 2px 1px;
+    font-size: 16px;
+    cursor: pointer;
 }
+
+.accordionButton-minus {
+	float:right;
+}
+
+
+
 .accordionContent {
 	padding-top: 10px;
 	transform: scaley(0);
-	background: lightcyan
+	background: gold;
 }
 .accordionContent.active {
 	transform: scaley(1);
