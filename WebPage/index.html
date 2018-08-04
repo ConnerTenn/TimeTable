@@ -9,15 +9,24 @@
 	</div>
 	
 	<div id="right-content">
-		<button class="day-button" type="button" onclick="" >S</button>
-		<button class="day-button" type="button" onclick="">T</button>
-		<button class="day-button" type="button" onclick="">T</button>
-		<button class="day-button" type="button" onclick="" >W</button>
-		<button class="day-button" type="button" onclick="" >T</button>
-		<button class="day-button" type="button" onclick="" >F</button>
-		<button class="day-button" type="button" onclick="" >S</button>
-		<input type="text" name="time-start" class="time-start" placeholder="add/select a value" onfocus="this.select()">
-		<input type="text" name="time-start" class="time-end" placeholder="add/select a value" onfocus="this.select()">		
+		<button class="accordion">Course</button>
+		<div class="accordionContent">
+			<button class="accordion">Section</button>
+			<div class="accordionContent">
+				<button class="accordion">Time Slot</button>
+				<div class="accordionContent">
+					<button class="day-button" type="button" onclick="" >S</button>
+					<button class="day-button" type="button" onclick="">T</button>
+					<button class="day-button" type="button" onclick="">T</button>
+					<button class="day-button" type="button" onclick="" >W</button>
+					<button class="day-button" type="button" onclick="" >T</button>
+					<button class="day-button" type="button" onclick="" >F</button>
+					<button class="day-button" type="button" onclick="" >S</button>
+					<input type="text" name="time-start" class="time-start" placeholder="add/select a value" onfocus="this.select()">
+					<input type="text" name="time-start" class="time-end" placeholder="add/select a value" onfocus="this.select()">
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 </html>
