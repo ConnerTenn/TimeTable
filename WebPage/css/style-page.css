@@ -1,14 +1,13 @@
 #main-content{
   display: grid;
-  grid-template-columns: auto 200px;
+  grid-template-columns: auto 350px;
   background-color: gray;
   padding: 10px;
 }
 #left-content, #right-content {
   background-color: darkgray;
   border: 1px solid rgba(0, 0, 0, 0.8);
-  padding: 20px;
-  font-size: 30px;
+  padding: 10px;
   text-align: center;
 }
 
@@ -20,7 +19,8 @@ p{
 
 
 .right-content-form{
-	
+	padding: 0px;
+	margin: 0px;
 }
 .time-start, .time-end {
 	width: auto;
@@ -28,21 +28,27 @@ p{
 }
 
 .day-button{
-	
+	border: none;
 	border-radius: 50%;
-	width: 30px;
-	height: 30px;
-	font-size: 20px;
+	width: 20px;
+	height: 20px;
+	font-size: 14px;
 	background: blue;
+	cursor: pointer;
+	
+}
+.day-button:hover{
+	background: limegreen;
 }
 
 input[type=text], select, textarea {
-    width: 100px;
-    padding: 12px;
+    width: 60px;
+    padding: 5px;
     border: 1px solid #ccc;
     border-radius: 4px;
     resize: vertical;
 	display: inline-block;
+	font-size: 10px;
 }
 
 label {
