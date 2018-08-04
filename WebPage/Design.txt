@@ -1,3 +1,4 @@
+
 8Queens
 	Line
 		Backtrack()
@@ -31,4 +32,16 @@
 					return fail
 			
 		
+		
+C
+	S T T T
+	S T T
+C
+	S T T
+	S T T
+C
+	S T T T
+	S T T T T
+	S T T T
+	S T T T
 	

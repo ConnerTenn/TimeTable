@@ -37,6 +37,8 @@ class Section
 	constructor()
 	{
 		this.Name = "";
+		this.Instructor = "";
+		this.Classroom = "";
 		this.TimeSlotList = [];
 	}
 	
