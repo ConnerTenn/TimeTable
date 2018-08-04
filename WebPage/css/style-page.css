@@ -69,10 +69,13 @@ input[type=text] {
 
 
 /* Accordion Styling */
+.accordionHeader {
+	background: lightblue;
+}
 .accordionButton {
 	cursor: pointer;
-	padding: 5px;
-	background: lightblue; 
+	width: 10px;
+	height: 10px;
 }
 .accordionContent {
 	padding-top: 10px;

@@ -48,7 +48,7 @@ $(".accordionButton").click(AccordionClick);
 
 function AccordionClick()
 {
-	this.nextElementSibling.classList.toggle("active");
+	this.parentElement.nextElementSibling.classList.toggle("active");
 }
 
 
