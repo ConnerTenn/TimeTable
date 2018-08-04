@@ -44,7 +44,7 @@ function DeleteTimeSlot()
 
 /* === Accordian Handling begins here === */
 
-var acc = document.getElementsByClassName("accordion");
+/*var acc = document.getElementsByClassName("accordion");
 var i;
 
 for (i = 0; i < acc.length; i++) {
@@ -57,7 +57,15 @@ for (i = 0; i < acc.length; i++) {
       panel.style.maxHeight = panel.scrollHeight + "px";
     } 
   });
+}*/
+
+$("button.accordion").click(AccordionClick);
+
+function AccordionClick()
+{
+	this.nextElementSibling.classList.toggle("active");
 }
+
 
 /* === Accordian Handling ends here === */
 
@@ -70,6 +78,13 @@ for (i = 0; i < acc.length; i++) {
 /* Section */
 
 /* TimeTable */
+
+$("button.day-button").click(DayButtonClick);
+
+function DayButtonClick()
+{
+	this.classList.toggle("active");
+}
 
 /* Schedule */
 
