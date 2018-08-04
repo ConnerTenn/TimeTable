@@ -1,6 +1,6 @@
 #main-content{
   display: grid;
-  grid-template-columns: auto 20%;
+  grid-template-columns: auto 200px;
   background-color: gray;
   padding: 10px;
 }
@@ -29,11 +29,11 @@ p{
 
 .day-button{
 	
-	border-radius: 50px;
-}
-
-{
-    box-sizing: border-box;
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+	font-size: 20px;
+	background: blue;
 }
 
 input[type=text], select, textarea {
