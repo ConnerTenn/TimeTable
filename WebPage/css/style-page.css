@@ -69,10 +69,16 @@ input[type=text] {
 
 
 /* Accordion Styling */
-.accordionContent {
-	transform: scaley(1);
+.accordionButton {
+	cursor: pointer;
+	padding: 5px;
+	background: lightblue; 
 }
-
-.accordionContent.active {
+.accordionContent {
+	padding-top: 10px;
 	transform: scaley(0);
+	background: lightcyan
+}
+.accordionContent.active {
+	transform: scaley(1);
 }
