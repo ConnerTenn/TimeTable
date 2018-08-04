@@ -1,0 +1,47 @@
+
+8Queens
+	Line
+		Backtrack()
+			custom
+			return fail if out of bounds, else move on 
+		Advance()
+			custom
+			return success if out of bounds, else move on 
+		Do()
+			loop while in bounds
+				Place()
+				if success 
+					advance()
+					if success then we're done
+				if fail
+					backtrack()
+					if fail then no solution
+					
+	Piece
+		Advance()
+			custom
+		Reset()
+			custom
+		Place()
+			loop (implicit loop if advance is fail)
+				advance()
+				if success
+					return success
+				if out of bounds
+					reset())
+					return fail
+			
+		
+		
+C
+	S T T T
+	S T T
+C
+	S T T
+	S T T
+C
+	S T T T
+	S T T T T
+	S T T T
+	S T T T
+	
