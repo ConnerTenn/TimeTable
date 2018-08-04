@@ -2,7 +2,7 @@
 
 console.log("It works");
 
-/* Dynamic Element Handlers */
+/* === Dynamic Element Handlers === */
 
 function AddCourse()
 {
@@ -39,27 +39,25 @@ function DeleteTimeSlot()
 	//if last course is being deleted, add initial empty timeslot
 }
 
-/* End Dynamic Element Handlers */
+/* === End Dynamic Element Handlers === */
 
 
-/* Accordian Handling begins here */
+/* === Accordian Handling begins here === */
 
 
-/* Accordian Handling ends here */
+/* === Accordian Handling ends here === */
 
 
-/* Button Handlers */
+/* === Button Handlers === */
 
 
 /* Course */
-
 
 /* Section */
 
 /* TimeTable */
 
 /* Schedule */
-
 
 function GenerateSchedule()
 {
@@ -72,7 +70,7 @@ function DrawSchedule()
 }
 
 
-/* End Button Handlers */
+/* === End Button Handlers === */
 
 
 
