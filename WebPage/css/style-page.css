@@ -42,7 +42,7 @@ input[type=text] {
 }
 
 input[type=text].section-name, input[type=text].course-name {
-	width: 87%;
+	width: 85%;
 	text-align: center;
 	font-size: 1em;
 	padding: 2px;
