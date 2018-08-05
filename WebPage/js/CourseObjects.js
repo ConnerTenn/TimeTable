@@ -17,6 +17,7 @@ class Time
 	}
 }
 
+var DayNames = ["sun", "mon", "tue", "wed", "thu", "fri", "sat", "sun"];
 class TimeSlot
 {
 	constructor()

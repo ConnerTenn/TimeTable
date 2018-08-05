@@ -109,7 +109,7 @@ function RemoveTimeSlot()
 /* === End Dynamic Element Handlers === */
 
 
-/* === Accordian Handling begins here === */
+/* === Accordian Handling === */
 
 $(".accordionButton").click(AccordionClick);
 
@@ -129,7 +129,7 @@ function AccordionClick()
 }
 
 
-/* === Accordian Handling ends here === */
+/* === End Accordian Handling === */
 
 
 /* === Button Handlers === */
@@ -152,18 +152,6 @@ $(".courseAdd").click(AddCourse);
 function DayButtonClick()
 {
 	this.classList.toggle("active");
-}
-
-/* Schedule */
-
-function GenerateSchedule()
-{
-	
-}
-
-function DrawSchedule()
-{
-	
 }
 
 
