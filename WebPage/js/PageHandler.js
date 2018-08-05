@@ -18,37 +18,78 @@ function InitScheduleGrid()
 
 /* === Dynamic Element Handlers === */
 
+var CourseTemplate = $(".CourseTemplate")[0];
 function AddCourse()
 {
-	//Copy template and append to end of dynamic list
-	//Bind Buttons
-	//add initial empty section
+	//generate new element
+	var newElem = CourseTemplate.cloneNode(true);
+	newElem.className = "Course";
+	
+	//bind buttons
+	$(newElem).find(".sectionAdd").click(AddSection);
+	$(newElem).find(".accordionButton").click(AccordionClick);
+	$(newElem).find(".courseRemove").click(RemoveCourse);
+	
+	//add initial children
+	AddSectionLoc($(newElem).find(".SectionListContainer"));
+	
+	//append to list
+	$(this).siblings(".CourseListContainer").append(newElem);
 }
 
-function DeleteCourse()
+function RemoveCourse()
 {
 	//if last course is being deleted, add initial empty course
 }
 
+var SectionTemplate = $(".SectionTemplate")[0];
 function AddSection()
 {
-	//Copy template and append to end of dynamic list
-	//Bind Buttons
-	//add initial empty timeslot
+	AddSectionLoc($(this).siblings(".SectionListContainer"));
+}
+function AddSectionLoc(location)
+{
+	//generate new element
+	var newElem = SectionTemplate.cloneNode(true);
+	newElem.className = "Section";
+	
+	//bind buttons
+	$(newElem).find(".timeSlotAdd").click(AddSection);
+	$(newElem).find(".accordionButton").click(AccordionClick);
+	$(newElem).find(".sectionRemove").click(RemoveCourse);
+	
+	//add initial children
+	AddTimeSlotLoc($(newElem).find(".TimeSlotListContainer"));
+	
+	//append to list
+	location.append(newElem);
 }
 
-function DeleteSection()
+function RemoveSection()
 {
 	//if last course is being deleted, add initial empty section
 }
 
+var TimeSlotTemplate = $(".TimeSlotTemplate")[0];
 function AddTimeSlot()
 {
-	//Copy template and append to end of dynamic list
-	//Bind Buttons
+	AddTimeSlotLoc($(this).siblings(".TimeSlotListContainer"));
+}
+function AddTimeSlotLoc(location)
+{
+	//generate new element
+	var newElem = TimeSlotTemplate.cloneNode(true);
+	newElem.className = "TimeSlot";
+	
+	//bind buttons
+	$(newElem).find(".timeSlotRemove").click(RemoveTimeSlot);
+	$(newElem).find("button.day-button").click(DayButtonClick);
+	
+	//append to list
+	location.append(newElem);
 }
 
-function DeleteTimeSlot()
+function RemoveTimeSlot()
 {
 	//if last course is being deleted, add initial empty timeslot
 }
@@ -83,9 +124,16 @@ function AccordionClick()
 
 /* Course */
 
+$(".courseAdd").click(AddCourse);
+
 /* Section */
 
+$(".sectionAdd").click(AddSection);
+
 /* TimeTable */
+
+$(".timeslotAdd").click(AddTimeSlot);
+
 
 $("button.day-button").click(DayButtonClick);
 
