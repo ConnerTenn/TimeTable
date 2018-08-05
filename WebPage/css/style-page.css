@@ -6,6 +6,21 @@
 	transform: scale(0);
 }
 
+.Section, .Course, .TimeSlot {
+		padding-top: 5px;
+}
+
+.Course>.accordionContent {
+	
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.Section>.accordionContent {
+	padding-right: 10px;
+	padding-left: 10px;
+}
+
 body{
 	
   background-color: #666666;
@@ -13,7 +28,7 @@ body{
 
 #main-content{
   display: grid;
-  grid-template-columns: auto 390px;
+  grid-template-columns: auto 430px;
 }
 
 #left-content, #right-content {
@@ -42,7 +57,7 @@ input[type=text] {
 }
 
 input[type=text].section-name, input[type=text].course-name {
-	width: 87%;
+	width: 85%;
 	text-align: center;
 	font-size: 1em;
 	padding: 2px;
