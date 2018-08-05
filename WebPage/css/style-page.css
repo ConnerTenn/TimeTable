@@ -21,6 +21,11 @@ body{
   padding: 10px;
 }
 
+#right-content{
+	overflow-y: scroll; 
+	height:980px;
+}
+
 /* Global Element Properties*/
 
 button:focus {
@@ -36,11 +41,24 @@ input[type=text] {
 	font-size: 10px;
 }
 
+input[type=text].section-name, input[type=text].course-name {
+	width: 87%;
+	text-align: center;
+	font-size: 1em;
+	padding: 2px;
+}
+
 /* === TimeSlot === */
 
 .time-start, .time-end {
 	width: auto;
 	display: inline-block;
+	text-align: center;
+}
+
+input[type=text].time-start, input[type=text].time-end{
+	font-size: 1em;
+	padding: 2px;
 }
 
 .day-button{
@@ -52,14 +70,23 @@ input[type=text] {
 	font-weight: bold; 
 	background: orange;
 	cursor: pointer;
-	color: white
+	color: white;
+	padding-right: 2.5%;
 }
+.day-button-W{
+	padding-left: 1.3%;
+}
+
+.day-button-S, .day-button-F{
+	padding-right: 2%;
+}
+
 .day-button:hover{
 	background: lightblue;
 }
 .day-button.active
 {
-	background: green;
+	background: teal;
 }
 .day-button.active:hover
 {
@@ -72,7 +99,7 @@ input[type=text] {
 	background: teal;
 }
 .accordionButton, .courseAdd, .courseRemove, .sectionAdd, .sectionRemove, .timeslotAdd, .timeslotRemove {
-	padding-top: 30%;
+	/*padding-top: 30%;*/
 	align: center;
 	/*background-color: teal;*/
 	background: transparent;
@@ -81,6 +108,8 @@ input[type=text] {
     padding: 2px 1px;
     font-size: 16px;
     cursor: pointer;
+	
+
 }
 
 .accordionButton-minus {
@@ -91,11 +120,13 @@ input[type=text] {
 
 .accordionContent {
 	padding-top: 10px;
-	transform: scaley(0);
+	/* transform: scaley(0); */
 	background: gold;
+	display: none;
 }
 .accordionContent.active {
-	transform: scaley(1);
+	/*transform: scaley(1);*/
+	display: block;
 }
 
 
