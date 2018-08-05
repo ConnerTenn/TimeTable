@@ -1,0 +1,73 @@
+<html>
+<link rel="stylesheet" type="text/css" href="css/style-page.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<head>
+	<!-- Course Template -->
+	<div class="CourseTemplate">
+		<div class="accordionHeader">
+			<button class="accordionButton"><i class="fas fa-arrow-alt-circle-down"></i></button>
+			<input type="text" class="course-name" placeholder="Course Name">
+			<button class="courseRemove"><i class="fas fa-minus-circle"></i></button>
+		</div>
+		<div class="accordionContent active">
+			<button class="sectionAdd"><i class="fas fa-plus-circle"></i></button>
+			<!-- Container for the list of sections -->
+			<div class="SectionListContainer">
+			</div>
+		</div>
+	</div>
+	<!-- Section Template -->
+	<div class="SectionTemplate">
+		<div class="accordionHeader">
+			<button class="accordionButton"><i class="fas fa-arrow-alt-circle-down"></i></button>
+			<input type="text" class="section-name" placeholder="Section Name">
+			<button class="sectionRemove"><i class="fas fa-minus-circle"></i></button>
+		</div>
+		<div class="accordionContent active">
+			<button class="timeSlotAdd"><i class="fas fa-plus-circle"></i></button>
+			<!-- Container for the list of timeslots -->
+			<div class="TimeSlotListContainer">
+			</div>
+		</div>
+	</div>
+	<!-- TimeSlotTemplate Template -->
+	<div class="TimeSlotTemplate">
+		<button class="day-button day-button-S" type="button" onclick="">S</button>
+		<button class="day-button" type="button" onclick="">M</button>
+		<button class="day-button" type="button" onclick="">T</button>
+		<button class="day-button day-button-W" type="button" onclick="">W</button>
+		<button class="day-button" type="button" onclick="">T</button>
+		<button class="day-button day-button-F" type="button" onclick="">F</button>
+		<button class="day-button day-button-S" type="button" onclick="">S</button>
+		<input type="text" class="time-start" value="7:00am" onfocus="this.select()">
+		<input type="text" class="time-end" value="8:00am" onfocus="this.select()">
+		<button class="timeslotRemove"><i class="fas fa-minus-circle"></i></button>
+	</div>
+</head>
+<body>
+<div id="main-content">
+	<div id="left-content"> 
+		<div class="grid-container">
+			<div class="grid-item space">###</div>
+			<div class="grid-item label">Sunday</div>
+			<div class="grid-item label">Monday</div>
+			<div class="grid-item label">Tuesday</div>
+			<div class="grid-item label">Wednesday</div>
+			<div class="grid-item label">Thursday</div>
+			<div class="grid-item label">Friday</div>
+			<div class="grid-item label">Saturday</div>
+		</div>
+	</div>
+	
+	<div id="right-content">
+		<button class="courseAdd"><i class="fas fa-plus-circle"></i></button>
+		<!-- Container for the list of courses -->
+		<div class="CourseListContainer">
+		</div>
+	</div>
+</div>
+</html>
+<script src="vendor/jquery.min.js"></script>
+<script src="js/CourseObjects.js"></script>
+<script src="js/Scheduler.js"></script>
+<script src="js/PageHandler.js"></script>

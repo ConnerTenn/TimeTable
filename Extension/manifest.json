@@ -1,0 +1,27 @@
+{
+	"manifest_version": 2,
+	
+	"name": "GTYST Scheduller Retriever",
+	"description": "This extension will read the schedule data from a page.",
+	"version": "1.0",
+	
+	"browser_action":
+	{
+		"default_icon": "icon.png",
+		"default_popup": "popup.html"
+	},
+	
+	"content_scripts": [
+	{
+		"matches": ["https://webadvisor.uoguelph.ca/*"],
+		"js": [ "jquery.min.js", "content.js" ]
+	}],
+	
+	"background": 
+	{
+		"persistent": false,
+		"scripts": [ "background.js" ]
+	},
+	
+	"permissions": ["activeTab"]
+}
