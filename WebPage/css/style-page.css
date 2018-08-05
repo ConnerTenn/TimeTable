@@ -66,7 +66,7 @@ input[type=text] {
 .accordionHeader {
 	background: teal;
 }
-.accordionButton, .accordionButton-minus, .accordionButton-plus {
+.accordionButton, .courseAdd, .courseRemove, .sectionAdd, .sectionRemove, .timeslotAdd, .timeslotRemove {
 	padding-top: 30%;
 	align: center;
 	/*background-color: teal;*/

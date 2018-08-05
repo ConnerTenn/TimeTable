@@ -63,6 +63,16 @@ $(".accordionButton").click(AccordionClick);
 function AccordionClick()
 {
 	this.parentElement.nextElementSibling.classList.toggle("active");
+	if (this.parentElement.nextElementSibling.classList.contains("active"))
+	{
+		this.firstChild.classList.remove("fa-arrow-alt-circle-right")
+		this.firstChild.classList.add("fa-arrow-alt-circle-down");
+	}
+	else
+	{
+		this.firstChild.classList.remove("fa-arrow-alt-circle-down")
+		this.firstChild.classList.add("fa-arrow-alt-circle-right");
+	}
 }
 
 
@@ -70,7 +80,6 @@ function AccordionClick()
 
 
 /* === Button Handlers === */
-
 
 /* Course */
 
