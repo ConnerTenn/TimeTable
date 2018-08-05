@@ -6,7 +6,7 @@
 	<div class="CourseTemplate">
 		<div class="accordionHeader">
 			<button class="accordionButton"><i class="fas fa-arrow-alt-circle-down"></i></button>
-			<input type="text" placeholder="Course Name">
+			<input type="text" class="course-name" placeholder="Course Name">
 			<button class="courseRemove">
 				<i class="fas fa-minus-circle"></i>
 			</button>
@@ -22,7 +22,7 @@
 	<div class="SectionTemplate">
 		<div class="accordionHeader">
 			<button class="accordionButton"><i class="fas fa-arrow-alt-circle-down"></i></button>
-			<input type="text" placeholder="Section Name">
+			<input type="text" class="section-name" placeholder="Section Name">
 			<button class="sectionRemove"><i class="fas fa-minus-circle"></i></button>
 		</div>
 		<div class="accordionContent active">
@@ -34,18 +34,17 @@
 	</div>
 	<!-- TimeSlotTemplate Template -->
 	<div class="TimeSlotTemplate">
-		<button class="day-button" type="button" onclick="">S</button>
+		<button class="day-button day-button-S" type="button" onclick="">S</button>
 		<button class="day-button" type="button" onclick="">M</button>
 		<button class="day-button" type="button" onclick="">T</button>
-		<button class="day-button" type="button" onclick="">W</button>
+		<button class="day-button day-button-W" type="button" onclick="">W</button>
 		<button class="day-button" type="button" onclick="">T</button>
-		<button class="day-button" type="button" onclick="">F</button>
-		<button class="day-button" type="button" onclick="">S</button>
+		<button class="day-button day-button-F" type="button" onclick="">F</button>
+		<button class="day-button day-button-S" type="button" onclick="">S</button>
 		<input type="text" class="time-start" value="7:00am" onfocus="this.select()">
 		<input type="text" class="time-end" value="8:00am" onfocus="this.select()">
 		<button class="timeslotRemove">
 			<i class="fas fa-minus-circle"></i>
-			</i>
 		</button>
 	</div>
 </head>
