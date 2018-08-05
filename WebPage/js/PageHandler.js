@@ -36,7 +36,12 @@ function AddCourse()
 
 function RemoveCourse()
 {
-	$(this).parent(".CourseListContainer").remove(this);
+	var list = $(this).closest(".CourseListContainer");
+	$(this).closest(".Course").remove();
+	if (list.children().length<=0)
+	{
+		AddCourse();
+	}
 }
 
 var SectionTemplate = $(".SectionTemplate")[0];
@@ -53,7 +58,7 @@ function AddSectionLoc(location)
 	//bind buttons
 	$(newElem).find(".timeSlotAdd").click(AddTimeSlot);
 	$(newElem).find(".accordionButton").click(AccordionClick);
-	$(newElem).find(".sectionRemove").click(RemoveCourse);
+	$(newElem).find(".sectionRemove").click(RemoveSection);
 	
 	//add initial children
 	AddTimeSlotLoc($(newElem).find(".TimeSlotListContainer"));
@@ -64,7 +69,12 @@ function AddSectionLoc(location)
 
 function RemoveSection()
 {
-	//if last course is being deleted, add initial empty section
+	var list = $(this).closest(".SectionListContainer");
+	$(this).closest(".Section").remove();
+	if (list.children().length <= 0)
+	{
+		AddSectionLoc(list);
+	}
 }
 
 var TimeSlotTemplate = $(".TimeSlotTemplate")[0];
@@ -88,7 +98,12 @@ function AddTimeSlotLoc(location)
 
 function RemoveTimeSlot()
 {
-	//if last course is being deleted, add initial empty timeslot
+	var list = $(this).closest(".TimeSlotListContainer");
+	$(this).closest(".TimeSlot").remove();
+	if (list.children().length <= 0)
+	{
+		AddTimeSlotLoc(list);
+	}
 }
 
 /* === End Dynamic Element Handlers === */
