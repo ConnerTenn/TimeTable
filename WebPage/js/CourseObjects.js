@@ -27,7 +27,7 @@ class TimeSlot
 		this.Days = 0b0000000; //Sat Fri Thurs Wed Tues Mon Sun
 	}
 	
-	Consflict(other)
+	Conflict(other)
 	{
 		return (this.Days & other.Days) && ((other.Start.Min >= this.Start.Min && other.Start.Min <= this.End.Min) || (other.End.Min >= this.Start.Min && Other.End.Min <= this.End.Min));
 	}
@@ -39,6 +39,19 @@ class TimeSlot
 		newTimeSlot.End.Min = this.End.Min;
 		newTimeSlot.Days = this.Days;
 		return newTimeSlot;
+	}
+	
+	toString()
+	{
+		var outStr = "";
+		
+		for (var i = 0; i < 7; i++)
+		{
+			if (this.Days & (1 << i)) { outStr += DayNames[i] + " "; }
+		}		
+		outStr += this.Start.Hour + ":" + this.Start.Minutes + "-" + this.End.Hour + ":" + this.End.Minutes;
+		
+		return outStr;
 	}
 }
 
@@ -56,7 +69,7 @@ class Section
 	{
 		for (var i = 0; i < this.TimeSlotList.length; i++)
 		{
-			for (var j = 0; j < other.TimeSlots.length; j++)
+			for (var j = 0; j < other.TimeSlotList.length; j++)
 			{
 				if (this.TimeSlotList[i].Conflict(other.TimeSlotList[j]))
 				{
@@ -78,6 +91,19 @@ class Section
 			newSection.TimeSlotList.push(this.TimeSlotList[i].Copy());
 		}
 		return newSection;
+	}
+	
+	toString()
+	{
+		var outStr = "";
+		
+		outStr += this.Name + " ";
+		for (var i = 0; i < this.TimeSlotList.length; i++)
+		{
+			outStr += "[" + this.TimeSlotList[i] + "] ";
+		}
+		
+		return outStr;
 	}
 }
 
@@ -102,6 +128,11 @@ class Course
 		newCourse.SectionList.push(this.Section.Copy());
 		newCourse.SelectedSection = 0;
 		return newCourse;
+	}
+	
+	toString()
+	{
+		return this.Name + " " + this.Section;
 	}
 }
 

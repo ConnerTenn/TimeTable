@@ -160,7 +160,7 @@ function BacktrackCourse()
 
 function AdvanceCourse()
 {
-	console.log("AdvanceCourse()");
+	console.log("AdvanceCourse() ");
 	
 	CourseIndex++;
 	return (CourseIndex < RequiredCourseList.length ? true : false);
@@ -168,7 +168,7 @@ function AdvanceCourse()
 
 function AdvanceSection()
 {
-	console.log("AdvanceSection()");
+	console.log("AdvanceSection() ");
 	
 	var course = RequiredCourseList[CourseIndex];
 	course.SelectedSection++;
@@ -261,12 +261,18 @@ function DrawSchedule()
 	for (var i = 0; i < ValidSchedules.length; i++)
 	{
 		console.log("Schedule " + i + ":");
-		console.log(ValidSchedules[i]);
+		for (var j = 0; j < ValidSchedules[i].length; j++)
+		{
+			console.log(ValidSchedules[i][j].toString());
+		}
 	}
 }
 
 function DoGenSchedule()
 {
+	RequiredCourseList = [];
+	CourseIndex = 0;
+	ValidSchedules = [];	
 	ReadCourseData();
 	GenerateSchedule();
 	DrawSchedule();
