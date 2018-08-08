@@ -15,6 +15,11 @@ class Time
 	{
 		return Math.floor(this.Min / 60);
 	}
+	
+	Valid()
+	{
+		return (0 <= this.Min && this.Min < 1440 ? true : false);
+	}
 }
 
 var DayNames = ["sun", "mon", "tue", "wed", "thu", "fri", "sat", "sun"];
@@ -39,6 +44,12 @@ class TimeSlot
 		newTimeSlot.End.Min = this.End.Min;
 		newTimeSlot.Days = this.Days;
 		return newTimeSlot;
+	}
+	
+	Valid()
+	{
+		if (!this.Days || !this.Start.Valid() || !this.End.Valid) { return false; }
+		return true;
 	}
 	
 	toString()
@@ -78,6 +89,15 @@ class Section
 			}
 		}
 		return false;
+	}
+	
+	Valid()
+	{
+		for (var i = 0; i < this.TimeSlotList.length; i++)
+		{
+			if (!this.TimeSlotList[i].Valid()) { return false; }
+		}
+		return true;
 	}
 	
 	Copy()
@@ -132,7 +152,18 @@ class Course
 	
 	toString()
 	{
-		return this.Name + " " + this.Section;
+		var outStr = "";
+		outStr += this.Name + "\n";
+		for (var i = 0; i < this.SectionList.length; i++)
+	 	{
+			outStr += "{ " + this.SectionList[i] + "}\n";
+		}
+		return outStr;
+	}
+	
+	toStringSimple()
+	{
+		return this.Name + " {" + this.Section + "}";
 	}
 }
 

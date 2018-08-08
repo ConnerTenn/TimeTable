@@ -148,7 +148,15 @@ function ReadCourseData()
 		
 		RequiredCourseList.push(course);
 	}
+	
+	console.log("===============\n Found Courses\n===============");
+	for (var i = 0; i < RequiredCourseList.length; i++)
+	{
+		console.log(RequiredCourseList[i].toString());
+	}
 }
+
+
 
 function BacktrackCourse()
 {
@@ -166,6 +174,7 @@ function AdvanceCourse()
 	return (CourseIndex < RequiredCourseList.length ? true : false);
 }
 
+//Return: 1: Success  2: Fail  3: Out of Bounds
 function AdvanceSection()
 {
 	console.log("AdvanceSection() ");
@@ -177,6 +186,8 @@ function AdvanceSection()
 	{
 		return 3;
 	}
+	
+	if (!course.Section.Valid()) { return 2; }
 	
 	var conflict = false;
 	for (var i = 0; i < CourseIndex; i++)
@@ -202,31 +213,9 @@ function ResetSection()
 	RequiredCourseList[CourseIndex].SelectedSection = -1;
 }
 
-
 function GenerateSchedule()
-{
-	//Debug Output
-	console.log();
-	for (var c = 0; c < RequiredCourseList.length; c++)
-	{
-		var course = RequiredCourseList[c];
-		for (var s = 0; s < course.SectionList.length; s++)
-		{
-			var section = course.SectionList[s];
-			for (var t = 0; t < section.TimeSlotList.length; t++)
-			{
-				var timeslot = section.TimeSlotList[t];
-				
-				var days = "";
-				for (var i = 0; i < 7; i++)
-				{
-					if (timeslot.Days & (1 << i)) { days = days + DayNames[i] + " "; }
-				}
-				console.log("Course:" + course.Name + "  Section:" + section.Name + " " + days + " " + timeslot.Start.Min + "-" + timeslot.End.Min);
-			}
-		}
-	}
-	//End Debug Output
+{	
+	console.log("===================\n Generate Schedule\n===================");
 	
 	var courseGenerator = new BacktrackLine();
 	courseGenerator.Backtrack = BacktrackCourse;
@@ -256,20 +245,21 @@ function MinToGridCoord(min)
 
 function DrawSchedule()
 {
-	console.log("DrawSchedule");
+	console.log("==============\n Draw Courses\n==============");
 	
 	for (var i = 0; i < ValidSchedules.length; i++)
 	{
 		console.log("Schedule " + i + ":");
 		for (var j = 0; j < ValidSchedules[i].length; j++)
 		{
-			console.log(ValidSchedules[i][j].toString());
+			console.log(ValidSchedules[i][j].toStringSimple());
 		}
 	}
 }
 
 function DoGenSchedule()
-{
+{	
+	console.log("#####################\n#####################");
 	RequiredCourseList = [];
 	CourseIndex = 0;
 	ValidSchedules = [];	
