@@ -31,6 +31,15 @@ class TimeSlot
 	{
 		return (this.Days & other.Days) && ((other.Start.Min >= this.Start.Min && other.Start.Min <= this.End.Min) || (other.End.Min >= this.Start.Min && Other.End.Min <= this.End.Min));
 	}
+	
+	Copy()
+	{
+		var newTimeSlot = new TimeSlot();
+		newTimeSlot.Start.Min = this.Start.Min;
+		newTimeSlot.End.Min = this.End.Min;
+		newTimeSlot.Days = this.Days;
+		return newTimeSlot;
+	}
 }
 
 class Section 
@@ -57,6 +66,19 @@ class Section
 		}
 		return false;
 	}
+	
+	Copy()
+	{
+		var newSection = new Section();
+		newSection.Name = this.Name;
+		newSection.Instructor = this.Instructor;
+		newSection.Classroom = this.Classroom;
+		for (var i = 0; i < this.TimeSlotList.length; i++)
+		{
+			newSection.TimeSlotList.push(this.TimeSlotList[i].Copy());
+		}
+		return newSection;
+	}
 }
 
 class Course
@@ -65,6 +87,21 @@ class Course
 	{
 		this.Name = "";
 		this.SectionList = [];
+		this.SelectedSection = -1;
+	}
+	
+	get Section()
+	{
+		return this.SectionList[this.SelectedSection];
+	}
+	
+	CopySimple()
+	{
+		var newCourse = new Course();
+		newCourse.Name = this.Name;
+		newCourse.SectionList.push(this.Section.Copy());
+		newCourse.SelectedSection = 0;
+		return newCourse;
 	}
 }
 

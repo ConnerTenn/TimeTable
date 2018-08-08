@@ -110,6 +110,7 @@ input[type=text].time-start, input[type=text].time-end{
 
 
 /*  === Accordion Styling === */
+
 .accordionHeader {
 	background: teal;
 }

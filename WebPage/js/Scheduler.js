@@ -1,4 +1,79 @@
 
+var RequiredCourseList = [];
+var CourseIndex = 0;
+var ValidSchedules = [];
+
+class BacktrackLine
+{
+	constructor()
+	{
+		this.Backtrack = function() {};
+		this.Advance = function() {};
+		this.Placer = {};
+	}
+	
+	Do()
+	{
+		console.log("BacktrackLine::Do()");
+		while (true)
+		{
+			var res = this.Placer.Place();
+			if (res)
+			{
+				if (!this.Advance())
+				{
+					//Found solution
+					console.log("BacktrackLine::Do() == Found Solution ==");
+					return true;
+				}				
+			}
+			else
+			{
+				if (!this.Backtrack())
+				{
+					//No solution
+					console.log("BacktrackLine::Do() == No Solution ==");
+					return false;
+				}
+			}
+		}
+
+	}
+}
+
+class BacktrackPlace
+{
+	constructor()
+	{
+		this.Advance = function() {};
+		this.Reset = function() {};
+	}
+	
+	Place()
+	{
+		console.log("BacktrackPlace::Place()");
+		while (true)
+		{
+			var res = this.Advance();
+			if (res === 1)
+			{
+				console.log("BacktrackPlace::Place() Success");
+				//Success
+				return true;
+			}
+			else if (res === 3)
+			{
+				//Out of bounds.
+				console.log("BacktrackPlace::Place() Out of bounds");
+				this.Reset();
+				return false;
+			}
+			//else loop and try advance again
+		}
+	}
+}
+
+
 function IsLetter(c)
 {
 	return c.length === 1 && c.match(/[a-z]/i);
@@ -36,8 +111,6 @@ function TimeToMin(time)
 	return hour * 60 + min;
 }
 
-var RequiredCourseList = [];
-
 function ReadCourseData()
 {
 	var courses = $(".CourseListContainer").children();
@@ -59,8 +132,8 @@ function ReadCourseData()
 			{
 				var timeslot = new TimeSlot();
 				
-				timeslot.Start = TimeToMin($(timeslots[t]).find(".time-start").val());
-				timeslot.End = TimeToMin($(timeslots[t]).find(".time-end").val());
+				timeslot.Start.Min = TimeToMin($(timeslots[t]).find(".time-start").val());
+				timeslot.End.Min = TimeToMin($(timeslots[t]).find(".time-end").val());
 				timeslot.Days = 0;
 				for (var i = 0; i < 7; i++)
 				{
@@ -77,8 +150,62 @@ function ReadCourseData()
 	}
 }
 
+function BacktrackCourse()
+{
+	console.log("BacktrackCourse()");
+	
+	CourseIndex--;
+	return (CourseIndex >= 0 ? true : false);
+}
+
+function AdvanceCourse()
+{
+	console.log("AdvanceCourse()");
+	
+	CourseIndex++;
+	return (CourseIndex < RequiredCourseList.length ? true : false);
+}
+
+function AdvanceSection()
+{
+	console.log("AdvanceSection()");
+	
+	var course = RequiredCourseList[CourseIndex];
+	course.SelectedSection++;
+	
+	if (course.SelectedSection >= course.SectionList.length) 
+	{
+		return 3;
+	}
+	
+	var conflict = false;
+	for (var i = 0; i < CourseIndex; i++)
+	{
+		if (course.Section.Conflict(RequiredCourseList[i].Section))
+		{
+			conflict = true;
+		}
+	}
+	
+	if (conflict)
+	{
+		return 2;
+	}
+	
+	return 1;
+}
+
+function ResetSection()
+{
+	console.log("ResetSection");
+	
+	RequiredCourseList[CourseIndex].SelectedSection = -1;
+}
+
+
 function GenerateSchedule()
 {
+	//Debug Output
 	console.log();
 	for (var c = 0; c < RequiredCourseList.length; c++)
 	{
@@ -95,15 +222,47 @@ function GenerateSchedule()
 				{
 					if (timeslot.Days & (1 << i)) { days = days + DayNames[i] + " "; }
 				}
-				console.log("Course:" + course.Name + "  Section:" + section.Name + " " + days + " " + timeslot.Start + "-" + timeslot.End);
+				console.log("Course:" + course.Name + "  Section:" + section.Name + " " + days + " " + timeslot.Start.Min + "-" + timeslot.End.Min);
 			}
 		}
 	}
+	//End Debug Output
+	
+	var courseGenerator = new BacktrackLine();
+	courseGenerator.Backtrack = BacktrackCourse;
+	courseGenerator.Advance = AdvanceCourse;
+	courseGenerator.Placer = new BacktrackPlace();
+	courseGenerator.Placer.Advance = AdvanceSection;
+	courseGenerator.Placer.Reset = ResetSection;
+	
+	while (courseGenerator.Do())
+	{
+		ValidSchedules.push([]);
+		var last = ValidSchedules[ValidSchedules.length - 1];
+		
+		for (var i = 0; i < RequiredCourseList.length; i++)
+		{
+			last.push(RequiredCourseList[i].CopySimple());
+		}
+		
+		courseGenerator.Backtrack();
+	}
+}
+
+function MinToGridCoord(min)
+{
+	return min;
 }
 
 function DrawSchedule()
 {
+	console.log("DrawSchedule");
 	
+	for (var i = 0; i < ValidSchedules.length; i++)
+	{
+		console.log("Schedule " + i + ":");
+		console.log(ValidSchedules[i]);
+	}
 }
 
 function DoGenSchedule()
