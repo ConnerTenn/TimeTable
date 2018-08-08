@@ -30,6 +30,8 @@ class TimeSlot
 		this.Start = new Time;
 		this.End = new Time;
 		this.Days = 0b0000000; //Sat Fri Thurs Wed Tues Mon Sun
+		this.Instructor = "";
+		this.Classroom = "";
 	}
 	
 	Conflict(other)
@@ -71,8 +73,6 @@ class Section
 	constructor()
 	{
 		this.Name = "";
-		this.Instructor = "";
-		this.Classroom = "";
 		this.TimeSlotList = [];
 	}
 	

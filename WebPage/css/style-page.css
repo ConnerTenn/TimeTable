@@ -28,7 +28,7 @@ body{
 
 #main-content{
   display: grid;
-  grid-template-columns: auto 430px;
+  grid-template-columns: auto 500px;
 }
 
 #left-content, #right-content {
@@ -47,7 +47,7 @@ button:focus {
 	outline:0;
 }
 input[type=text] {
-    width: 60px;
+    /*width: 60px;*/
     padding: 5px;
     border: none;
     border-radius: 4px;
@@ -58,20 +58,22 @@ input[type=text] {
 
 input[type=text].section-name, input[type=text].course-name {
 	width: 85%;
-	text-align: center;
+	text-align: left;
 	font-size: 1em;
 	padding: 2px;
+	background: transparent;
+	color: white;
+}
+.section-name::placeholder, .course-name::placeholder {
+	color: lightgray;
 }
 
 /* === TimeSlot === */
 
-.time-start, .time-end {
-	width: auto;
+input[type=text].time-start, input[type=text].time-end{
+	width: 80px;
 	display: inline-block;
 	text-align: center;
-}
-
-input[type=text].time-start, input[type=text].time-end{
 	font-size: 1em;
 	padding: 2px;
 }
@@ -101,7 +103,7 @@ input[type=text].time-start, input[type=text].time-end{
 }
 .day-button.active
 {
-	background: teal;
+	background: trans;
 }
 .day-button.active:hover
 {
@@ -113,6 +115,9 @@ input[type=text].time-start, input[type=text].time-end{
 
 .accordionHeader {
 	background: teal;
+	padding: 4px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
 }
 .accordionButton, .courseAdd, .courseRemove, .sectionAdd, .sectionRemove, .timeslotAdd, .timeslotRemove {
 	/*padding-top: 30%;*/
@@ -144,7 +149,9 @@ input[type=text].time-start, input[type=text].time-end{
 	/*transform: scaley(1);*/
 	display: block;
 }
-
+.Section>.accordionContent {
+	background: yellow;
+}
 
 /* === Schedule Table Layout === */
 
