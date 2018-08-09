@@ -74,43 +74,6 @@ class BacktrackPlace
 }
 
 
-function IsLetter(c)
-{
-	return c.length === 1 && c.match(/[a-z]/i);
-}
-
-function IsNumber(c)
-{
-	return c >= '0' && c <= '9';
-}
-
-
-function TimeToMin(time)
-{
-	time = time.replace(/\s+/g, ''); //remove spaces
-	var hour = 0, min = 0;
-	if (time[1] == ":")
-	{
-		hour = time[0] - '0';
-		min = parseInt(time.substring(2, 4));
-		hour += (time[4].toLowerCase() == 'a' ? 0 : 12);
-	}
-	else if (time[2] == ":")
-	{
-		hour = parseInt(time.substring(0,2));
-		if (hour > 12) { return NaN; }
-		min = parseInt(time.substring(3,5));
-		hour += (time[5].toLowerCase() == 'a' ? 0 : 12);
-	}
-	else
-	{
-		return NaN;
-	}
-	
-	if (isNaN(hour) || isNaN(min)) {return NaN; }
-	return hour * 60 + min;
-}
-
 function ReadCourseData()
 {
 	var courses = $(".CourseListContainer").children();
@@ -238,21 +201,43 @@ function GenerateSchedule()
 	}
 }
 
-function MinToGridCoord(min)
+function TimeToGridCoord(time)
 {
-	return min;
+	return (time.Hour-7)*4+2+Math.floor(time.Minutes/30);
 }
 
+var GridSlotTemplate = $(".gridSlotTemplate")[0];
 function DrawSchedule()
 {
 	console.log("==============\n Draw Courses\n==============");
+	var gridContainer = $(".grid-container");
+	gridContainer.children(".grid-item.gridSlot").remove();
 	
-	for (var i = 0; i < ValidSchedules.length; i++)
+	for (var i = 0; i < Math.min(ValidSchedules.length, 1); i++)
 	{
 		console.log("Schedule " + i + ":");
 		for (var j = 0; j < ValidSchedules[i].length; j++)
 		{
-			console.log(ValidSchedules[i][j].toStringSimple());
+			var course = ValidSchedules[i][j];
+			console.log(course.toStringSimple());
+			
+			for (var t = 0; t < course.Section.TimeSlotList.length; t++)
+			{
+				var timeSlot = course.Section.TimeSlotList[t];
+				
+				for (var d = 0; d < 7; d++)
+				{
+					if ((timeSlot.Days >> d) & 1)
+					{
+						var newElem = GridSlotTemplate.cloneNode(true);
+						newElem.className = "grid-item gridSlot";
+						newElem.style = "grid-row:" + TimeToGridCoord(timeSlot.Start) + "/" + TimeToGridCoord(timeSlot.End) + "; grid-column:" + (2+d) + "/" + (2+d) + ";";
+						$(newElem).find(".course-name").html(course.Name);
+						$(newElem).find(".section-name").html(course.Section.Name);
+						gridContainer.append(newElem);
+					}
+				}
+			}
 		}
 	}
 }

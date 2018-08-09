@@ -1,5 +1,5 @@
 
-/* === Page Content === */
+/* === Page Layout === */
 
 .CourseTemplate, .SectionTemplate, .TimeSlotTemplate {
 	display: none;
@@ -41,7 +41,8 @@ body{
 	height:980px;
 }
 
-/* Global Element Properties*/
+
+/* === Global Element Properties === */
 
 button:focus {
 	outline:0;
@@ -67,6 +68,7 @@ input[type=text].section-name, input[type=text].course-name {
 .section-name::placeholder, .course-name::placeholder {
 	color: lightgray;
 }
+
 
 /* === TimeSlot === */
 
@@ -103,7 +105,7 @@ input[type=text].time-start, input[type=text].time-end{
 }
 .day-button.active
 {
-	background: trans;
+	background: teal;
 }
 .day-button.active:hover
 {
@@ -129,15 +131,11 @@ input[type=text].time-start, input[type=text].time-end{
     padding: 2px 1px;
     font-size: 16px;
     cursor: pointer;
-	
-
 }
 
 .accordionButton-minus {
 	float:right;
 }
-
-
 
 .accordionContent {
 	padding-top: 10px;
@@ -153,16 +151,17 @@ input[type=text].time-start, input[type=text].time-end{
 	background: yellow;
 }
 
+
 /* === Schedule Table Layout === */
 
 .grid-container {
   display: grid;
   grid-template-columns: auto 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  background-color: #2196F3;
+  background-color: red;
 }
 .grid-item {
-  background-color: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(0, 0, 0, 0.8);
+  background-color: #ffffff;
+  border: 1px solid #000000;
   padding: 5px;
   font-size: 15px;
   text-align: center;
@@ -171,7 +170,9 @@ input[type=text].time-start, input[type=text].time-end{
 	font-weight: bold;
 }
 .grid-item.time {
-	
+}
+.grid-item.gridSlot {
+	background: #2196F3;
 }
 .grid-item.space {
 	

@@ -1,4 +1,43 @@
 
+function IsLetter(c)
+{
+	return c.length === 1 && c.match(/[a-z]/i);
+}
+
+function IsNumber(c)
+{
+	return c >= '0' && c <= '9';
+}
+
+
+function TimeToMin(time)
+{
+	time = time.replace(/\s+/g, ''); //remove spaces
+	var hour = 0, min = 0, off = 0;
+	if (time[1] == ":")
+	{
+	}
+	else if (time[2] == ":")
+	{
+		off = 1;
+	}
+	else
+	{
+		return NaN;
+	}
+
+	hour = parseInt(time.substring(0, 1+off));
+	if (hour > 12) { return NaN; }
+	min = parseInt(time.substring(2+off, 4+off));
+	hour += (time[4+off].toLowerCase() == 'p' && hour != 12 ? 12 : 0);
+	if (hour < 7) { return NaN; }
+	if (time[5+off].toLowerCase() != 'm' && time[5+off].toLowerCase() != 'm') { return NaN; }
+
+	if (isNaN(hour) || isNaN(min)) { return NaN; }
+	return hour * 60 + min;
+}
+
+
 class Time
 {
 	constructor()
