@@ -15,6 +15,28 @@ function InitScheduleGrid()
 
 /* === Dynamic Element Handlers === */
 
+function AutoCourseNames()
+{
+	var courseNames = $(".Course").find(".course-name");
+	for (var i = 0; i < courseNames.length; i++)
+	{
+		$(courseNames[i]).attr("placeholder", "Course "+(i+1));
+	}
+}
+
+function AutoSectionNames()
+{
+	var courses = $(".Course");
+	for (var i = 0; i < courses.length; i++)
+	{
+		var sectionNames = $(courses[i]).find(".section-name");
+		for (var j = 0; j < sectionNames.length; j++)
+		{
+			$(sectionNames[j]).attr("placeholder", "Section " + (j + 1));
+		}
+	}
+}
+
 var CourseTemplate = $(".CourseTemplate")[0];
 function AddCourse()
 {
@@ -32,6 +54,9 @@ function AddCourse()
 	
 	//append to list
 	$(".CourseListContainer").append(newElem);
+	
+	AutoCourseNames();
+	AutoSectionNames();
 }
 
 function RemoveCourse()
@@ -42,12 +67,16 @@ function RemoveCourse()
 	{
 		AddCourse();
 	}
+	
+	AutoCourseNames();
 }
 
 var SectionTemplate = $(".SectionTemplate")[0];
 function AddSection()
 {
 	AddSectionLoc($(this).siblings(".SectionListContainer"));
+
+	AutoSectionNames();
 }
 function AddSectionLoc(location)
 {
@@ -65,6 +94,7 @@ function AddSectionLoc(location)
 	
 	//append to list
 	location.append(newElem);
+	
 }
 
 function RemoveSection()
@@ -75,6 +105,8 @@ function RemoveSection()
 	{
 		AddSectionLoc(list);
 	}
+	
+	AutoSectionNames();
 }
 
 var TimeSlotTemplate = $(".TimeSlotTemplate")[0];
@@ -160,8 +192,8 @@ function DayButtonClick()
 
 /* === Init Items === */
 
-AddCourse();
-
 InitScheduleGrid();
+
+AddCourse();
 
 /* === End Init Items === */

@@ -14,7 +14,7 @@ class BacktrackLine
 	
 	Do()
 	{
-		console.log("BacktrackLine::Do()");
+		//console.log("BacktrackLine::Do()");
 		while (true)
 		{
 			var res = this.Placer.Place();
@@ -23,7 +23,7 @@ class BacktrackLine
 				if (!this.Advance())
 				{
 					//Found solution
-					console.log("BacktrackLine::Do() == Found Solution ==");
+					//console.log("BacktrackLine::Do() == Found Solution ==");
 					return true;
 				}				
 			}
@@ -32,7 +32,7 @@ class BacktrackLine
 				if (!this.Backtrack())
 				{
 					//No solution
-					console.log("BacktrackLine::Do() == No Solution ==");
+					//console.log("BacktrackLine::Do() == No Solution ==");
 					return false;
 				}
 			}
@@ -51,20 +51,20 @@ class BacktrackPlace
 	
 	Place()
 	{
-		console.log("BacktrackPlace::Place()");
+		//console.log("BacktrackPlace::Place()");
 		while (true)
 		{
 			var res = this.Advance();
 			if (res === 1)
 			{
-				console.log("BacktrackPlace::Place() Success");
 				//Success
+				//console.log("BacktrackPlace::Place() Success");
 				return true;
 			}
 			else if (res === 3)
 			{
 				//Out of bounds.
-				console.log("BacktrackPlace::Place() Out of bounds");
+				//console.log("BacktrackPlace::Place() Out of bounds");
 				this.Reset();
 				return false;
 			}
@@ -83,6 +83,7 @@ function ReadCourseData()
 		var sections = $(courses[c]).find(".SectionListContainer").children();
 		
 		course.Name = $(courses[c]).find(".course-name").val();
+		if (course.Name.length === 0) { course.Name = $(courses[c]).find(".course-name").attr("placeholder"); }
 		
 		for (var s = 0; s < sections.length; s++)
 		{
@@ -90,6 +91,7 @@ function ReadCourseData()
 			var timeslots = $(sections[s]).find(".TimeSlotListContainer").children();
 			
 			section.Name = $(sections[s]).find(".section-name").val();
+			if (section.Name.length === 0) { section.Name = $(sections[s]).find(".section-name").attr("placeholder"); }
 			
 			for (var t = 0; t < timeslots.length; t++)
 			{
@@ -123,7 +125,7 @@ function ReadCourseData()
 
 function BacktrackCourse()
 {
-	console.log("BacktrackCourse()");
+	//console.log("BacktrackCourse()");
 	
 	CourseIndex--;
 	return (CourseIndex >= 0 ? true : false);
@@ -131,7 +133,7 @@ function BacktrackCourse()
 
 function AdvanceCourse()
 {
-	console.log("AdvanceCourse() ");
+	//console.log("AdvanceCourse() ");
 	
 	CourseIndex++;
 	return (CourseIndex < RequiredCourseList.length ? true : false);
@@ -140,7 +142,7 @@ function AdvanceCourse()
 //Return: 1: Success  2: Fail  3: Out of Bounds
 function AdvanceSection()
 {
-	console.log("AdvanceSection() ");
+	//console.log("AdvanceSection() ");
 	
 	var course = RequiredCourseList[CourseIndex];
 	course.SelectedSection++;
@@ -171,7 +173,7 @@ function AdvanceSection()
 
 function ResetSection()
 {
-	console.log("ResetSection");
+	//console.log("ResetSection");
 	
 	RequiredCourseList[CourseIndex].SelectedSection = -1;
 }
