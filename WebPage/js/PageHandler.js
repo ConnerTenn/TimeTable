@@ -5,15 +5,37 @@ function InitScheduleGrid()
 {
 	for (var i = 0; i < (23-7)*2; i++)
 	{
-		$(".grid-container").append("<div class='grid-item time' style='grid-row: " + (i*2+2) + "/ span 2;'>" + ((Math.floor(i/2)+6)%12+1) + ":" + (i%2 ? "30" : "00") + ((i<=9?"am":"pm")) + "</div>");
+		$(".grid-container").append("<div class='grid-item time' style='grid-row: " + (i*2+2) + "/ span 2; grid-column: 1/1;'>" + ((Math.floor(i/2)+6)%12+1) + ":" + (i%2 ? "30" : "00") + ((i<=9?"am":"pm")) + "</div>");
 		for (var j = 0; j < 7; j++)
 		{
-			$(".grid-container").append("<div class='grid-item space' style='grid-row:" + (i*2+2) + "/ span 2;'></div>");
+			$(".grid-container").append("<div class='grid-item space' style='grid-row:" + (i*2+2) + "/ span 2; grid-column: " + (j+2) + "/" + (j+2) + ";'></div>");
 		}
 	}
 }
 
 /* === Dynamic Element Handlers === */
+
+function AutoCourseNames()
+{
+	var courseNames = $(".Course").find(".course-name");
+	for (var i = 0; i < courseNames.length; i++)
+	{
+		$(courseNames[i]).attr("placeholder", "Course "+(i+1));
+	}
+}
+
+function AutoSectionNames()
+{
+	var courses = $(".Course");
+	for (var i = 0; i < courses.length; i++)
+	{
+		var sectionNames = $(courses[i]).find(".section-name");
+		for (var j = 0; j < sectionNames.length; j++)
+		{
+			$(sectionNames[j]).attr("placeholder", "Section " + (j + 1));
+		}
+	}
+}
 
 var CourseTemplate = $(".CourseTemplate")[0];
 function AddCourse()
@@ -32,6 +54,9 @@ function AddCourse()
 	
 	//append to list
 	$(".CourseListContainer").append(newElem);
+	
+	AutoCourseNames();
+	AutoSectionNames();
 }
 
 function RemoveCourse()
@@ -42,12 +67,16 @@ function RemoveCourse()
 	{
 		AddCourse();
 	}
+	
+	AutoCourseNames();
 }
 
 var SectionTemplate = $(".SectionTemplate")[0];
 function AddSection()
 {
 	AddSectionLoc($(this).siblings(".SectionListContainer"));
+
+	AutoSectionNames();
 }
 function AddSectionLoc(location)
 {
@@ -65,6 +94,7 @@ function AddSectionLoc(location)
 	
 	//append to list
 	location.append(newElem);
+	
 }
 
 function RemoveSection()
@@ -75,6 +105,8 @@ function RemoveSection()
 	{
 		AddSectionLoc(list);
 	}
+	
+	AutoSectionNames();
 }
 
 var TimeSlotTemplate = $(".TimeSlotTemplate")[0];
@@ -109,7 +141,7 @@ function RemoveTimeSlot()
 /* === End Dynamic Element Handlers === */
 
 
-/* === Accordian Handling begins here === */
+/* === Accordian Handling === */
 
 $(".accordionButton").click(AccordionClick);
 
@@ -129,7 +161,7 @@ function AccordionClick()
 }
 
 
-/* === Accordian Handling ends here === */
+/* === End Accordian Handling === */
 
 
 /* === Button Handlers === */
@@ -154,26 +186,14 @@ function DayButtonClick()
 	this.classList.toggle("active");
 }
 
-/* Schedule */
-
-function GenerateSchedule()
-{
-	
-}
-
-function DrawSchedule()
-{
-	
-}
-
 
 /* === End Button Handlers === */
 
 
 /* === Init Items === */
 
-AddCourse();
-
 InitScheduleGrid();
+
+AddCourse();
 
 /* === End Init Items === */
