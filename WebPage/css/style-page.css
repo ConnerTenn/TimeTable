@@ -1,5 +1,5 @@
 
-/* === Page Content === */
+/* === Page Layout === */
 
 .CourseTemplate, .SectionTemplate, .TimeSlotTemplate {
 	display: none;
@@ -28,7 +28,7 @@ body{
 
 #main-content{
   display: grid;
-  grid-template-columns: auto 430px;
+  grid-template-columns: auto 500px;
 }
 
 #left-content, #right-content {
@@ -41,13 +41,14 @@ body{
 	height:980px;
 }
 
-/* Global Element Properties*/
+
+/* === Global Element Properties === */
 
 button:focus {
 	outline:0;
 }
 input[type=text] {
-    width: 60px;
+    /*width: 60px;*/
     padding: 5px;
     border: none;
     border-radius: 4px;
@@ -58,20 +59,23 @@ input[type=text] {
 
 input[type=text].section-name, input[type=text].course-name {
 	width: 85%;
-	text-align: center;
+	text-align: left;
 	font-size: 1em;
 	padding: 2px;
+	background: transparent;
+	color: white;
 }
+.section-name::placeholder, .course-name::placeholder {
+	color: lightgray;
+}
+
 
 /* === TimeSlot === */
 
-.time-start, .time-end {
-	width: auto;
+input[type=text].time-start, input[type=text].time-end{
+	width: 80px;
 	display: inline-block;
 	text-align: center;
-}
-
-input[type=text].time-start, input[type=text].time-end{
 	font-size: 1em;
 	padding: 2px;
 }
@@ -110,8 +114,12 @@ input[type=text].time-start, input[type=text].time-end{
 
 
 /*  === Accordion Styling === */
+
 .accordionHeader {
 	background: teal;
+	padding: 4px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
 }
 .accordionButton, .courseAdd, .courseRemove, .sectionAdd, .sectionRemove, .timeslotAdd, .timeslotRemove {
 	/*padding-top: 30%;*/
@@ -123,15 +131,11 @@ input[type=text].time-start, input[type=text].time-end{
     padding: 2px 1px;
     font-size: 16px;
     cursor: pointer;
-	
-
 }
 
 .accordionButton-minus {
 	float:right;
 }
-
-
 
 .accordionContent {
 	padding-top: 10px;
@@ -143,6 +147,9 @@ input[type=text].time-start, input[type=text].time-end{
 	/*transform: scaley(1);*/
 	display: block;
 }
+.Section>.accordionContent {
+	background: yellow;
+}
 
 
 /* === Schedule Table Layout === */
@@ -150,11 +157,11 @@ input[type=text].time-start, input[type=text].time-end{
 .grid-container {
   display: grid;
   grid-template-columns: auto 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  background-color: #2196F3;
+  background-color: red;
 }
 .grid-item {
-  background-color: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(0, 0, 0, 0.8);
+  background-color: #ffffff;
+  border: 1px solid #000000;
   padding: 5px;
   font-size: 15px;
   text-align: center;
@@ -163,7 +170,9 @@ input[type=text].time-start, input[type=text].time-end{
 	font-weight: bold;
 }
 .grid-item.time {
-	
+}
+.grid-item.gridSlot {
+	background: #2196F3;
 }
 .grid-item.space {
 	

@@ -3,12 +3,12 @@
 	Line
 		Backtrack()
 			custom
-			return fail if out of bounds, else move on 
+			return fail if out of bounds, else return move on 
 		Advance()
 			custom
-			return success if out of bounds, else move on 
+			return success if not out of bounds, else return move on 
 		Do()
-			loop while in bounds
+			loop while in bounds (infinate loop; exit from internal returns)
 				Place()
 				if success 
 					advance()
@@ -20,6 +20,7 @@
 	Piece
 		Advance()
 			custom
+			return if success (1), fail (2), or out of bounds (3)
 		Reset()
 			custom
 		Place()
@@ -28,7 +29,7 @@
 				if success
 					return success
 				if out of bounds
-					reset())
+					reset()
 					return fail
 			
 		
