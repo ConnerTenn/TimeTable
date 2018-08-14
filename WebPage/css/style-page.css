@@ -87,7 +87,9 @@ input[type=text].time-start, input[type=text].time-end{
 	height: 24px;
 	font-size: 14px;
 	font-weight: bold; 
-	background: orange;
+	/*background: OLIVE;*/
+	  background: -webkit-linear-gradient(left, #25c481, #25b7c4);
+  background: linear-gradient(to right, #25c481, #25b7c4);
 	cursor: pointer;
 	color: white;
 	padding-right: 2.5%;
@@ -105,21 +107,18 @@ input[type=text].time-start, input[type=text].time-end{
 }
 .day-button.active
 {
-	background: teal;
+	background: ORANGERED;
 }
 .day-button.active:hover
 {
-	background: lightgreen;
+	background: MOCCASIN;
 }
 
 
 /*  === Accordion Styling === */
 
 .accordionHeader {
-	background: teal;
-	padding: 4px;
-	border-top-left-radius: 5px;
-	border-top-right-radius: 5px;
+	background: transparent;
 }
 .accordionButton, .courseAdd, .courseRemove, .sectionAdd, .sectionRemove, .timeslotAdd, .timeslotRemove {
 	/*padding-top: 30%;*/
@@ -140,7 +139,7 @@ input[type=text].time-start, input[type=text].time-end{
 .accordionContent {
 	padding-top: 10px;
 	/* transform: scaley(0); */
-	background: gold;
+	background: voilet;
 	display: none;
 }
 .accordionContent.active {
@@ -160,8 +159,8 @@ input[type=text].time-start, input[type=text].time-end{
   background-color: red;
 }
 .grid-item {
-  background-color: #ffffff;
-  border: 1px solid #000000;
+  background-color: red;
+  border: 1px solid rgba(0, 0, 0, 0.8);
   padding: 5px;
   font-size: 15px;
   text-align: center;
