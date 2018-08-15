@@ -6,8 +6,25 @@
 	transform: scale(0);
 }
 
-.Section, .Course, .TimeSlot {
-		padding-top: 5px;
+.Course {
+	background-color: #273746;
+	margin-top: 5.5px;
+	padding: 7px;
+	border-radius: 10px;
+}
+
+.Section {
+	background-color: #34495E;
+	margin-top: 4.5px;
+	padding: 7px;
+	border-radius: 10px;
+}
+
+.TimeSlot {
+	background-color: #2E4053;
+	margin-top: 3.5px;
+	padding: 6px 0px 6px 5px;
+	border-radius: 10px;
 }
 
 .Course>.accordionContent {
@@ -23,7 +40,7 @@
 
 body{
 	
-  background-color: #666666;
+  background-color: black;
 }
 
 #main-content{
@@ -32,13 +49,13 @@ body{
 }
 
 #left-content, #right-content {
-  border: 1px solid rgba(0, 0, 0, 0.8);
+  /*border: 1px solid rgba(0, 0, 0, 0.8);*/
   padding: 10px;
 }
 
 #right-content{
 	overflow-y: scroll; 
-	height:980px;
+	height:900px;
 }
 
 
@@ -87,13 +104,19 @@ input[type=text].time-start, input[type=text].time-end{
 	height: 24px;
 	font-size: 14px;
 	font-weight: bold; 
-	background: orange;
+	/*background: OLIVE;*/
+	  background: -webkit-linear-gradient(left, #25c481, #25b7c4);
+  background: linear-gradient(to right, #25c481, #25b7c4);
 	cursor: pointer;
 	color: white;
 	padding-right: 2.5%;
 }
 .day-button-W{
 	padding-left: 1.3%;
+}
+
+.day-button-T {
+	padding-left: 1.8%;
 }
 
 .day-button-S, .day-button-F{
@@ -105,21 +128,18 @@ input[type=text].time-start, input[type=text].time-end{
 }
 .day-button.active
 {
-	background: teal;
+	background: #E74C3C;
 }
 .day-button.active:hover
 {
-	background: lightgreen;
+	background: MOCCASIN;
 }
 
 
 /*  === Accordion Styling === */
 
 .accordionHeader {
-	background: teal;
-	padding: 4px;
-	border-top-left-radius: 5px;
-	border-top-right-radius: 5px;
+	background: transparent;
 }
 .accordionButton, .courseAdd, .courseRemove, .sectionAdd, .sectionRemove, .timeslotAdd, .timeslotRemove {
 	/*padding-top: 30%;*/
@@ -140,39 +160,95 @@ input[type=text].time-start, input[type=text].time-end{
 .accordionContent {
 	padding-top: 10px;
 	/* transform: scaley(0); */
-	background: gold;
+	background: voilet;
 	display: none;
 }
 .accordionContent.active {
 	/*transform: scaley(1);*/
 	display: block;
 }
-.Section>.accordionContent {
-	background: yellow;
+
+/* === Generate Button === */
+
+button.genSchedule {
+	text-align: center;
+	left: 40%;
 }
 
+.genSchedule {
+	display: inline-block;
+  border-radius: 10px;
+  background-color: #E74C3C;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 18px;
+  padding: 10px;
+  width: 50%;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.genSchedule span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.genSchedule span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.genSchedule:hover span {
+  padding-right: 25px;
+}
+
+.genSchedule:hover span:after {
+  opacity: 1;
+  right: 0;
+}
 
 /* === Schedule Table Layout === */
+
+.gridSlot {
+	background: #E74C3C;
+}
 
 .grid-container {
   display: grid;
   grid-template-columns: auto 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  background-color: red;
+  background-color: transparent;
+  
 }
 .grid-item {
-  background-color: #ffffff;
-  border: 1px solid #000000;
+  background-color: transparent;
+  border: 1px solid gray;
   padding: 5px;
   font-size: 15px;
   text-align: center;
+  color: white;
 }
 .grid-item.label {
+	font-family: Courier New;
 	font-weight: bold;
+	border: 0px;
+	background-color: #273746;
+	text-transform: UPPERCASE;
 }
 .grid-item.time {
+	background-color: #273746;
+	border: 0px;
 }
 .grid-item.gridSlot {
-	background: #2196F3;
+	background: #E74C3C;
+	opacity: 0.8;
 }
 .grid-item.space {
 	

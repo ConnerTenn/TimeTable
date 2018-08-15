@@ -1,5 +1,6 @@
 <html>
 <link rel="stylesheet" type="text/css" href="css/style-page.css">
+<link rel="stylesheet" type="text/css" href="css/dark-theme.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 <head>
 	<!-- Course Template -->
@@ -34,9 +35,9 @@
 	<div class="TimeSlotTemplate">
 		<button class="day-button sun day-button-S" type="button" onclick="">S</button>
 		<button class="day-button mon" type="button" onclick="">M</button>
-		<button class="day-button tue" type="button" onclick="">T</button>
+		<button class="day-button tue day-button-T" type="button" onclick="">T</button>
 		<button class="day-button wed day-button-W" type="button" onclick="">W</button>
-		<button class="day-button thu" type="button" onclick="">T</button>
+		<button class="day-button thu day-button-T" type="button" onclick="">T</button>
 		<button class="day-button fri day-button-F" type="button" onclick="">F</button>
 		<button class="day-button sat day-button-S" type="button" onclick="">S</button>
 		<input type="text" class="time-start" value="7:00am" onfocus="this.select()">
@@ -71,7 +72,7 @@
 			<!-- Container for the list of courses -->
 			<div class="CourseListContainer">
 			</div>
-			<button class="genSchedule">Generate Schedules</button>
+			<button class="genSchedule"style="vertical-align:middle"><span>Generate Schedules</span></button>
 		</div>
 	</div>
 </body>
