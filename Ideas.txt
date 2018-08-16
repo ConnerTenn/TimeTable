@@ -1,0 +1,11 @@
+[ ] Add horizontal line that follows mouse cursor
+[ ] add schedule result switching
+[ ] add multi week scheduler
+		and exam scheduler
+[ ] add interactivity on schedule canvas
+[ ] change and and remove buttons designs 
+[ ] add time drop down menu
+[ ] offset schedule time markers
+[ ] remove day button linear gradient
+[ ] coloured courses
+[ ] dynamic list animations

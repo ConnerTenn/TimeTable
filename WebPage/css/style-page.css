@@ -1,42 +1,5 @@
 
-/* === Page Layout === */
-
-.CourseTemplate, .SectionTemplate, .TimeSlotTemplate {
-	display: none;
-	transform: scale(0);
-}
-
-.Course {
-	background-color: #273746;
-	margin-top: 5.5px;
-	padding: 7px;
-	border-radius: 10px;
-}
-
-.Section {
-	background-color: #34495E;
-	margin-top: 4.5px;
-	padding: 7px;
-	border-radius: 10px;
-}
-
-.TimeSlot {
-	background-color: #2E4053;
-	margin-top: 3.5px;
-	padding: 6px 0px 6px 5px;
-	border-radius: 10px;
-}
-
-.Course>.accordionContent {
-	
-	padding-left: 10px;
-	padding-right: 10px;
-}
-
-.Section>.accordionContent {
-	padding-right: 10px;
-	padding-left: 10px;
-}
+/* === Main Page Layout === */
 
 body{
 	
@@ -87,56 +50,10 @@ input[type=text].section-name, input[type=text].course-name {
 }
 
 
-/* === TimeSlot === */
 
-input[type=text].time-start, input[type=text].time-end{
-	width: 80px;
-	display: inline-block;
-	text-align: center;
-	font-size: 1em;
-	padding: 2px;
-}
+/* === Dynamic List Styling === */
 
-.day-button{
-	border: none;
-	border-radius: 50%;
-	width: 24px;
-	height: 24px;
-	font-size: 14px;
-	font-weight: bold; 
-	/*background: OLIVE;*/
-	  background: -webkit-linear-gradient(left, #25c481, #25b7c4);
-  background: linear-gradient(to right, #25c481, #25b7c4);
-	cursor: pointer;
-	color: white;
-	padding-right: 2.5%;
-}
-.day-button-W{
-	padding-left: 1.3%;
-}
-
-.day-button-T {
-	padding-left: 1.8%;
-}
-
-.day-button-S, .day-button-F{
-	padding-right: 2%;
-}
-
-.day-button:hover{
-	background: lightblue;
-}
-.day-button.active
-{
-	background: #E74C3C;
-}
-.day-button.active:hover
-{
-	background: MOCCASIN;
-}
-
-
-/*  === Accordion Styling === */
+/* Accordion Styling */
 
 .accordionHeader {
 	background: transparent;
@@ -168,7 +85,96 @@ input[type=text].time-start, input[type=text].time-end{
 	display: block;
 }
 
-/* === Generate Button === */
+.Course>.accordionContent {
+	
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.Section>.accordionContent {
+	padding-right: 10px;
+	padding-left: 10px;
+}
+
+/* Course */
+
+.CourseTemplate, .SectionTemplate, .TimeSlotTemplate {
+	display: none;
+	transform: scale(0);
+}
+
+.Course {
+	background-color: #273746;
+	margin-top: 5.5px;
+	padding: 7px;
+	border-radius: 10px;
+}
+
+/* Section */
+
+.Section {
+	background-color: #34495E;
+	margin-top: 4.5px;
+	padding: 7px;
+	border-radius: 10px;
+}
+
+/* TimeSlot */
+
+.TimeSlot {
+	background-color: #2E4053;
+	margin-top: 3.5px;
+	padding: 6px 0px 6px 5px;
+	border-radius: 10px;
+}
+
+input[type=text].time-start, input[type=text].time-end{
+	width: 80px;
+	display: inline-block;
+	text-align: center;
+	font-size: 1em;
+	padding: 2px;
+}
+
+.day-button{
+	border: none;
+	border-radius: 50%;
+	width: 24px;
+	height: 24px;
+	font-size: 14px;
+	font-weight: bold; 
+	/*background: OLIVE;*/
+	background: -webkit-linear-gradient(left, #25c481, #25b7c4);
+	background: linear-gradient(to right, #25c481, #25b7c4);
+	cursor: pointer;
+	color: white;
+	padding-right: 2.5%;
+}
+.day-button-W{
+	padding-left: 1.3%;
+}
+
+.day-button-T {
+	padding-left: 1.8%;
+}
+
+.day-button-S, .day-button-F{
+	padding-right: 2%;
+}
+
+.day-button:hover{
+	background: lightblue;
+}
+.day-button.active
+{
+	background: #E74C3C;
+}
+.day-button.active:hover
+{
+	background: MOCCASIN;
+}
+
+/* Generate Button */
 
 button.genSchedule {
 	text-align: center;
@@ -215,6 +221,8 @@ button.genSchedule {
   right: 0;
 }
 
+
+
 /* === Schedule Table Layout === */
 
 .gridSlot {
@@ -247,8 +255,11 @@ button.genSchedule {
 	border: 0px;
 }
 .grid-item.gridSlot {
-	background: #E74C3C;
-	opacity: 0.8;
+	background: #E74C3CAA;
+	border-color: #ff0000ff;
+	border-width: 0px;
+	border-left-width: 5px;
+	/*opacity: 0.7;*/
 }
 .grid-item.space {
 	

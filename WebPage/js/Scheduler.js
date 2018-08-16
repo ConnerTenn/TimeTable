@@ -205,7 +205,7 @@ function GenerateSchedule()
 
 function TimeToGridCoord(time)
 {
-	return (time.Hour-7)*4+2+Math.floor(time.Minutes/30);
+	return (time.Hour-7)*4+2+Math.floor(time.Minutes/15);
 }
 
 var GridSlotTemplate = $(".gridSlotTemplate")[0];
