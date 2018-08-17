@@ -54,6 +54,8 @@ function AddCourse()
 	var colour = Colours[Rand(0, 7)];
 	$(newElem).find(".colour")[0].style.background=colour;
 	$(newElem).find(".colour").attr("colour", colour);
+	//$(newElem).find(".accordion-header")[0].style.background = colour;
+	//$(newElem)[0].style.background = colour;
 	
 	//bind buttons
 	$(newElem).find(".section-add").click(AddSection);
@@ -285,7 +287,7 @@ $(".time-picker").focusout(HideTimePicker);
 var ActiveTimeBox = 0;
 function ShowTimePicker(event)
 {
-	$(".time-picker").removeClass("hidden");
+	$(".time-picker").removeClass("invisible");
 	if (event.data)
 	{
 		ActiveTimeBox = this;
@@ -299,7 +301,7 @@ function HideTimePicker(event)
 {
 	//ActiveTimeBox = 0;
 	//console.log("Spawn ["+val+"]");
-	$(".time-picker").addClass("hidden");
+	$(".time-picker").addClass("invisible");
 }
 
 function PickTime()
