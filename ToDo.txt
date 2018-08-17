@@ -12,7 +12,6 @@
 [ ] offset schedule time markers
 [ ] coloured courses
 [ ] dynamic list animations
-[ ] Add reserved time periods
 
 
 ==== Completed ====
@@ -20,4 +19,5 @@
 [x] make nameing consistant
 [x] Add support for displaying multiple valid schedules
 [x] add time drop down menu
+[x] Add reserved time periods
 

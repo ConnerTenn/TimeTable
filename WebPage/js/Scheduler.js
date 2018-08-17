@@ -114,6 +114,35 @@ function ReadCourseData()
 		RequiredCourseList.push(course);
 	}
 	
+	var reserves = $(".reserve-list-container").children();
+	for (var r = 0; r < reserves.length; r++)
+	{
+		var course = new Course();
+		var section = new Section();
+		var timeslots = $(reserves[r]).find(".time-slot-list-container").children();
+		
+		course.Name = $(reserves[r]).find(".reserve-name").val();
+		if (course.Name.length === 0) { course.Name = $(reserves[r]).find(".reserve-name").attr("placeholder"); }
+		
+		for (var t = 0; t < timeslots.length; t++)
+		{
+			var timeslot = new TimeSlot();
+
+			timeslot.Start.Min = TimeToMin($(timeslots[t]).find(".time-start").val());
+			timeslot.End.Min = TimeToMin($(timeslots[t]).find(".time-end").val());
+			timeslot.Days = 0;
+			for (var i = 0; i < 7; i++)
+			{
+				timeslot.Days += ($(timeslots[t]).find(".day-button." + DayNames[i])[0].classList.contains("active") ? 1 : 0) << i;
+			}
+
+			section.TimeSlotList.push(timeslot);
+		}
+
+		course.SectionList.push(section);
+		RequiredCourseList.push(course);
+	}
+	
 	console.log("===============\n Found Courses\n===============");
 	for (var i = 0; i < RequiredCourseList.length; i++)
 	{

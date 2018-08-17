@@ -165,17 +165,13 @@ function AddReserve()
 	AddTimeSlotLoc($(newElem).find(".time-slot-list-container"));
 
 	//append to list
-	$(".course-list-container").append(newElem);
+	$(".reserve-list-container").append(newElem);
 }
 
 function RemoveReserve()
 {
-	var list = $(this).closest(".course-list-container");
+	var list = $(this).closest(".reserve-list-container");
 	$(this).closest(".reserve.list-item").remove();
-	if (list.children().length <= 0)
-	{
-		AddCourse();
-	}
 
 	AutoCourseNames();
 }
