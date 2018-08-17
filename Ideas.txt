@@ -1,11 +1,21 @@
-[ ] Add horizontal line that follows mouse cursor
+
+==== Quick Tasks ====
 [ ] add schedule result switching
-[ ] add multi week scheduler
-		and exam scheduler
-[ ] add interactivity on schedule canvas
 [ ] change and and remove buttons designs 
-[ ] add time drop down menu
-[ ] offset schedule time markers
 [ ] remove day button linear gradient
+
+
+==== Large Tasks ====
+[ ] add multi week scheduler and exam scheduler
+[ ] add time drop down menu
+Schedule
+	[ ] Change schedule grid from using css grid
+	[ ] add interactivity on schedule canvas
+	[ ] offset schedule time markers
 [ ] coloured courses
 [ ] dynamic list animations
+[ ] Add reserved time periods
+
+
+==== Completed ====
+[x] Add horizontal line that follows mouse cursor

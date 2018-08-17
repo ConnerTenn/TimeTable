@@ -185,6 +185,18 @@ function DayButtonClick()
 
 
 
+/* === Schedule Handlers === */
+
+$(".grid-container").mousemove(UpdateMouseLine);
+
+function UpdateMouseLine(event)
+{
+	$(".mouse-line")[0].style.top=event.clientY-$(".grid-container").position().top;
+}
+
+/* === Schedule Handlers === */
+
+
 
 /* === Init Items === */
 
