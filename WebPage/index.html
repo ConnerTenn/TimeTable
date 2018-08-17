@@ -4,35 +4,35 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 <head>
 	<!-- Course Template -->
-	<div class="CourseTemplate">
-		<div class="accordionHeader">
-			<button class="accordionButton"><i class="fas fa-arrow-alt-circle-down"></i></button>
+	<div class="course-template">
+		<div class="accordion-header">
+			<button class="accordion-button"><i class="fas fa-arrow-alt-circle-down"></i></button>
 			<input type="text" class="course-name" placeholder="Course Name">
-			<button class="courseRemove"><i class="fas fa-minus-circle"></i></button>
+			<button class="course-remove"><i class="fas fa-minus-circle"></i></button>
 		</div>
-		<div class="accordionContent active">
-			<button class="sectionAdd"><i class="fas fa-plus-circle"></i></button>
+		<div class="accordion-content active">
+			<button class="section-add"><i class="fas fa-plus-circle"></i></button>
 			<!-- Container for the list of sections -->
-			<div class="SectionListContainer">
+			<div class="section-list-container">
 			</div>
 		</div>
 	</div>
 	<!-- Section Template -->
-	<div class="SectionTemplate">
-		<div class="accordionHeader">
-			<button class="accordionButton"><i class="fas fa-arrow-alt-circle-down"></i></button>
+	<div class="section-template">
+		<div class="accordion-header">
+			<button class="accordion-button"><i class="fas fa-arrow-alt-circle-down"></i></button>
 			<input type="text" class="section-name" placeholder="Section Name">
-			<button class="sectionRemove"><i class="fas fa-minus-circle"></i></button>
+			<button class="section-remove"><i class="fas fa-minus-circle"></i></button>
 		</div>
-		<div class="accordionContent active">
-			<button class="timeSlotAdd"><i class="fas fa-plus-circle"></i></button>
+		<div class="accordion-content active">
+			<button class="time-slot-add"><i class="fas fa-plus-circle"></i></button>
 			<!-- Container for the list of timeslots -->
-			<div class="TimeSlotListContainer">
+			<div class="time-slot-list-container">
 			</div>
 		</div>
 	</div>
-	<!-- TimeSlotTemplate Template -->
-	<div class="TimeSlotTemplate">
+	<!-- time-slot-template Template -->
+	<div class="time-slot-template">
 		<button class="day-button sun day-button-S" type="button" onclick="">S</button>
 		<button class="day-button mon" type="button" onclick="">M</button>
 		<button class="day-button tue day-button-T" type="button" onclick="">T</button>
@@ -42,10 +42,10 @@
 		<button class="day-button sat day-button-S" type="button" onclick="">S</button>
 		<input type="text" class="time-start" value="7:00am" onfocus="this.select()">
 		<input type="text" class="time-end" value="8:00am" onfocus="this.select()">
-		<button class="timeslotRemove"><i class="fas fa-minus-circle"></i></button>
+		<button class="time-slot-remove"><i class="fas fa-minus-circle"></i></button>
 	</div>
 	<!-- Grid Item TimeSlot Template -->
-	<div class="gridSlotTemplate">
+	<div class="grid-slot-template">
 		<div class="course-name"></div>
 		<div class="section-name"></div>
 	</div>
@@ -55,7 +55,7 @@
 	<div id="main-content">
 		<!-- Schedule Grid Container -->
 		<div id="left-content"> 
-			<div class="mouse-line" style="position:relative; background:red; width:100%; height:1px; top:0;"></div>
+			<div class="mouse-line hidden"></div>
 			<div class="grid-container">
 				<div class="grid-item space">###</div>
 				<div class="grid-item label">Sunday</div>
@@ -71,9 +71,9 @@
 		<div id="right-content">
 			<button class="courseAdd"><i class="fas fa-plus-circle"></i></button>
 			<!-- Container for the list of courses -->
-			<div class="CourseListContainer">
+			<div class="course-list-container">
 			</div>
-			<button class="genSchedule"style="vertical-align:middle"><span>Generate Schedules</span></button>
+			<button class="gen-schedule"style="vertical-align:middle"><span>Generate Schedules</span></button>
 		</div>
 	</div>
 	<div style="display:block; position:absolute; color: white; background:blue; width:70px; height:150px; top:500px; right:50px; overflow-y:scroll;">

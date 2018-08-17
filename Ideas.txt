@@ -19,3 +19,5 @@ Schedule
 
 ==== Completed ====
 [x] Add horizontal line that follows mouse cursor
+[x] make nameing consistant
+

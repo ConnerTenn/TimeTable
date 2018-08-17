@@ -22,7 +22,7 @@ function InitScheduleGrid()
 
 function AutoCourseNames()
 {
-	var courseNames = $(".Course").find(".course-name");
+	var courseNames = $(".course.list-item").find(".course-name");
 	for (var i = 0; i < courseNames.length; i++)
 	{
 		$(courseNames[i]).attr("placeholder", "Course "+(i+1));
@@ -31,7 +31,7 @@ function AutoCourseNames()
 
 function AutoSectionNames()
 {
-	var courses = $(".Course");
+	var courses = $(".course.list-item");
 	for (var i = 0; i < courses.length; i++)
 	{
 		var sectionNames = $(courses[i]).find(".section-name");
@@ -42,23 +42,23 @@ function AutoSectionNames()
 	}
 }
 
-var CourseTemplate = $(".CourseTemplate")[0];
+var CourseTemplate = $(".course-template")[0];
 function AddCourse()
 {
 	//generate new element
 	var newElem = CourseTemplate.cloneNode(true);
-	newElem.className = "Course";
+	newElem.className = "course list-item";
 	
 	//bind buttons
-	$(newElem).find(".sectionAdd").click(AddSection);
-	$(newElem).find(".accordionButton").click(AccordionClick);
-	$(newElem).find(".courseRemove").click(RemoveCourse);
+	$(newElem).find(".section-add").click(AddSection);
+	$(newElem).find(".accordion-button").click(AccordionClick);
+	$(newElem).find(".course-remove").click(RemoveCourse);
 	
 	//add initial children
-	AddSectionLoc($(newElem).find(".SectionListContainer"));
+	AddSectionLoc($(newElem).find(".section-list-container"));
 	
 	//append to list
-	$(".CourseListContainer").append(newElem);
+	$(".course-list-container").append(newElem);
 	
 	AutoCourseNames();
 	AutoSectionNames();
@@ -66,8 +66,8 @@ function AddCourse()
 
 function RemoveCourse()
 {
-	var list = $(this).closest(".CourseListContainer");
-	$(this).closest(".Course").remove();
+	var list = $(this).closest(".course-list-container");
+	$(this).closest(".course.list-item").remove();
 	if (list.children().length<=0)
 	{
 		AddCourse();
@@ -76,10 +76,10 @@ function RemoveCourse()
 	AutoCourseNames();
 }
 
-var SectionTemplate = $(".SectionTemplate")[0];
+var SectionTemplate = $(".section-template")[0];
 function AddSection()
 {
-	AddSectionLoc($(this).siblings(".SectionListContainer"));
+	AddSectionLoc($(this).siblings(".section-list-container"));
 
 	AutoSectionNames();
 }
@@ -87,15 +87,15 @@ function AddSectionLoc(location)
 {
 	//generate new element
 	var newElem = SectionTemplate.cloneNode(true);
-	newElem.className = "Section";
+	newElem.className = "section list-item";
 	
 	//bind buttons
-	$(newElem).find(".timeSlotAdd").click(AddTimeSlot);
-	$(newElem).find(".accordionButton").click(AccordionClick);
-	$(newElem).find(".sectionRemove").click(RemoveSection);
+	$(newElem).find(".time-slot-add").click(AddTimeSlot);
+	$(newElem).find(".accordion-button").click(AccordionClick);
+	$(newElem).find(".section-remove").click(RemoveSection);
 	
 	//add initial children
-	AddTimeSlotLoc($(newElem).find(".TimeSlotListContainer"));
+	AddTimeSlotLoc($(newElem).find(".time-slot-list-container"));
 	
 	//append to list
 	location.append(newElem);
@@ -104,8 +104,8 @@ function AddSectionLoc(location)
 
 function RemoveSection()
 {
-	var list = $(this).closest(".SectionListContainer");
-	$(this).closest(".Section").remove();
+	var list = $(this).closest(".section-list-container");
+	$(this).closest(".section.list-item").remove();
 	if (list.children().length <= 0)
 	{
 		AddSectionLoc(list);
@@ -114,19 +114,19 @@ function RemoveSection()
 	AutoSectionNames();
 }
 
-var TimeSlotTemplate = $(".TimeSlotTemplate")[0];
+var TimeSlotTemplate = $(".time-slot-template")[0];
 function AddTimeSlot()
 {
-	AddTimeSlotLoc($(this).siblings(".TimeSlotListContainer"));
+	AddTimeSlotLoc($(this).siblings(".time-slot-list-container"));
 }
 function AddTimeSlotLoc(location)
 {
 	//generate new element
 	var newElem = TimeSlotTemplate.cloneNode(true);
-	newElem.className = "TimeSlot";
+	newElem.className = "time-slot list-item";
 	
 	//bind buttons
-	$(newElem).find(".timeSlotRemove").click(RemoveTimeSlot);
+	$(newElem).find(".time-slot-remove").click(RemoveTimeSlot);
 	$(newElem).find("button.day-button").click(DayButtonClick);
 	
 	//append to list
@@ -135,8 +135,8 @@ function AddTimeSlotLoc(location)
 
 function RemoveTimeSlot()
 {
-	var list = $(this).closest(".TimeSlotListContainer");
-	$(this).closest(".TimeSlot").remove();
+	var list = $(this).closest(".time-slot-list-container");
+	$(this).closest(".time-slot.list-item").remove();
 	if (list.children().length <= 0)
 	{
 		AddTimeSlotLoc(list);
@@ -150,7 +150,7 @@ function RemoveTimeSlot()
 
 /* === Accordian Handling === */
 
-$(".accordionButton").click(AccordionClick);
+$(".accordion-button").click(AccordionClick);
 
 function AccordionClick()
 {
@@ -187,11 +187,14 @@ function DayButtonClick()
 
 /* === Schedule Handlers === */
 
+var GridHeightOffset = 0;
 $(".grid-container").mousemove(UpdateMouseLine);
+$(".grid-container").mouseenter(function () { $(".mouse-line").removeClass("hidden"); GridHeightOffset = $(".grid-container").position().top; } );
+$(".grid-container").mouseleave(function () { $(".mouse-line").addClass("hidden"); });
 
 function UpdateMouseLine(event)
 {
-	$(".mouse-line")[0].style.top=event.clientY-$(".grid-container").position().top;
+	$(".mouse-line")[0].style.top=event.clientY - GridHeightOffset;
 }
 
 /* === Schedule Handlers === */

@@ -76,11 +76,11 @@ class BacktrackPlace
 
 function ReadCourseData()
 {
-	var courses = $(".CourseListContainer").children();
+	var courses = $(".course-list-container").children();
 	for (var c = 0; c < courses.length; c++)
 	{
 		var course = new Course();
-		var sections = $(courses[c]).find(".SectionListContainer").children();
+		var sections = $(courses[c]).find(".section-list-container").children();
 		
 		course.Name = $(courses[c]).find(".course-name").val();
 		if (course.Name.length === 0) { course.Name = $(courses[c]).find(".course-name").attr("placeholder"); }
@@ -88,7 +88,7 @@ function ReadCourseData()
 		for (var s = 0; s < sections.length; s++)
 		{
 			var section = new Section();
-			var timeslots = $(sections[s]).find(".TimeSlotListContainer").children();
+			var timeslots = $(sections[s]).find(".time-slot-list-container").children();
 			
 			section.Name = $(sections[s]).find(".section-name").val();
 			if (section.Name.length === 0) { section.Name = $(sections[s]).find(".section-name").attr("placeholder"); }
@@ -208,12 +208,12 @@ function TimeToGridCoord(time)
 	return (time.Hour-7)*4+2+Math.floor(time.Minutes/15);
 }
 
-var GridSlotTemplate = $(".gridSlotTemplate")[0];
+var GridSlotTemplate = $(".grid-slot-template")[0];
 function DrawSchedule()
 {
 	console.log("==============\n Draw Courses\n==============");
 	var gridContainer = $(".grid-container");
-	gridContainer.children(".grid-item.gridSlot").remove();
+	gridContainer.children(".grid-item.grid-slot").remove();
 	
 	for (var i = 0; i < Math.min(ValidSchedules.length, 1); i++)
 	{
@@ -232,7 +232,7 @@ function DrawSchedule()
 					if ((timeSlot.Days >> d) & 1)
 					{
 						var newElem = GridSlotTemplate.cloneNode(true);
-						newElem.className = "grid-item gridSlot";
+						newElem.className = "grid-item grid-slot";
 						newElem.style = "grid-row:" + TimeToGridCoord(timeSlot.Start) + "/" + TimeToGridCoord(timeSlot.End) + "; grid-column:" + (2+d) + "/" + (2+d) + ";";
 						$(newElem).find(".course-name").html(course.Name);
 						$(newElem).find(".section-name").html(course.Section.Name);
@@ -255,4 +255,4 @@ function DoGenSchedule()
 	DrawSchedule();
 }
 
-$("button.genSchedule").click(DoGenSchedule);
+$("button.gen-schedule").click(DoGenSchedule);
