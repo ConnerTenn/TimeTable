@@ -42,6 +42,8 @@ function AutoSectionNames()
 	}
 }
 
+$(".courseAdd").click(AddCourse);
+
 var CourseTemplate = $(".course-template")[0];
 function AddCourse()
 {
@@ -128,6 +130,8 @@ function AddTimeSlotLoc(location)
 	//bind buttons
 	$(newElem).find(".time-slot-remove").click(RemoveTimeSlot);
 	$(newElem).find("button.day-button").click(DayButtonClick);
+	$(newElem).find(".time-start,.time-end").focusin(1, ShowTimePicker);
+	$(newElem).find(".time-start,.time-end").focusout(HideTimePicker);
 	
 	//append to list
 	location.append(newElem);
@@ -144,7 +148,6 @@ function RemoveTimeSlot()
 }
 
 /* === End Dynamic Element Handlers === */
-
 
 
 
@@ -172,24 +175,61 @@ function AccordionClick()
 
 
 
-/* === Button Handlers === */
+/* === Course Handlers === */
 
-$(".courseAdd").click(AddCourse);
+/* === End Course Handlers === */
+
+
+
+
+/* === Section Handlers === */
+
+/* === End Section Handlers === */
+
+
+
+/* === Time Slot Handlers === */
 
 function DayButtonClick()
 {
 	this.classList.toggle("active");
 }
 
-/* === End Button Handlers === */
+/* === End Time Slot Handlers === */
 
 
 
 /* === Schedule Handlers === */
 
+var ActiveSchedule = 0;
+$(".schedule-select-dec").click(DecrementActiveSchedule);
+$(".schedule-select-inc").click(IncrementActiveSchedule);
+
+function DecrementActiveSchedule()
+{
+	ActiveSchedule = Math.max(ActiveSchedule-1, 0);
+	$(".schedule-select-disp").html(ActiveSchedule + 1);
+	
+	if (ValidSchedules.length) { DrawSchedule(); }
+}
+function IncrementActiveSchedule()
+{
+	ActiveSchedule = Math.max(Math.min(ActiveSchedule + 1, ValidSchedules.length - 1), 0);
+	$(".schedule-select-disp").html(ActiveSchedule+1);
+	
+	if (ValidSchedules.length) { DrawSchedule(); }
+}
+
+function RefreshActiveScheduleVal()
+{
+	ActiveSchedule = Math.max(Math.min(ActiveSchedule, ValidSchedules.length - 1), 0);
+	$(".schedule-select-disp").html(ActiveSchedule + 1);
+}
+
+
 var GridHeightOffset = 0;
 $(".grid-container").mousemove(UpdateMouseLine);
-$(".grid-container").mouseenter(function () { $(".mouse-line").removeClass("hidden"); GridHeightOffset = $(".grid-container").position().top; } );
+$(".grid-container").mouseenter(function () { $(".mouse-line").removeClass("hidden"); GridHeightOffset = $(".grid-container").offset().top; } );
 $(".grid-container").mouseleave(function () { $(".mouse-line").addClass("hidden"); });
 
 function UpdateMouseLine(event)
@@ -200,10 +240,57 @@ function UpdateMouseLine(event)
 /* === Schedule Handlers === */
 
 
+/* === General Handlers === */
+
+/* time picker */
+
+$(".time-picker").focusin(ShowTimePicker);
+$(".time-picker").focusout(HideTimePicker);
+var ActiveTimeBox = 0;
+function ShowTimePicker(event)
+{
+	$(".time-picker").removeClass("hidden");
+	if (event.data)
+	{
+		ActiveTimeBox = this;
+		//console.log("Spawn ["+val+"]");
+		
+		$(".time-picker").offset({ top: this.offsetTop + this.clientHeight + 1, left: this.offsetLeft });
+	}
+}
+
+function HideTimePicker(event)
+{
+	//ActiveTimeBox = 0;
+	//console.log("Spawn ["+val+"]");
+	$(".time-picker").addClass("hidden");
+}
+
+function PickTime()
+{
+	$(ActiveTimeBox).val(this.innerHTML);
+	$(this).focusout();
+}
+
+function InitTimePicker()
+{
+	for (var i = 0; i < (23-7)*2; i++)
+	{
+		$(".time-picker").append("<div class=\"picker-elem\">" + ((Math.floor(i/2)+6)%12+1) + ":" + (i%2 ? "30" : "00") + ((i<=9?"am":"pm")) + "</div>");
+	}
+	$(".picker-elem").click(PickTime);
+}
+
+
+/* === End General Handlers === */
+
+
 
 /* === Init Items === */
 
 InitScheduleGrid();
+
+InitTimePicker();
 
 AddCourse();
 

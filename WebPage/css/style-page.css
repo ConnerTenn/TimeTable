@@ -50,7 +50,8 @@ input[type=text].section-name, input[type=text].course-name {
 }
 
 .hidden {
-	display: none;
+	/*display: none;*/
+	transform: scale(0);
 }
 
 
@@ -278,10 +279,22 @@ button.gen-schedule {
 	top: 0;
 }
 
-/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
-/*@media screen and (max-width: 600px) {
-    .col-25, .col-75, input[type=submit] {
-        width: 100%;
-        margin-top: 0;
-    }
-}*/
+/* General Element Styling */
+
+.time-picker {
+	display:block;
+	position:absolute;
+	color: white;
+	background:blue;
+	width:100px;
+	height:200px;
+	overflow-y:scroll;
+}
+
+.picker-elem {
+	margin: 5px 2px;
+	padding: 5px 2px;
+}
+.picker-elem:hover {
+	background: #25b7c4
+}

@@ -215,12 +215,14 @@ function DrawSchedule()
 	var gridContainer = $(".grid-container");
 	gridContainer.children(".grid-item.grid-slot").remove();
 	
-	for (var i = 0; i < Math.min(ValidSchedules.length, 1); i++)
+	if (ValidSchedules.length)
 	{
-		console.log("Schedule " + i + ":");
-		for (var j = 0; j < ValidSchedules[i].length; j++)
+		RefreshActiveScheduleVal();
+		
+		console.log("Schedule " + ActiveSchedule + ":");
+		for (var j = 0; j < ValidSchedules[ActiveSchedule].length; j++)
 		{
-			var course = ValidSchedules[i][j];
+			var course = ValidSchedules[ActiveSchedule][j];
 			console.log(course.toStringSimple());
 			
 			for (var t = 0; t < course.Section.TimeSlotList.length; t++)

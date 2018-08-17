@@ -7,11 +7,9 @@
 
 ==== Large Tasks ====
 [ ] add multi week scheduler and exam scheduler
-[ ] add time drop down menu
-Schedule
-	[ ] Change schedule grid from using css grid
-	[ ] add interactivity on schedule canvas
-	[ ] offset schedule time markers
+[ ] Change schedule grid from using css grid
+[ ] add interactivity on schedule canvas
+[ ] offset schedule time markers
 [ ] coloured courses
 [ ] dynamic list animations
 [ ] Add reserved time periods
@@ -20,4 +18,6 @@ Schedule
 ==== Completed ====
 [x] Add horizontal line that follows mouse cursor
 [x] make nameing consistant
+[x] Add support for displaying multiple valid schedules
+[x] add time drop down menu
 

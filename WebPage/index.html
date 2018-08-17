@@ -40,8 +40,8 @@
 		<button class="day-button thu day-button-T" type="button" onclick="">T</button>
 		<button class="day-button fri day-button-F" type="button" onclick="">F</button>
 		<button class="day-button sat day-button-S" type="button" onclick="">S</button>
-		<input type="text" class="time-start" value="7:00am" onfocus="this.select()">
-		<input type="text" class="time-end" value="8:00am" onfocus="this.select()">
+		<input type="text" class="time-start" value="7:00am">
+		<input type="text" class="time-end" value="8:00am">
 		<button class="time-slot-remove"><i class="fas fa-minus-circle"></i></button>
 	</div>
 	<!-- Grid Item TimeSlot Template -->
@@ -55,6 +55,9 @@
 	<div id="main-content">
 		<!-- Schedule Grid Container -->
 		<div id="left-content"> 
+			<button class="schedule-select-dec" style="display:inline-block;">&lt</button>
+			<form type="text" class="schedule-select-disp" style="display:inline-block; background:white;">1</form>
+			<button class="schedule-select-inc" style="display:inline-block;">&gt</button>
 			<div class="mouse-line hidden"></div>
 			<div class="grid-container">
 				<div class="grid-item space">###</div>
@@ -76,19 +79,7 @@
 			<button class="gen-schedule"style="vertical-align:middle"><span>Generate Schedules</span></button>
 		</div>
 	</div>
-	<div style="display:block; position:absolute; color: white; background:blue; width:70px; height:150px; top:500px; right:50px; overflow-y:scroll;">
-		<div onmouseover="this.style.background='lightblue'" onmouseout="this.style.background='blue'">7:00</div>
-		<div onmouseover="this.style.background='lightblue'" onmouseout="this.style.background='blue'">7:30</div>
-		<div onmouseover="this.style.background='lightblue'" onmouseout="this.style.background='blue'">8:00</div>
-		<div onmouseover="this.style.background='lightblue'" onmouseout="this.style.background='blue'">8:30</div>
-		<div onmouseover="this.style.background='lightblue'" onmouseout="this.style.background='blue'">9:00</div>
-		<div onmouseover="this.style.background='lightblue'" onmouseout="this.style.background='blue'">9:30</div>
-		<div onmouseover="this.style.background='lightblue'" onmouseout="this.style.background='blue'">10:00</div>
-		<div onmouseover="this.style.background='lightblue'" onmouseout="this.style.background='blue'">10:30</div>
-		<div onmouseover="this.style.background='lightblue'" onmouseout="this.style.background='blue'">11:00</div>
-		<div onmouseover="this.style.background='lightblue'" onmouseout="this.style.background='blue'">11:30</div>
-		<div onmouseover="this.style.background='lightblue'" onmouseout="this.style.background='blue'">12:00</div>
-		<div onmouseover="this.style.background='lightblue'" onmouseout="this.style.background='blue'">12:30</div>
+	<div class="time-picker hidden" tabindex="1">
 	</div>
 </body>
 </html>
