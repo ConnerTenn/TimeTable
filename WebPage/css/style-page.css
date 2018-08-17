@@ -22,56 +22,43 @@ body {
 }
 
 
-/* === Global Element Properties === */
-
-button:focus {
-	outline:0;
-}
-input[type=text] {
-    /*width: 60px;*/
-    padding: 5px;
-    border: none;
-    border-radius: 4px;
-    resize: vertical;
-	display: inline-block;
-	font-size: 10px;
-}
-
-input[type=text].section-name, input[type=text].course-name {
-	width: 85%;
-	text-align: left;
-	font-size: 1em;
-	padding: 2px;
-	background: transparent;
-	color: white;
-}
-.section-name::placeholder, .course-name::placeholder {
-	color: lightgray;
-}
-
-.hidden {
-	/*display: none;*/
-	transform: scale(0);
-}
-
 
 /* === Dynamic List Styling === */
+
+.accordion-button, .course-remove, .section-remove, .time-slot-remove, .reserve-remove {
+	/*padding-top: 30%;*/
+	align: center;
+	/*background-color: teal;*/
+	background: transparent;
+	padding: 2px 1px;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.course-add, .section-add, .time-slot-add, .reserve-add {
+	/*padding-top: 30%;*/
+	align: center;
+	/*background-color: teal;*/
+	background: #44494E;
+	padding: 6px;
+	border-radius: 3px;
+	margin-right: 5px;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
 
 /* Accordion Styling */
 
 .accordion-header {
 	background: transparent;
 }
-.accordion-button, .courseAdd, .course-remove, .section-add, .section-remove, .time-slot-add, .time-slot-remove {
-	/*padding-top: 30%;*/
-	align: center;
-	/*background-color: teal;*/
-	background: transparent;
-    border: none;
-    color: white;
-    padding: 2px 1px;
-    font-size: 16px;
-    cursor: pointer;
+
+.course-add:hover, .section-add:hover, .time-slot-add:hover, .reserve-add:hover {
+	background: #54595E
 }
 
 .accordion-button-minus {
@@ -90,26 +77,25 @@ input[type=text].section-name, input[type=text].course-name {
 }
 
 .course.list-item>.accordion-content {
-	
 	padding-left: 10px;
 	padding-right: 10px;
 }
 
-.section>.accordion-content {
+.section.list-item>.accordion-content {
+	padding-right: 10px;
+	padding-left: 10px;
+}
+
+.reserve.list-item>.accordion-content {
 	padding-right: 10px;
 	padding-left: 10px;
 }
 
 /* Course */
 
-.course-template, .section-template, .time-slot-template {
-	display: none;
-	transform: scale(0);
-}
-
 .course.list-item {
 	background-color: #273746;
-	margin-top: 5.5px;
+	margin-top: 10px;
 	padding: 7px;
 	border-radius: 10px;
 }
@@ -118,14 +104,14 @@ input[type=text].section-name, input[type=text].course-name {
 
 .section.list-item {
 	background-color: #34495E;
-	margin-top: 4.5px;
+	margin-top: 5px;
 	padding: 7px;
 	border-radius: 10px;
 }
 
 /* Time Slot */
 
-.time-slot {
+.time-slot.list-item {
 	background-color: #2E4053;
 	margin-top: 3.5px;
 	padding: 6px 0px 6px 5px;
@@ -177,6 +163,15 @@ input[type=text].time-start, input[type=text].time-end{
 .day-button.active:hover
 {
 	background: MOCCASIN;
+}
+
+/* Reserve */
+
+.reserve.list-item {
+	background-color: #34495E;
+	margin-top: 10px;
+	padding: 7px;
+	border-radius: 10px;
 }
 
 /* Generate Button */
@@ -297,4 +292,41 @@ button.gen-schedule {
 }
 .picker-elem:hover {
 	background: #25b7c4
+}
+
+
+
+/* === Global Element Properties === */
+
+button:focus {
+	outline:0;
+}
+input[type=text] {
+    /*width: 60px;*/
+    padding: 5px;
+    border: none;
+    border-radius: 4px;
+    resize: vertical;
+	display: inline-block;
+	font-size: 10px;
+}
+
+input[type=text].course-name, input[type=text].section-name, input[type=text].reserve-name {
+	width: 85%;
+	text-align: left;
+	font-size: 1em;
+	padding: 2px;
+	background: transparent;
+	color: white;
+}
+.course-name::placeholder, .section-name::placeholder, .reserve-name::placeholder {
+	color: lightgray;
+}
+
+.invisible {
+	transform: scale(0);
+}
+
+.hidden {
+	display: none;
 }

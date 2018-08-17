@@ -4,35 +4,35 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 <head>
 	<!-- Course Template -->
-	<div class="course-template">
+	<div class="course-template hidden">
 		<div class="accordion-header">
 			<button class="accordion-button"><i class="fas fa-arrow-alt-circle-down"></i></button>
 			<input type="text" class="course-name" placeholder="Course Name">
 			<button class="course-remove"><i class="fas fa-minus-circle"></i></button>
 		</div>
 		<div class="accordion-content active">
-			<button class="section-add"><i class="fas fa-plus-circle"></i></button>
+			<button class="section-add"><i class="fas fa-plus-circle"> Section</i></button>
 			<!-- Container for the list of sections -->
 			<div class="section-list-container">
 			</div>
 		</div>
 	</div>
 	<!-- Section Template -->
-	<div class="section-template">
+	<div class="section-template hidden">
 		<div class="accordion-header">
 			<button class="accordion-button"><i class="fas fa-arrow-alt-circle-down"></i></button>
 			<input type="text" class="section-name" placeholder="Section Name">
 			<button class="section-remove"><i class="fas fa-minus-circle"></i></button>
 		</div>
 		<div class="accordion-content active">
-			<button class="time-slot-add"><i class="fas fa-plus-circle"></i></button>
+			<button class="time-slot-add"><i class="fas fa-plus-circle"> Time Slot</i></button>
 			<!-- Container for the list of timeslots -->
 			<div class="time-slot-list-container">
 			</div>
 		</div>
 	</div>
 	<!-- time-slot-template Template -->
-	<div class="time-slot-template">
+	<div class="time-slot-template hidden">
 		<button class="day-button sun day-button-S" type="button" onclick="">S</button>
 		<button class="day-button mon" type="button" onclick="">M</button>
 		<button class="day-button tue day-button-T" type="button" onclick="">T</button>
@@ -44,8 +44,22 @@
 		<input type="text" class="time-end" value="8:00am">
 		<button class="time-slot-remove"><i class="fas fa-minus-circle"></i></button>
 	</div>
+	<!-- Reserve Template -->
+	<div class="reserve-template hidden">
+		<div class="accordion-header">
+			<button class="accordion-button"><i class="fas fa-arrow-alt-circle-down"></i></button>
+			<input type="text" class="reserve-name" placeholder="Reserve Name">
+			<button class="reserve-remove"><i class="fas fa-minus-circle"></i></button>
+		</div>
+		<div class="accordion-content active">
+			<button class="time-slot-add"><i class="fas fa-plus-circle"> Time Slot</i></button>
+			<!-- Container for the list of timeslots -->
+			<div class="time-slot-list-container">
+			</div>
+		</div>
+	</div>
 	<!-- Grid Item TimeSlot Template -->
-	<div class="grid-slot-template">
+	<div class="grid-slot-template hidden">
 		<div class="course-name"></div>
 		<div class="section-name"></div>
 	</div>
@@ -58,7 +72,7 @@
 			<button class="schedule-select-dec" style="display:inline-block;">&lt</button>
 			<form type="text" class="schedule-select-disp" style="display:inline-block; background:white;">1</form>
 			<button class="schedule-select-inc" style="display:inline-block;">&gt</button>
-			<div class="mouse-line hidden"></div>
+			<div class="mouse-line invisible"></div>
 			<div class="grid-container">
 				<div class="grid-item space">###</div>
 				<div class="grid-item label">Sunday</div>
@@ -72,7 +86,8 @@
 		</div>
 		<!-- List Container -->
 		<div id="right-content">
-			<button class="courseAdd"><i class="fas fa-plus-circle"></i></button>
+			<button class="course-add"><i class="fas fa-plus-circle"> Course</i></button>
+			<button class="reserve-add"><i class="fas fa-plus-circle"> Reserve</i></button>
 			<!-- Container for the list of courses -->
 			<div class="course-list-container">
 			</div>

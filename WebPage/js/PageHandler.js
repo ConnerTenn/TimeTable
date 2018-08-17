@@ -42,7 +42,7 @@ function AutoSectionNames()
 	}
 }
 
-$(".courseAdd").click(AddCourse);
+$(".course-add").click(AddCourse);
 
 var CourseTemplate = $(".course-template")[0];
 function AddCourse()
@@ -147,6 +147,39 @@ function RemoveTimeSlot()
 	}
 }
 
+$(".reserve-add").click(AddReserve);
+
+var ReserveTemplate = $(".reserve-template")[0];
+function AddReserve()
+{
+	//generate new element
+	var newElem = ReserveTemplate.cloneNode(true);
+	newElem.className = "reserve list-item";
+
+	//bind buttons
+	$(newElem).find(".time-slot-add").click(AddTimeSlot);
+	$(newElem).find(".accordion-button").click(AccordionClick);
+	$(newElem).find(".reserve-remove").click(RemoveReserve);
+
+	//add initial children
+	AddTimeSlotLoc($(newElem).find(".time-slot-list-container"));
+
+	//append to list
+	$(".course-list-container").append(newElem);
+}
+
+function RemoveReserve()
+{
+	var list = $(this).closest(".course-list-container");
+	$(this).closest(".reserve.list-item").remove();
+	if (list.children().length <= 0)
+	{
+		AddCourse();
+	}
+
+	AutoCourseNames();
+}
+
 /* === End Dynamic Element Handlers === */
 
 
@@ -229,8 +262,8 @@ function RefreshActiveScheduleVal()
 
 var GridHeightOffset = 0;
 $(".grid-container").mousemove(UpdateMouseLine);
-$(".grid-container").mouseenter(function () { $(".mouse-line").removeClass("hidden"); GridHeightOffset = $(".grid-container").offset().top; } );
-$(".grid-container").mouseleave(function () { $(".mouse-line").addClass("hidden"); });
+$(".grid-container").mouseenter(function () { $(".mouse-line").removeClass("invisible"); GridHeightOffset = $(".grid-container").offset().top; } );
+$(".grid-container").mouseleave(function () { $(".mouse-line").addClass("invisible"); });
 
 function UpdateMouseLine(event)
 {
