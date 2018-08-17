@@ -1,4 +1,11 @@
 
+var Colours = [ "#b58900", "#cb4b16", "#dc322f", "#d33682", "#6c71c4", "#268bd2", "#2aa198", "#859900" ];
+
+function Rand(min, max)
+{
+	return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 function IsLetter(c)
 {
 	return c.length === 1 && c.match(/[a-z]/i);
@@ -173,6 +180,7 @@ class Course
 		this.Name = "";
 		this.SectionList = [];
 		this.SelectedSection = -1;
+		this.Colour = 0;
 	}
 	
 	get Section()
@@ -186,6 +194,7 @@ class Course
 		newCourse.Name = this.Name;
 		newCourse.SectionList.push(this.Section.Copy());
 		newCourse.SelectedSection = 0;
+		newCourse.Colour = this.Colour;
 		return newCourse;
 	}
 	

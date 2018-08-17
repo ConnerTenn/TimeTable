@@ -82,6 +82,7 @@ function ReadCourseData()
 		var course = new Course();
 		var sections = $(courses[c]).find(".section-list-container").children();
 		
+		course.Colour = $(courses[c]).find(".colour").attr("colour");
 		course.Name = $(courses[c]).find(".course-name").val();
 		if (course.Name.length === 0) { course.Name = $(courses[c]).find(".course-name").attr("placeholder"); }
 		
@@ -121,6 +122,7 @@ function ReadCourseData()
 		var section = new Section();
 		var timeslots = $(reserves[r]).find(".time-slot-list-container").children();
 		
+		course.Colour = "#aaaaaa";
 		course.Name = $(reserves[r]).find(".reserve-name").val();
 		if (course.Name.length === 0) { course.Name = $(reserves[r]).find(".reserve-name").attr("placeholder"); }
 		
@@ -264,7 +266,8 @@ function DrawSchedule()
 					{
 						var newElem = GridSlotTemplate.cloneNode(true);
 						newElem.className = "grid-item grid-slot";
-						newElem.style = "grid-row:" + TimeToGridCoord(timeSlot.Start) + "/" + TimeToGridCoord(timeSlot.End) + "; grid-column:" + (2+d) + "/" + (2+d) + ";";
+						newElem.style = "grid-row:" + TimeToGridCoord(timeSlot.Start) + "/" + TimeToGridCoord(timeSlot.End) + "; grid-column:" + (2+d) + "/" + (2+d) + ";" + 
+							"background:" + course.Colour + "80; border-color:" + course.Colour + ";";
 						$(newElem).find(".course-name").html(course.Name);
 						$(newElem).find(".section-name").html(course.Section.Name);
 						gridContainer.append(newElem);

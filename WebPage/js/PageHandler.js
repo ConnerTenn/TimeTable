@@ -51,6 +51,10 @@ function AddCourse()
 	var newElem = CourseTemplate.cloneNode(true);
 	newElem.className = "course list-item";
 	
+	var colour = Colours[Rand(0, 7)];
+	$(newElem).find(".colour")[0].style.background=colour;
+	$(newElem).find(".colour").attr("colour", colour);
+	
 	//bind buttons
 	$(newElem).find(".section-add").click(AddSection);
 	$(newElem).find(".accordion-button").click(AccordionClick);
@@ -155,6 +159,8 @@ function AddReserve()
 	//generate new element
 	var newElem = ReserveTemplate.cloneNode(true);
 	newElem.className = "reserve list-item";
+	
+	$(newElem).find(".colour")[0].style.background = "#aaaaaa";
 
 	//bind buttons
 	$(newElem).find(".time-slot-add").click(AddTimeSlot);
@@ -266,7 +272,8 @@ function UpdateMouseLine(event)
 	$(".mouse-line")[0].style.top=event.clientY - GridHeightOffset;
 }
 
-/* === Schedule Handlers === */
+/* === End Schedule Handlers === */
+
 
 
 /* === General Handlers === */
@@ -322,5 +329,10 @@ InitScheduleGrid();
 InitTimePicker();
 
 AddCourse();
+
+for (var i = 0; i < Colours.length; i++)
+{
+	//$("body").append("<div class=\"grid-item grid-slot\" style=\"position:absolute; left: 170px; top:" + (108 + i*112) + "px; background:" + Colours[i] + "80; border-color:" + Colours[i] + "; display:block; width:70px; height:45px; margin:5px;\"</div>");
+}
 
 /* === End Init Items === */

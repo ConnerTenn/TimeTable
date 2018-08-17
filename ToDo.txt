@@ -10,7 +10,6 @@
 [ ] Change schedule grid from using css grid
 [ ] add interactivity on schedule canvas
 [ ] offset schedule time markers
-[ ] coloured courses
 [ ] dynamic list animations
 
 
@@ -20,4 +19,5 @@
 [x] Add support for displaying multiple valid schedules
 [x] add time drop down menu
 [x] Add reserved time periods
+[x] coloured courses
 
