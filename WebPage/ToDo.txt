@@ -5,7 +5,6 @@
 [ ] improve time box entry
 [ ] fix scrolling containers
 	course add, reserve add, and generate schedule buttons should not scroll
-[ ] timepicker postion should take scrolling into account
 
 ==== Features ====
 [ ] change and and remove buttons designs
@@ -38,4 +37,5 @@
 [x] Add reserved time periods
 [x] coloured courses
 [x] add schedule result switching
+[x] timepicker postion should take scrolling into account
 

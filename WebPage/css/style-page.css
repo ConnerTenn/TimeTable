@@ -276,7 +276,7 @@ button.gen-schedule {
 
 /* General Element Styling */
 
-.time-picker {
+#time-picker {
 	display:block;
 	position:absolute;
 	color: white;

@@ -284,18 +284,20 @@ function UpdateMouseLine(event)
 
 /* time picker */
 
-$(".time-picker").focusin(ShowTimePicker);
-$(".time-picker").focusout(HideTimePicker);
+$("#right-content").scroll(UpdateTimePickerPosition);
+
+$("#time-picker").focusin(ShowTimePicker);
+$("#time-picker").focusout(HideTimePicker);
 var ActiveTimeBox = 0;
 function ShowTimePicker(event)
 {
-	$(".time-picker").removeClass("invisible");
+	$("#time-picker").removeClass("invisible");
 	if (event.data)
 	{
 		ActiveTimeBox = this;
 		//console.log("Spawn ["+val+"]");
 		
-		$(".time-picker").offset({ top: this.offsetTop + this.clientHeight + 1, left: this.offsetLeft });
+		UpdateTimePickerPosition(this);
 	}
 }
 
@@ -303,7 +305,15 @@ function HideTimePicker(event)
 {
 	//ActiveTimeBox = 0;
 	//console.log("Spawn ["+val+"]");
-	$(".time-picker").addClass("invisible");
+	$("#time-picker").addClass("invisible");
+}
+
+function UpdateTimePickerPosition()
+{
+	if (ActiveTimeBox) 
+	{
+		$("#time-picker").offset({ top: $(ActiveTimeBox).offset().top + ActiveTimeBox.clientHeight + 1, left: ActiveTimeBox.offsetLeft });
+	}
 }
 
 function PickTime()
@@ -316,7 +326,7 @@ function InitTimePicker()
 {
 	for (var i = 0; i < (23-7)*2; i++)
 	{
-		$(".time-picker").append("<div class=\"picker-elem\">" + ((Math.floor(i/2)+6)%12+1) + ":" + (i%2 ? "30" : "00") + ((i<=9?"am":"pm")) + "</div>");
+		$("#time-picker").append("<div class=\"picker-elem\">" + ((Math.floor(i/2)+6)%12+1) + ":" + (i%2 ? "30" : "00") + ((i<=9?"am":"pm")) + "</div>");
 	}
 	$(".picker-elem").click(PickTime);
 }
