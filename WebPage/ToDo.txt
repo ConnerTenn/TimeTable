@@ -1,14 +1,33 @@
 
-==== Quick Tasks ====
+
+
+==== Fixes ====
+[ ] improve time box entry
+[ ] fix scrolling containers
+	course add, reserve add, and generate schedule buttons should not scroll
+[ ] timepicker postion should take scrolling into account
+
+==== Features ====
 [ ] change and and remove buttons designs
-
-
-==== Large Tasks ====
 [ ] add multi week scheduler and exam scheduler
+[ ] add undo and redo
+[ ] add settings
+	[ ] enable/disable mouse line
+	[ ] enable/disable use filled sections
+[ ] list item rearranging
+[ ] schedule comparing
+	simultaneous viewing
+	highlightable schedules
+[ ] highlight sections being shown on active valid schedule
+[ ] save and load
+[ ] dynamic list animations
+[ ] add duplicate list item controls
+[ ] add course & section enable/disable
+[ ] add timeslot labels
 [ ] Change schedule grid from using css grid
 [ ] add interactivity on schedule canvas
+	[ ] when click on course, scroll into view
 [ ] offset schedule time markers
-[ ] dynamic list animations
 
 
 ==== Completed ====

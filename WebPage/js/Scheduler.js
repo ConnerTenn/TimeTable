@@ -253,6 +253,7 @@ function DrawSchedule()
 	
 	if (ValidSchedules.length)
 	{
+		ActiveSchedule=0;
 		RefreshActiveScheduleVal();
 		
 		console.log("Schedule " + ActiveSchedule + ":");

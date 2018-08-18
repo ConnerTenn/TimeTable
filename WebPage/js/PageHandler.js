@@ -246,15 +246,15 @@ $(".schedule-select-inc").click(IncrementActiveSchedule);
 
 function DecrementActiveSchedule()
 {
-	ActiveSchedule = Math.max(ActiveSchedule-1, 0);
-	$(".schedule-select-disp").html(ActiveSchedule + 1 + "/" + Math.max(1,ValidSchedules.length));
+	ActiveSchedule--;
+	RefreshActiveScheduleVal();
 	
 	if (ValidSchedules.length) { DrawSchedule(); }
 }
 function IncrementActiveSchedule()
 {
-	ActiveSchedule = Math.max(Math.min(ActiveSchedule + 1, ValidSchedules.length - 1), 0);
-	$(".schedule-select-disp").html(ActiveSchedule + 1 + "/" + Math.max(1,ValidSchedules.length));
+	ActiveSchedule++;
+	RefreshActiveScheduleVal();
 	
 	if (ValidSchedules.length) { DrawSchedule(); }
 }
