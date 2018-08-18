@@ -1,5 +1,29 @@
 
-var Colours = [ "#b58900", "#cb4b16", "#dc322f", "#d33682", "#6c71c4", "#268bd2", "#2aa198", "#859900" ];
+var Colours = [ ["#b58900",0], ["#cb4b16",0], ["#dc322f",0], ["#d33682",0], ["#6c71c4",0], ["#268bd2",0], ["#2aa198",0], ["#859900",0] ];
+
+function GetColour()
+{
+	var min = Colours[0][1];
+	//find minimum count for used colours
+	for (var i = 1; i < Colours.length; i++)
+	{
+		min = (Colours[i][1] < min ? Colours[i][1] : min);
+	}
+	//save colours that are minimally used
+	var colours = [];
+	for (var i = 0; i < Colours.length; i++)
+	{
+		if (Colours[i][1] == min) { colours.push([Colours[i][0], i]); }
+	}
+	//select colour
+	var selected = Rand(0, colours.length - 1);
+	//increment use counter for selected colour
+	Colours[colours[selected][1]][1]++;
+	
+	return colours[selected][0];
+	
+	
+}
 
 function Rand(min, max)
 {
@@ -82,7 +106,7 @@ class TimeSlot
 	
 	Conflict(other)
 	{
-		return (this.Days & other.Days) && ((other.Start.Min >= this.Start.Min && other.Start.Min <= this.End.Min) || (other.End.Min >= this.Start.Min && Other.End.Min <= this.End.Min));
+		return (this.Days & other.Days) && ((other.Start.Min >= this.Start.Min && other.Start.Min < this.End.Min) || (other.End.Min > this.Start.Min && other.End.Min <= this.End.Min));
 	}
 	
 	Copy()

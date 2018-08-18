@@ -51,8 +51,10 @@ function AddCourse()
 	var newElem = CourseTemplate.cloneNode(true);
 	newElem.className = "course list-item";
 	
-	var colour = Colours[Rand(0, 7)];
-	$(newElem).find(".colour")[0].style.background=colour;
+	var colour = GetColour();
+	//$(newElem).find(".colour")[0].style.background=colour;
+	//$(newElem).find(".colour").attr("colour", colour);
+	$(newElem).find(".colour").css("background", colour);
 	$(newElem).find(".colour").attr("colour", colour);
 	//$(newElem).find(".accordion-header")[0].style.background = colour;
 	//$(newElem)[0].style.background = colour;
@@ -245,14 +247,14 @@ $(".schedule-select-inc").click(IncrementActiveSchedule);
 function DecrementActiveSchedule()
 {
 	ActiveSchedule = Math.max(ActiveSchedule-1, 0);
-	$(".schedule-select-disp").html(ActiveSchedule + 1);
+	$(".schedule-select-disp").html(ActiveSchedule + 1 + "/" + Math.max(1,ValidSchedules.length));
 	
 	if (ValidSchedules.length) { DrawSchedule(); }
 }
 function IncrementActiveSchedule()
 {
 	ActiveSchedule = Math.max(Math.min(ActiveSchedule + 1, ValidSchedules.length - 1), 0);
-	$(".schedule-select-disp").html(ActiveSchedule+1);
+	$(".schedule-select-disp").html(ActiveSchedule + 1 + "/" + Math.max(1,ValidSchedules.length));
 	
 	if (ValidSchedules.length) { DrawSchedule(); }
 }
@@ -260,7 +262,7 @@ function IncrementActiveSchedule()
 function RefreshActiveScheduleVal()
 {
 	ActiveSchedule = Math.max(Math.min(ActiveSchedule, ValidSchedules.length - 1), 0);
-	$(".schedule-select-disp").html(ActiveSchedule + 1);
+	$(".schedule-select-disp").html(ActiveSchedule + 1 + "/" + Math.max(1,ValidSchedules.length));
 }
 
 

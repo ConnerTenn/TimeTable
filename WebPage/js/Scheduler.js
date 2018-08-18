@@ -79,31 +79,34 @@ function ReadCourseData()
 	var courses = $(".course-list-container").children();
 	for (var c = 0; c < courses.length; c++)
 	{
+		var $course = $(courses[c]);
 		var course = new Course();
-		var sections = $(courses[c]).find(".section-list-container").children();
+		var sections = $course.find(".section-list-container").children();
 		
-		course.Colour = $(courses[c]).find(".colour").attr("colour");
-		course.Name = $(courses[c]).find(".course-name").val();
-		if (course.Name.length === 0) { course.Name = $(courses[c]).find(".course-name").attr("placeholder"); }
+		course.Colour = $course.find(".colour").attr("colour");
+		course.Name = $course.find(".course-name").val();
+		if (course.Name.length === 0) { course.Name = $course.find(".course-name").attr("placeholder"); }
 		
 		for (var s = 0; s < sections.length; s++)
 		{
+			var $section = $(sections[s]);
 			var section = new Section();
-			var timeslots = $(sections[s]).find(".time-slot-list-container").children();
+			var timeslots = $section.find(".time-slot-list-container").children();
 			
-			section.Name = $(sections[s]).find(".section-name").val();
-			if (section.Name.length === 0) { section.Name = $(sections[s]).find(".section-name").attr("placeholder"); }
+			section.Name = $section.find(".section-name").val();
+			if (section.Name.length === 0) { section.Name = $section.find(".section-name").attr("placeholder"); }
 			
 			for (var t = 0; t < timeslots.length; t++)
 			{
+				var $timeslot = $(timeslots[t]);
 				var timeslot = new TimeSlot();
 				
-				timeslot.Start.Min = TimeToMin($(timeslots[t]).find(".time-start").val());
-				timeslot.End.Min = TimeToMin($(timeslots[t]).find(".time-end").val());
+				timeslot.Start.Min = TimeToMin($timeslot.find(".time-start").val());
+				timeslot.End.Min = TimeToMin($timeslot.find(".time-end").val());
 				timeslot.Days = 0;
 				for (var i = 0; i < 7; i++)
 				{
-					timeslot.Days += ($(timeslots[t]).find(".day-button." + DayNames[i])[0].classList.contains("active") ? 1 : 0) << i;
+					timeslot.Days += ($timeslot.find(".day-button." + DayNames[i])[0].classList.contains("active") ? 1 : 0) << i;
 				}
 				
 				section.TimeSlotList.push(timeslot);
@@ -118,24 +121,26 @@ function ReadCourseData()
 	var reserves = $(".reserve-list-container").children();
 	for (var r = 0; r < reserves.length; r++)
 	{
+		var $reserve = $(reserves[r]);
 		var course = new Course();
 		var section = new Section();
-		var timeslots = $(reserves[r]).find(".time-slot-list-container").children();
+		var timeslots = $reserve.find(".time-slot-list-container").children();
 		
 		course.Colour = "#aaaaaa";
-		course.Name = $(reserves[r]).find(".reserve-name").val();
-		if (course.Name.length === 0) { course.Name = $(reserves[r]).find(".reserve-name").attr("placeholder"); }
+		course.Name = $reserve.find(".reserve-name").val();
+		if (course.Name.length === 0) { course.Name = $reserve.find(".reserve-name").attr("placeholder"); }
 		
 		for (var t = 0; t < timeslots.length; t++)
 		{
+			var $timeslot = $(timeslots[t]);
 			var timeslot = new TimeSlot();
 
-			timeslot.Start.Min = TimeToMin($(timeslots[t]).find(".time-start").val());
-			timeslot.End.Min = TimeToMin($(timeslots[t]).find(".time-end").val());
+			timeslot.Start.Min = TimeToMin($timeslot.find(".time-start").val());
+			timeslot.End.Min = TimeToMin($timeslot.find(".time-end").val());
 			timeslot.Days = 0;
 			for (var i = 0; i < 7; i++)
 			{
-				timeslot.Days += ($(timeslots[t]).find(".day-button." + DayNames[i])[0].classList.contains("active") ? 1 : 0) << i;
+				timeslot.Days += ($timeslot.find(".day-button." + DayNames[i])[0].classList.contains("active") ? 1 : 0) << i;
 			}
 
 			section.TimeSlotList.push(timeslot);
@@ -279,7 +284,8 @@ function DrawSchedule()
 }
 
 function DoGenSchedule()
-{	
+{
+	console.time("Do Gen Schedule Time");
 	console.log("#####################\n#####################");
 	RequiredCourseList = [];
 	CourseIndex = 0;
@@ -287,6 +293,7 @@ function DoGenSchedule()
 	ReadCourseData();
 	GenerateSchedule();
 	DrawSchedule();
+	console.timeEnd("Do Gen Schedule Time");
 }
 
 $("button.gen-schedule").click(DoGenSchedule);
