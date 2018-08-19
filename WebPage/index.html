@@ -45,6 +45,7 @@
 		<input type="text" class="time-end" value="8:00am">
 		<button class="time-slot-remove"><i class="fas fa-minus-circle"></i></button>
 	</div>
+</div>
 	<!-- Reserve Template -->
 	<div class="reserve-template hidden">
 		<div class="accordion-header">
@@ -75,7 +76,7 @@
 			<form type="text" class="schedule-select-disp" style="display:inline-block; background:white;">1/1</form>
 			<button class="schedule-select-inc" style="display:inline-block;">&gt</button>
 			<div class="mouse-line invisible"></div>
-			<div class="grid-container">
+			<!--<div class="grid-container">
 				<div class="grid-item space">###</div>
 				<div class="grid-item label">Sunday</div>
 				<div class="grid-item label">Monday</div>
@@ -84,6 +85,54 @@
 				<div class="grid-item label">Thursday</div>
 				<div class="grid-item label">Friday</div>
 				<div class="grid-item label">Saturday</div>
+			</div>-->
+			
+			<div class="table">
+				<div class="time-col">
+					<div> Time </div>
+				</div>
+				<div >Sunday</div>
+				<div >Monday</div>
+				<div >Tuesday</div>
+				<div >Wednesday</div>
+				<div >Thursday</div>
+				<div >Friday</div>
+				<div >Saturday</div>
+				<div>
+					<div>7:00am</div>
+					<div>7:30am</div>
+					<div>8:00am</div>
+					<div>8:30am</div>
+					<div>9:00am</div>
+					<div>9:30am</div>
+					<div>10:00am</div>
+					<div>10:30am</div>
+					
+				</div>
+				<div class="day-col" column="1">
+					<div class="schedule-slot-container"></div>
+				</div>
+				<div class="day-col">
+					<div class="schedule-slot-container">
+						<div style="top:100px; height:40px; background:blue;">
+						</div>				
+					</div>
+				</div>
+				<div class="day-col">
+					<div class="schedule-slot-container"></div>
+				</div>
+				<div class="day-col">
+					<div class="schedule-slot-container"></div>
+				</div>
+				<div class="day-col">
+					<div class="schedule-slot-container"></div>
+				</div>
+				<div class="day-col">
+					<div class="schedule-slot-container"></div>
+				</div>
+				<div class="day-col">
+					<div class="schedule-slot-container"></div>
+				</div>
 			</div>
 		</div>
 		<!-- List Container -->
