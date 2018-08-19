@@ -237,6 +237,27 @@ button.gen-schedule {
 
 /* === Schedule Table Layout === */
 
+.table{
+	
+	display: grid;
+	grid-template-columns: 70px 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+	grid-template-rows: 50px 1fr; 
+	text-align: center;
+	color:white;
+	text-transform: UPPERCASE;
+	
+}
+
+.time-col{
+	height: 500px;
+}
+
+.day-col{
+	
+	height: 500px;
+}
+
+/*
 .grid-slot {
 	background: #E74C3C;
 }
@@ -276,6 +297,7 @@ button.gen-schedule {
 .grid-item.space {
 	
 }
+
 
 .mouse-line
 {
