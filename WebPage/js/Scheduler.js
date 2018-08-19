@@ -252,10 +252,7 @@ function DrawSchedule()
 	gridContainer.children(".grid-item.grid-slot").remove();
 	
 	if (ValidSchedules.length)
-	{
-		ActiveSchedule=0;
-		RefreshActiveScheduleVal();
-		
+	{		
 		console.log("Schedule " + ActiveSchedule + ":");
 		for (var j = 0; j < ValidSchedules[ActiveSchedule].length; j++)
 		{
@@ -288,12 +285,19 @@ function DoGenSchedule()
 {
 	console.time("Do Gen Schedule Time");
 	console.log("#####################\n#####################");
+	
 	RequiredCourseList = [];
 	CourseIndex = 0;
 	ValidSchedules = [];	
+	
 	ReadCourseData();
 	GenerateSchedule();
+
+	ActiveSchedule = 0;
+	RefreshActiveScheduleVal();
+	
 	DrawSchedule();
+	
 	console.timeEnd("Do Gen Schedule Time");
 }
 

@@ -51,14 +51,26 @@ body {
     cursor: pointer;
 }
 
+.course-add:hover, .section-add:hover, .time-slot-add:hover, .reserve-add:hover {
+	background: #54595E
+}
+
+input[type=text].course-name, input[type=text].section-name, input[type=text].reserve-name {
+	width: 70%;
+	text-align: left;
+	font-size: 1em;
+	padding: 2px;
+	background: transparent;
+	color: white;
+}
+.course-name::placeholder, .section-name::placeholder, .reserve-name::placeholder {
+	color: lightgray;
+}
+
 /* Accordion Styling */
 
 .accordion-header {
 	background: transparent;
-}
-
-.course-add:hover, .section-add:hover, .time-slot-add:hover, .reserve-add:hover {
-	background: #54595E
 }
 
 .accordion-button-minus {
@@ -225,24 +237,49 @@ button.gen-schedule {
 
 /* === Schedule Table Layout === */
 
-.table{
+.table {
 	
 	display: grid;
-	grid-template-columns: 70px 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+	grid-template-columns: 70px 1fr;
 	grid-template-rows: 50px 1fr; 
 	text-align: center;
 	color:white;
 	text-transform: UPPERCASE;
 	
 }
-
+.table-header {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+	border: solid 1px white;
+}
 .time-col{
+	height: 500px;
+	border: solid 1px white;
+}
+.table-content{
+	border: solid 1px white;
+}
+.day-content {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+.day-col {
+	border: solid 1px white;
+	
 	height: 500px;
 }
 
-.day-col{
-	
-	height: 500px;
+.temp {
+	display:block; 
+	height:40px;
+	border-bottom: 1px solid orange;
+	width:100%;
+	margin-top: -1px;
+}
+
+.temp::after {
+	content: '';
+	position: absolute;
 }
 
 /*
@@ -296,6 +333,7 @@ button.gen-schedule {
 	top: 0;
 }
 
+
 /* General Element Styling */
 
 #time-picker {
@@ -336,18 +374,6 @@ input[type=text] {
     resize: vertical;
 	display: inline-block;
 	font-size: 10px;
-}
-
-input[type=text].course-name, input[type=text].section-name, input[type=text].reserve-name {
-	width: 85%;
-	text-align: left;
-	font-size: 1em;
-	padding: 2px;
-	background: transparent;
-	color: white;
-}
-.course-name::placeholder, .section-name::placeholder, .reserve-name::placeholder {
-	color: lightgray;
 }
 
 .invisible {
