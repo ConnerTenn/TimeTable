@@ -262,7 +262,7 @@ function IncrementActiveSchedule()
 function RefreshActiveScheduleVal()
 {
 	ActiveSchedule = Math.max(Math.min(ActiveSchedule, ValidSchedules.length - 1), 0);
-	$(".schedule-select-disp").html(ActiveSchedule + 1 + "/" + Math.max(1,ValidSchedules.length));
+	$(".schedule-select-disp").html(Math.min(ActiveSchedule + 1, ValidSchedules.length) + "/" + ValidSchedules.length);
 }
 
 

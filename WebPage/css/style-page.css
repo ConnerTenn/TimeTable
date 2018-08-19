@@ -51,14 +51,26 @@ body {
     cursor: pointer;
 }
 
+.course-add:hover, .section-add:hover, .time-slot-add:hover, .reserve-add:hover {
+	background: #54595E
+}
+
+input[type=text].course-name, input[type=text].section-name, input[type=text].reserve-name {
+	width: 70%;
+	text-align: left;
+	font-size: 1em;
+	padding: 2px;
+	background: transparent;
+	color: white;
+}
+.course-name::placeholder, .section-name::placeholder, .reserve-name::placeholder {
+	color: lightgray;
+}
+
 /* Accordion Styling */
 
 .accordion-header {
 	background: transparent;
-}
-
-.course-add:hover, .section-add:hover, .time-slot-add:hover, .reserve-add:hover {
-	background: #54595E
 }
 
 .accordion-button-minus {
@@ -274,6 +286,7 @@ button.gen-schedule {
 	top: 0;
 }
 
+
 /* General Element Styling */
 
 #time-picker {
@@ -314,18 +327,6 @@ input[type=text] {
     resize: vertical;
 	display: inline-block;
 	font-size: 10px;
-}
-
-input[type=text].course-name, input[type=text].section-name, input[type=text].reserve-name {
-	width: 85%;
-	text-align: left;
-	font-size: 1em;
-	padding: 2px;
-	background: transparent;
-	color: white;
-}
-.course-name::placeholder, .section-name::placeholder, .reserve-name::placeholder {
-	color: lightgray;
 }
 
 .invisible {
