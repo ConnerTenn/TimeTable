@@ -242,7 +242,6 @@ button.gen-schedule {
 	display: grid;
 	grid-template-columns: 70px 1fr;
 	grid-template-rows: 50px 1fr; 
-	text-align: center;
 	color:white;
 	text-transform: UPPERCASE;
 	
@@ -256,30 +255,28 @@ button.gen-schedule {
 	height: 500px;
 	border: solid 1px white;
 }
-.table-content{
-	border: solid 1px white;
-}
-.day-content {
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+.table-content {
+	display: flex;
 }
 .day-col {
 	border: solid 1px white;
-	
+	/*width:50px;*/
 	height: 500px;
+	flex: 1 1 auto;
 }
 
 .temp {
-	display:block; 
 	height:40px;
-	border-bottom: 1px solid orange;
-	width:100%;
-	margin-top: -1px;
 }
 
 .temp::after {
 	content: '';
+	display:block; 
 	position: absolute;
+	margin: 0px;
+	margin-top: -1px;
+	border-bottom: 1px solid orange;
+	width:100%;
 }
 
 /*
