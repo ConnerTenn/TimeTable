@@ -3,13 +3,19 @@
 
 function InitScheduleGrid()
 {
-	for (var i = 0; i < (23-7)*2; i++)
+	/*for (var i = 0; i < (23-7)*2; i++)
 	{
 		$(".grid-container").append("<div class='grid-item time' style='grid-row: " + (i*2+2) + "/ span 2; grid-column: 1/1;'>" + ((Math.floor(i/2)+6)%12+1) + ":" + (i%2 ? "30" : "00") + ((i<=9?"am":"pm")) + "</div>");
 		for (var j = 0; j < 7; j++)
 		{
 			$(".grid-container").append("<div class='grid-item space' style='grid-row:" + (i*2+2) + "/ span 2; grid-column: " + (j+2) + "/" + (j+2) + ";'></div>");
 		}
+	}*/
+	
+	for (var i = 1; i < (23 - 7) * 2; i++)
+	{
+		$(".time-column").append("<div class='time-label-spacer'><div class='time-label'>" + ((Math.floor(i / 2) + 6) % 12 + 1) + ":" + (i % 2 ? "30" : "00") + ((i <= 9 ? "am" : "pm")) + "</div></div>");
+		$(".time-divider-container").append("<div class='time-divider'></div>");
 	}
 }
 

@@ -240,36 +240,41 @@ button.gen-schedule {
 .table {
 	
 	display: grid;
-	grid-template-columns: 70px 1fr;
+	grid-template-columns: 75px 1fr;
 	grid-template-rows: 50px 1fr; 
 	color:white;
 	text-transform: UPPERCASE;
-	
+	text-align: center;
 }
 .table-header {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 	border: solid 1px white;
 }
-.time-col{
-	height: 500px;
+.time-column {
 	border: solid 1px white;
 }
 .table-content {
 	display: flex;
 }
-.day-col {
+.day-column {
 	border: solid 1px white;
 	/*width:50px;*/
-	height: 500px;
 	flex: 1 1 auto;
 }
 
-.temp {
+.time-divider, .time-label-spacer {
 	height:40px;
+	/*width: 10px;
+	background: olivedrab;*/
 }
 
-.temp::after {
+.time-label {
+	position: relative;
+	top:-10;
+}
+
+.time-divider::after {
 	content: '';
 	display:block; 
 	position: absolute;
@@ -314,11 +319,11 @@ button.gen-schedule {
 	border-color: white;
 	border-width: 0px;
 	border-left-width: 5px;
-	/*opacity: 0.7;*/
+	/*opacity: 0.7;
 }
 .grid-item.space {
 	
-}
+}*/
 
 
 .mouse-line
