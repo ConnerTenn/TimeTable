@@ -237,7 +237,7 @@ button.gen-schedule {
 
 /* === Schedule Table Layout === */
 
-.table {
+.schedule {
 	
 	display: grid;
 	grid-template-columns: 75px 1fr;
@@ -246,7 +246,7 @@ button.gen-schedule {
 	text-transform: UPPERCASE;
 	text-align: center;
 }
-.table-header {
+.schedule-header {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 	border: solid 1px white;
@@ -254,13 +254,16 @@ button.gen-schedule {
 .time-column {
 	border: solid 1px white;
 }
-.table-content {
-	display: flex;
+.schedule-content {
+	display: grid;
+	grid-template-columns: 0px 1fr 1fr 1fr 1fr 1fr 1fr 1fr 0px;
+	position: relative; 
+	border: white 1px solid;
 }
 .day-column {
 	border: solid 1px white;
 	/*width:50px;*/
-	flex: 1 1 auto;
+	/*flex: 1 1 auto;*/
 }
 
 .time-divider, .time-label-spacer {
@@ -276,12 +279,37 @@ button.gen-schedule {
 
 .time-divider::after {
 	content: '';
-	display:block; 
+	display: block; 
 	position: absolute;
 	margin: 0px;
 	margin-top: -1px;
 	border-bottom: 1px solid orange;
 	width:100%;
+}
+
+.mouse-line {
+	content: '';
+	display: block; 
+	position: absolute;
+	margin: 0px;
+	margin-top: -1px;
+	border-bottom: 1px solid red;
+	width: 100%;
+	right: 0px;
+	top: auto;
+}
+
+.schedule-item {
+	background-color: transparent;
+	border: 1px solid #555555;
+	/*padding: 5px;*/
+	font-size: 15px;
+	text-align: center;
+	color: white;
+	width:100%;
+	border-width: 0px;
+	border-left-width: 5px;
+	position: relative;
 }
 
 /*
@@ -325,15 +353,6 @@ button.gen-schedule {
 	
 }*/
 
-
-.mouse-line
-{
-	position: relative;
-	background: red;
-	width: 100%;
-	height: 1px;
-	top: 0;
-}
 
 
 /* General Element Styling */

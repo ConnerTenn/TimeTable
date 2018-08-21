@@ -239,17 +239,17 @@ function GenerateSchedule()
 	}
 }
 
-function TimeToGridCoord(time)
+function TimeToCoord(time)
 {
-	return (time.Hour-7)*4+2+Math.floor(time.Minutes/15);
+	return (time.Hour - 7 + time.Minutes / 60) * 2 * 40;
 }
 
-var GridSlotTemplate = $(".grid-slot-template")[0];
+var GridSlotTemplate = $(".schedule-item-template")[0];
 function DrawSchedule()
 {
 	console.log("==============\n Draw Courses\n==============");
-	var gridContainer = $(".grid-container");
-	gridContainer.children(".grid-item.grid-slot").remove();
+	var scheduleContent = $(".schedule-content");
+	scheduleContent.find(".day-column").children().remove();
 	
 	if (ValidSchedules.length)
 	{		
@@ -268,12 +268,13 @@ function DrawSchedule()
 					if ((timeSlot.Days >> d) & 1)
 					{
 						var newElem = GridSlotTemplate.cloneNode(true);
-						newElem.className = "grid-item grid-slot";
-						newElem.style = "grid-row:" + TimeToGridCoord(timeSlot.Start) + "/" + TimeToGridCoord(timeSlot.End) + "; grid-column:" + (2+d) + "/" + (2+d) + ";" + 
-							"background:" + course.Colour + "80; border-color:" + course.Colour + ";";
+						newElem.className = "schedule-item";
+						//newElem.style = "grid-row:" + TimeToGridCoord(timeSlot.Start) + "/" + TimeToGridCoord(timeSlot.End) + "; grid-column:" + (2+d) + "/" + (2+d) + ";" + 
+						//	"background:" + course.Colour + "80; border-color:" + course.Colour + ";";
+						$(newElem).css("background", course.Colour + "80").css("border-color", course.Colour).css("top", TimeToCoord(timeSlot.Start)).css("height", TimeToCoord(timeSlot.End) - TimeToCoord(timeSlot.Start));
 						$(newElem).find(".course-name").html(course.Name);
 						$(newElem).find(".section-name").html(course.Section.Name);
-						gridContainer.append(newElem);
+						scheduleContent.find(".day-column[column="+(d+1)+"]").append(newElem);
 					}
 				}
 			}

@@ -273,13 +273,13 @@ function RefreshActiveScheduleVal()
 
 
 var GridHeightOffset = 0;
-$(".grid-container").mousemove(UpdateMouseLine);
-$(".grid-container").mouseenter(function () { $(".mouse-line").removeClass("invisible"); GridHeightOffset = $(".grid-container").offset().top; } );
-$(".grid-container").mouseleave(function () { $(".mouse-line").addClass("invisible"); });
+$(".schedule-content").mousemove(UpdateMouseLine);
+$(".schedule-content").mouseenter(function () { $(".mouse-line").removeClass("invisible"); GridHeightOffset = $(".schedule-content").offset().top; } );
+$(".schedule-content").mouseleave(function () { $(".mouse-line").addClass("invisible"); });
 
 function UpdateMouseLine(event)
 {
-	$(".mouse-line")[0].style.top=event.clientY - GridHeightOffset;
+	$(".mouse-line").css("margin-top", event.clientY - GridHeightOffset + (document.documentElement.scrollTop || document.body.scrollTop) + "px");
 }
 
 /* === End Schedule Handlers === */
@@ -303,7 +303,7 @@ function ShowTimePicker(event)
 		ActiveTimeBox = this;
 		//console.log("Spawn ["+val+"]");
 		
-		UpdateTimePickerPosition(this);
+		UpdateTimePickerPosition();
 	}
 }
 
