@@ -24,178 +24,6 @@ function InitScheduleGrid()
 
 
 
-/* === Dynamic Element Handlers === */
-
-function AutoCourseNames()
-{
-	var courseNames = $(".course.list-item").find(".course-name");
-	for (var i = 0; i < courseNames.length; i++)
-	{
-		$(courseNames[i]).attr("placeholder", "Course "+(i+1));
-	}
-}
-
-function AutoSectionNames()
-{
-	var courses = $(".course.list-item");
-	for (var i = 0; i < courses.length; i++)
-	{
-		var sectionNames = $(courses[i]).find(".section-name");
-		for (var j = 0; j < sectionNames.length; j++)
-		{
-			$(sectionNames[j]).attr("placeholder", "Section " + (j + 1));
-		}
-	}
-}
-
-$(".course-add").click(AddCourse);
-
-var CourseTemplate = $(".course-template")[0];
-function AddCourse()
-{
-	//generate new element
-	var newElem = CourseTemplate.cloneNode(true);
-	newElem.className = "course list-item";
-	
-	var colour = GetColour();
-	//$(newElem).find(".colour")[0].style.background=colour;
-	//$(newElem).find(".colour").attr("colour", colour);
-	$(newElem).find(".colour").css("background", colour);
-	$(newElem).find(".colour").attr("colour", colour);
-	//$(newElem).find(".accordion-header")[0].style.background = colour;
-	//$(newElem)[0].style.background = colour;
-	
-	//bind buttons
-	$(newElem).find(".section-add").click(AddSection);
-	$(newElem).find(".accordion-button").click(AccordionClick);
-	$(newElem).find(".course-remove").click(RemoveCourse);
-	
-	//add initial children
-	AddSectionLoc($(newElem).find(".section-list-container"));
-	
-	//append to list
-	$(".course-list-container").append(newElem);
-	
-	AutoCourseNames();
-	AutoSectionNames();
-}
-
-function RemoveCourse()
-{
-	var list = $(this).closest(".course-list-container");
-	$(this).closest(".course.list-item").remove();
-	if (list.children().length<=0)
-	{
-		AddCourse();
-	}
-	
-	AutoCourseNames();
-}
-
-var SectionTemplate = $(".section-template")[0];
-function AddSection()
-{
-	AddSectionLoc($(this).siblings(".section-list-container"));
-
-	AutoSectionNames();
-}
-function AddSectionLoc(location)
-{
-	//generate new element
-	var newElem = SectionTemplate.cloneNode(true);
-	newElem.className = "section list-item";
-	
-	//bind buttons
-	$(newElem).find(".time-slot-add").click(AddTimeSlot);
-	$(newElem).find(".accordion-button").click(AccordionClick);
-	$(newElem).find(".section-remove").click(RemoveSection);
-	
-	//add initial children
-	AddTimeSlotLoc($(newElem).find(".time-slot-list-container"));
-	
-	//append to list
-	location.append(newElem);
-	
-}
-
-function RemoveSection()
-{
-	var list = $(this).closest(".section-list-container");
-	$(this).closest(".section.list-item").remove();
-	if (list.children().length <= 0)
-	{
-		AddSectionLoc(list);
-	}
-	
-	AutoSectionNames();
-}
-
-var TimeSlotTemplate = $(".time-slot-template")[0];
-function AddTimeSlot()
-{
-	AddTimeSlotLoc($(this).siblings(".time-slot-list-container"));
-}
-function AddTimeSlotLoc(location)
-{
-	//generate new element
-	var newElem = TimeSlotTemplate.cloneNode(true);
-	newElem.className = "time-slot list-item";
-	
-	//bind buttons
-	$(newElem).find(".time-slot-remove").click(RemoveTimeSlot);
-	$(newElem).find("button.day-button").click(DayButtonClick);
-	$(newElem).find(".time-start,.time-end").focusin(1, ShowTimePicker);
-	$(newElem).find(".time-start,.time-end").focusout(HideTimePicker);
-	
-	//append to list
-	location.append(newElem);
-}
-
-function RemoveTimeSlot()
-{
-	var list = $(this).closest(".time-slot-list-container");
-	$(this).closest(".time-slot.list-item").remove();
-	if (list.children().length <= 0)
-	{
-		AddTimeSlotLoc(list);
-	}
-}
-
-$(".reserve-add").click(AddReserve);
-
-var ReserveTemplate = $(".reserve-template")[0];
-function AddReserve()
-{
-	//generate new element
-	var newElem = ReserveTemplate.cloneNode(true);
-	newElem.className = "reserve list-item";
-	
-	$(newElem).find(".colour")[0].style.background = "#aaaaaa";
-
-	//bind buttons
-	$(newElem).find(".time-slot-add").click(AddTimeSlot);
-	$(newElem).find(".accordion-button").click(AccordionClick);
-	$(newElem).find(".reserve-remove").click(RemoveReserve);
-
-	//add initial children
-	AddTimeSlotLoc($(newElem).find(".time-slot-list-container"));
-
-	//append to list
-	$(".reserve-list-container").append(newElem);
-}
-
-function RemoveReserve()
-{
-	var list = $(this).closest(".reserve-list-container");
-	$(this).closest(".reserve.list-item").remove();
-
-	AutoCourseNames();
-}
-
-/* === End Dynamic Element Handlers === */
-
-
-
 /* === Accordian Handling === */
 
 $(".accordion-button").click(AccordionClick);
@@ -222,12 +50,135 @@ function AccordionClick()
 
 /* === Course Handlers === */
 
+function AutoCourseNames()
+{
+	var courseNames = $(".course.list-item").find(".course-name");
+	for (var i = 0; i < courseNames.length; i++)
+	{
+		$(courseNames[i]).attr("placeholder", "Course " + (i + 1));
+	}
+}
+
+$(".course-add").click(AddCourse);
+
+var CourseTemplate = $(".course-template")[0];
+function AddCourse()
+{
+	//generate new element
+	var newElem = CourseTemplate.cloneNode(true);
+	newElem.className = "course list-item";
+
+	var colour = GetColour();
+	//$(newElem).find(".colour")[0].style.background=colour;
+	//$(newElem).find(".colour").attr("colour", colour);
+	$(newElem).find(".colour").css("background", colour);
+	$(newElem).find(".colour").attr("colour", colour);
+	//$(newElem).find(".accordion-header")[0].style.background = colour;
+	//$(newElem)[0].style.background = colour;
+
+	//bind buttons
+	$(newElem).find(".section-add").click(AddSection);
+	$(newElem).find(".accordion-button").click(AccordionClick);
+	$(newElem).find(".course-remove").click(RemoveCourse);
+	$(newElem).find(".course-clone").click(CloneCourse);
+
+	//add initial children
+	AddSectionLoc($(newElem).find(".section-list-container"));
+
+	//append to list
+	$(".course-list-container").append(newElem);
+
+	AutoCourseNames();
+	AutoSectionNames();
+}
+
+function RemoveCourse()
+{
+	var list = $(this).closest(".course-list-container");
+	$(this).closest(".course.list-item").remove();
+	if (list.children().length <= 0)
+	{
+		AddCourse();
+	}
+
+	AutoCourseNames();
+}
+
+function CloneCourse()
+{
+	var newElem = $(this).closest(".course.list-item").clone(true);
+	var colour = GetColour();
+	$(newElem).find(".colour").css("background", colour);
+	$(newElem).find(".colour").attr("colour", colour);
+	$(this).closest(".course.list-item").after(newElem);
+	AutoCourseNames();
+	AutoSectionNames();
+}
+
 /* === End Course Handlers === */
 
 
 
-
 /* === Section Handlers === */
+
+function AutoSectionNames()
+{
+	var courses = $(".course.list-item");
+	for (var i = 0; i < courses.length; i++)
+	{
+		var sectionNames = $(courses[i]).find(".section-name");
+		for (var j = 0; j < sectionNames.length; j++)
+		{
+			$(sectionNames[j]).attr("placeholder", "Section " + (j + 1));
+		}
+	}
+}
+
+var SectionTemplate = $(".section-template")[0];
+function AddSection()
+{
+	AddSectionLoc($(this).siblings(".section-list-container"));
+
+	AutoSectionNames();
+}
+function AddSectionLoc(location)
+{
+	//generate new element
+	var newElem = SectionTemplate.cloneNode(true);
+	newElem.className = "section list-item";
+
+	//bind buttons
+	$(newElem).find(".time-slot-add").click(AddTimeSlot);
+	$(newElem).find(".accordion-button").click(AccordionClick);
+	$(newElem).find(".section-remove").click(RemoveSection);
+	$(newElem).find(".section-clone").click(CloneSection);
+
+	//add initial children
+	AddTimeSlotLoc($(newElem).find(".time-slot-list-container"));
+
+	//append to list
+	location.append(newElem);
+
+}
+
+function RemoveSection()
+{
+	var list = $(this).closest(".section-list-container");
+	$(this).closest(".section.list-item").remove();
+	if (list.children().length <= 0)
+	{
+		AddSectionLoc(list);
+	}
+
+	AutoSectionNames();
+}
+
+
+function CloneSection()
+{
+	$(this).closest(".section.list-item").after($(this).closest(".section.list-item").clone(true));
+	AutoSectionNames();
+}
 
 /* === End Section Handlers === */
 
@@ -235,12 +186,87 @@ function AccordionClick()
 
 /* === Time Slot Handlers === */
 
+var TimeSlotTemplate = $(".time-slot-template")[0];
+function AddTimeSlot()
+{
+	AddTimeSlotLoc($(this).siblings(".time-slot-list-container"));
+}
+function AddTimeSlotLoc(location)
+{
+	//generate new element
+	var newElem = TimeSlotTemplate.cloneNode(true);
+	newElem.className = "time-slot list-item";
+
+	//bind buttons
+	$(newElem).find(".time-slot-remove").click(RemoveTimeSlot);
+	$(newElem).find("button.day-button").click(DayButtonClick);
+	$(newElem).find(".time-start,.time-end").focusin(1, ShowTimePicker);
+	$(newElem).find(".time-start,.time-end").focusout(HideTimePicker);
+	$(newElem).find(".time-slot-clone").click(CloneTimeSlot);
+
+	//append to list
+	location.append(newElem);
+}
+
+function RemoveTimeSlot()
+{
+	var list = $(this).closest(".time-slot-list-container");
+	$(this).closest(".time-slot.list-item").remove();
+	if (list.children().length <= 0)
+	{
+		AddTimeSlotLoc(list);
+	}
+}
+
+function CloneTimeSlot()
+{
+	$(this).closest(".time-slot.list-item").after($(this).closest(".time-slot.list-item").clone(true));
+}
+
 function DayButtonClick()
 {
 	this.classList.toggle("active");
 }
 
 /* === End Time Slot Handlers === */
+
+
+
+/* === Reserve Handlers === */
+
+$(".reserve-add").click(AddReserve);
+
+var ReserveTemplate = $(".reserve-template")[0];
+function AddReserve()
+{
+	//generate new element
+	var newElem = ReserveTemplate.cloneNode(true);
+	newElem.className = "reserve list-item";
+
+	$(newElem).find(".colour")[0].style.background = "#aaaaaa";
+
+	//bind buttons
+	$(newElem).find(".time-slot-add").click(AddTimeSlot);
+	$(newElem).find(".accordion-button").click(AccordionClick);
+	$(newElem).find(".reserve-remove").click(RemoveReserve);
+
+	//add initial children
+	AddTimeSlotLoc($(newElem).find(".time-slot-list-container"));
+
+	//append to list
+	$(".reserve-list-container").append(newElem);
+}
+
+function RemoveReserve()
+{
+	var list = $(this).closest(".reserve-list-container");
+	$(this).closest(".reserve.list-item").remove();
+
+	AutoCourseNames();
+}
+
+/* === End Reserve Handlers === */
+
 
 
 
@@ -283,6 +309,7 @@ function UpdateMouseLine(event)
 }
 
 /* === End Schedule Handlers === */
+
 
 
 
@@ -339,6 +366,7 @@ function InitTimePicker()
 
 
 /* === End General Handlers === */
+
 
 
 

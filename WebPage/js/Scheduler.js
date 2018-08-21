@@ -241,7 +241,7 @@ function GenerateSchedule()
 
 function TimeToCoord(time)
 {
-	return (time.Hour - 7 + time.Minutes / 60) * 2 * 40;
+	return (time.Hour - 7 + time.Minutes / 60) * 2 * 30;
 }
 
 var GridSlotTemplate = $(".schedule-item-template")[0];
