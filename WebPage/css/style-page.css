@@ -238,7 +238,7 @@ button.gen-schedule {
 .schedule {
 	
 	display: grid;
-	grid-template-columns: 75px 1fr;
+	grid-template-columns: auto 1fr;
 	grid-template-rows: 40px 1fr; 
 	color:white;
 	text-transform: UPPERCASE;
@@ -249,7 +249,7 @@ button.gen-schedule {
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 	background: #273746;
 	/*border: solid 1px white;*/
-	min-width: 300px;
+	min-width: 280px;
 }
 .time-column {
 	background: #273746;
@@ -280,6 +280,7 @@ button.gen-schedule {
 .time-label {
 	position: relative;
 	top:-10;
+	padding: 0px 3px;
 }
 
 .time-divider::after {
@@ -319,6 +320,7 @@ button.gen-schedule {
 	border-left-width: 5px;
 	position: absolute;
 	overflow: hidden;
+	width: 100%;
 	box-sizing: border-box;
 }
 

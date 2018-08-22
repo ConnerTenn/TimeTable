@@ -343,29 +343,54 @@ class HTMLSchedule
 	
 	InitScheduleGrid()
 	{
-		for (var i = 1; i < (23 - 7) * 2; i++)
-		{
-			this.$(".time-column").append("<div class='time-label-spacer'><div class='time-label'>" + ((Math.floor(i / 2) + 6) % 12 + 1) + ":" + (i % 2 ? "30" : "00") + ((i <= 9 ? "am" : "pm")) + "</div></div>");
-			this.$(".time-divider-container").append("<div class='time-divider'></div>");
-		}
+		this.UpdateScheduleTimes(this);
 		
-		this.UpdateScheduleNames();
+		this.UpdateScheduleNames(this);
 		for (var i = 0; i < 7; i++)
 		{
 			this.$(".time-divider-container").after("<div class='day-column' column='" + (i+1) + "'><div class='day-container'></div></div>");
 		}
 	}
 	
-	UpdateScheduleNames(event)
+	UpdateScheduleTimes(target)
 	{
-		var target = this;
-		if (event) {target = event.data;}
+		target.$(".time-column").children(":not(:first)").remove();
+		target.$(".time-divider-container").children().remove();
+		
+		var shrink = target.$(".schedule-header").width() < 450;
+		for (var i = 1; i < (23 - 7) * 2; i++)
+		{
+			var timestr;
+			if (shrink)
+			{
+				timestr = (i % 2 ? ":30" : ((Math.floor(i / 2) + 6) % 12 + 1) + ((i <= 9 ? "am" : "pm")));
+			}
+			else
+			{
+				timestr = ((Math.floor(i / 2) + 6) % 12 + 1) + ":" + (i % 2 ? "30" : "00") + ((i <= 9 ? "am" : "pm"));
+			}
+			
+			target.$(".time-column").append("<div class='time-label-spacer'><div class='time-label'>" + timestr + "</div></div>");
+			target.$(".time-divider-container").append("<div class='time-divider'></div>");
+		}
+
+	}
+	
+	UpdateScheduleNames(target)
+	{
 		target.$(".schedule-header").children().remove();
 		var set = (target.$(".schedule-header").width() < 660 ? 1 : 0);
 		for (var i = 0; i < 7; i++)
 		{
 			target.$(".schedule-header").append("<div>" + DayNames[set][i] + "</div>");
 		}
+	}
+	
+	Resize(event)
+	{
+		var target = event.data
+		target.UpdateScheduleTimes(target);
+		target.UpdateScheduleNames(target);
 	}
 	
 	BindEvents()
@@ -379,7 +404,7 @@ class HTMLSchedule
 		this.$(".schedule-content, .time-column").mouseenter(this, function (event) { var target = event.data; target.$(".mouse-line").removeClass("invisible"); target.GridHeightOffset = target.$(".schedule-content").offset().top; });
 		this.$(".schedule-content, .time-column").mouseleave(this, function (event) { event.data.$(".mouse-line").addClass("invisible"); });
 		
-		$(window).resize(this, this.UpdateScheduleNames);
+		$(window).resize(this, this.Resize);
 	}
 }
 
