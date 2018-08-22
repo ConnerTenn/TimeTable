@@ -249,7 +249,7 @@ button.gen-schedule {
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 	background: #273746;
 	/*border: solid 1px white;*/
-	min-width: 650px;
+	min-width: 300px;
 }
 .time-column {
 	background: #273746;

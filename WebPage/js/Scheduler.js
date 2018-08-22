@@ -18,7 +18,7 @@ function ReadTimeSlot(timeslots, section)
 		timeslot.Days = 0;
 		for (var i = 0; i < 7; i++)
 		{
-			timeslot.Days += ($timeslot.find(".day-button." + DayNames[i])[0].classList.contains("active") ? 1 : 0) << i;
+			timeslot.Days += ($timeslot.find(".day-button." + DayNames[1][i])[0].classList.contains("active") ? 1 : 0) << i;
 		}
 		
 		if (!timeslot.Valid()) { $timeslot.find(".time-slot-enable").prop("checked", false); }
@@ -238,7 +238,7 @@ function DoGenSchedule()
 	GenerateSchedule();
 
 	ActiveSchedule = 0;
-	RefreshActiveScheduleVal();
+	RefreshActiveScheduleVal(Schedule);
 	
 	DrawSchedule();
 	

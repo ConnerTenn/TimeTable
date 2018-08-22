@@ -1,5 +1,6 @@
 
-var Colours = [ ["#b58900",0], ["#cb4b16",0], ["#dc322f",0], ["#d33682",0], ["#6c71c4",0], ["#268bd2",0], ["#2aa198",0], ["#859900",0] ];
+var Colours = [["#b58900", 0], ["#cb4b16", 0], ["#dc322f", 0], ["#d33682", 0], ["#6c71c4", 0], ["#268bd2", 0], ["#2aa198", 0], ["#859900", 0]];
+var DayNames = [["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"], ["sun", "mon", "tue", "wed", "thu", "fri", "sat"]];
 
 function GetColour()
 {
@@ -92,7 +93,6 @@ class Time
 	}
 }
 
-var DayNames = ["sun", "mon", "tue", "wed", "thu", "fri", "sat", "sun"];
 class TimeSlot
 {
 	constructor()
@@ -135,7 +135,7 @@ class TimeSlot
 		outStr += "\"" + this.Name + "\" \"" + this.Week + "\" ";
 		for (var i = 0; i < 7; i++)
 		{
-			if (this.Days & (1 << i)) { outStr += DayNames[i] + " "; }
+			if (this.Days & (1 << i)) { outStr += DayNames[1][i] + " "; }
 		}		
 		outStr += this.Start.Hour + ":" + this.Start.Minutes + "-" + this.End.Hour + ":" + this.End.Minutes;
 		
@@ -323,19 +323,63 @@ class BacktrackPlace
 	}
 }
 
-
-class Schedule
+class HTMLSchedule
 {
-	constructor()
+	constructor($root)
 	{
+		this.$Root = $root;
 		this.ActiveSchedule = 0;
-		this.SelectedWeek = "";
+		this.SelectedWeek = this.$(".week-display-selector.active").html();
+		this.GridHeightOffset = 0;
 		
+		this.InitScheduleGrid();
+		this.BindEvents();
+	}
+	
+	$(q)
+	{
+		return this.$Root.find(q);
 	}
 	
 	InitScheduleGrid()
 	{
+		for (var i = 1; i < (23 - 7) * 2; i++)
+		{
+			this.$(".time-column").append("<div class='time-label-spacer'><div class='time-label'>" + ((Math.floor(i / 2) + 6) % 12 + 1) + ":" + (i % 2 ? "30" : "00") + ((i <= 9 ? "am" : "pm")) + "</div></div>");
+			this.$(".time-divider-container").append("<div class='time-divider'></div>");
+		}
 		
+		this.UpdateScheduleNames();
+		for (var i = 0; i < 7; i++)
+		{
+			this.$(".time-divider-container").after("<div class='day-column' column='" + (i+1) + "'><div class='day-container'></div></div>");
+		}
+	}
+	
+	UpdateScheduleNames(event)
+	{
+		var target = this;
+		if (event) {target = event.data;}
+		target.$(".schedule-header").children().remove();
+		var set = (target.$(".schedule-header").width() < 660 ? 1 : 0);
+		for (var i = 0; i < 7; i++)
+		{
+			target.$(".schedule-header").append("<div>" + DayNames[set][i] + "</div>");
+		}
+	}
+	
+	BindEvents()
+	{
+		this.$(".schedule-select-dec").click(this, DecrementActiveSchedule);
+		this.$(".schedule-select-inc").click(this, IncrementActiveSchedule);
+		
+		this.$(".week-display-selector").click(this, SelectWeek);
+		
+		this.$(".schedule-content, .time-column").mousemove(this, UpdateMouseLine);
+		this.$(".schedule-content, .time-column").mouseenter(this, function (event) { var target = event.data; target.$(".mouse-line").removeClass("invisible"); target.GridHeightOffset = target.$(".schedule-content").offset().top; });
+		this.$(".schedule-content, .time-column").mouseleave(this, function (event) { event.data.$(".mouse-line").addClass("invisible"); });
+		
+		$(window).resize(this, this.UpdateScheduleNames);
 	}
 }
 
