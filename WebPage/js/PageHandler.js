@@ -52,41 +52,41 @@ function AccordionClick()
 
 function AutoCourseNames()
 {
-	var courseNames = $(".course.list-item").find(".course-name");
-	for (var i = 0; i < courseNames.length; i++)
+	var $courseNames = $(".course.list-item").find(".course-name");
+	for (var i = 0; i < $courseNames.length; i++)
 	{
-		$(courseNames[i]).attr("placeholder", "Course " + (i + 1));
+		$($courseNames[i]).attr("placeholder", "Course " + (i + 1));
 	}
 }
 
 $(".course-add").click(AddCourse);
 
-var CourseTemplate = $(".course-template")[0];
+var $CourseTemplate = $(".course-template");
 function AddCourse()
 {
 	//generate new element
-	var newElem = CourseTemplate.cloneNode(true);
-	newElem.className = "course list-item";
+	var $newElem = $CourseTemplate.clone(true);
+	$newElem[0].className = "course list-item";
 
 	var colour = GetColour();
 	//$(newElem).find(".colour")[0].style.background=colour;
 	//$(newElem).find(".colour").attr("colour", colour);
-	$(newElem).find(".colour").css("background", colour);
-	$(newElem).find(".colour").attr("colour", colour);
+	$newElem.find(".colour").css("background", colour);
+	$newElem.find(".colour").attr("colour", colour);
 	//$(newElem).find(".accordion-header")[0].style.background = colour;
 	//$(newElem)[0].style.background = colour;
 
 	//bind buttons
-	$(newElem).find(".section-add").click(AddSection);
-	$(newElem).find(".accordion-button").click(AccordionClick);
-	$(newElem).find(".course-remove").click(RemoveCourse);
-	$(newElem).find(".course-clone").click(CloneCourse);
+	$newElem.find(".section-add").click(AddSection);
+	$newElem.find(".accordion-button").click(AccordionClick);
+	$newElem.find(".course-remove").click(RemoveCourse);
+	$newElem.find(".course-clone").click(CloneCourse);
 
 	//add initial children
-	AddSectionLoc($(newElem).find(".section-list-container"));
+	AddSectionLoc($newElem.find(".section-list-container"));
 
 	//append to list
-	$(".course-list-container").append(newElem);
+	$(".course-list-container").append($newElem);
 
 	AutoCourseNames();
 	AutoSectionNames();
@@ -94,9 +94,9 @@ function AddCourse()
 
 function RemoveCourse()
 {
-	var list = $(this).closest(".course-list-container");
+	var $list = $(this).closest(".course-list-container");
 	$(this).closest(".course.list-item").remove();
-	if (list.children().length <= 0)
+	if ($list.children().length <= 0)
 	{
 		AddCourse();
 	}
@@ -106,11 +106,11 @@ function RemoveCourse()
 
 function CloneCourse()
 {
-	var newElem = $(this).closest(".course.list-item").clone(true);
+	var $newElem = $(this).closest(".course.list-item").clone(true);
 	var colour = GetColour();
-	$(newElem).find(".colour").css("background", colour);
-	$(newElem).find(".colour").attr("colour", colour);
-	$(this).closest(".course.list-item").after(newElem);
+	$newElem.find(".colour").css("background", colour);
+	$newElem.find(".colour").attr("colour", colour);
+	$(this).closest(".course.list-item").after($newElem);
 	AutoCourseNames();
 	AutoSectionNames();
 }
@@ -123,51 +123,51 @@ function CloneCourse()
 
 function AutoSectionNames()
 {
-	var courses = $(".course.list-item");
-	for (var i = 0; i < courses.length; i++)
+	var $courses = $(".course.list-item");
+	for (var i = 0; i < $courses.length; i++)
 	{
-		var sectionNames = $(courses[i]).find(".section-name");
-		for (var j = 0; j < sectionNames.length; j++)
+		var $sectionNames = $($courses[i]).find(".section-name");
+		for (var j = 0; j < $sectionNames.length; j++)
 		{
-			$(sectionNames[j]).attr("placeholder", "Section " + (j + 1));
+			$($sectionNames[j]).attr("placeholder", "Section " + (j + 1));
 		}
 	}
 }
 
-var SectionTemplate = $(".section-template")[0];
+var $SectionTemplate = $(".section-template");
 function AddSection()
 {
 	AddSectionLoc($(this).siblings(".section-list-container"));
 
 	AutoSectionNames();
 }
-function AddSectionLoc(location)
+function AddSectionLoc($location)
 {
 	//generate new element
-	var newElem = SectionTemplate.cloneNode(true);
-	newElem.className = "section list-item";
+	var $newElem = $SectionTemplate.clone(true);
+	$newElem[0].className = "section list-item";
 
 	//bind buttons
-	$(newElem).find(".time-slot-add").click(AddTimeSlot);
-	$(newElem).find(".accordion-button").click(AccordionClick);
-	$(newElem).find(".section-remove").click(RemoveSection);
-	$(newElem).find(".section-clone").click(CloneSection);
+	$newElem.find(".time-slot-add").click(AddTimeSlot);
+	$newElem.find(".accordion-button").click(AccordionClick);
+	$newElem.find(".section-remove").click(RemoveSection);
+	$newElem.find(".section-clone").click(CloneSection);
 
 	//add initial children
-	AddTimeSlotLoc($(newElem).find(".time-slot-list-container"));
+	AddTimeSlotLoc($newElem.find(".time-slot-list-container"));
 
 	//append to list
-	location.append(newElem);
+	$location.append($newElem);
 
 }
 
 function RemoveSection()
 {
-	var list = $(this).closest(".section-list-container");
+	var $list = $(this).closest(".section-list-container");
 	$(this).closest(".section.list-item").remove();
-	if (list.children().length <= 0)
+	if ($list.children().length <= 0)
 	{
-		AddSectionLoc(list);
+		AddSectionLoc($list);
 	}
 
 	AutoSectionNames();
@@ -186,7 +186,7 @@ function CloneSection()
 
 /* === Time Slot Handlers === */
 
-var TimeSlotTemplate = $(".time-slot-template")[0];
+var $TimeSlotTemplate = $(".time-slot-template");
 function AddTimeSlot()
 {
 	AddTimeSlotLoc($(this).siblings(".time-slot-list-container"));
@@ -194,27 +194,27 @@ function AddTimeSlot()
 function AddTimeSlotLoc(location)
 {
 	//generate new element
-	var newElem = TimeSlotTemplate.cloneNode(true);
-	newElem.className = "time-slot list-item";
+	var $newElem = $TimeSlotTemplate.clone(true);
+	$newElem[0].className = "time-slot list-item";
 
 	//bind buttons
-	$(newElem).find(".time-slot-remove").click(RemoveTimeSlot);
-	$(newElem).find("button.day-button").click(DayButtonClick);
-	$(newElem).find(".time-start,.time-end").focusin(1, ShowTimePicker).click(1, ShowTimePicker);
-	$(newElem).find(".time-start,.time-end").focusout(HideTimePicker);
-	$(newElem).find(".time-slot-clone").click(CloneTimeSlot);
+	$newElem.find(".time-slot-remove").click(RemoveTimeSlot);
+	$newElem.find("button.day-button").click(DayButtonClick);
+	$newElem.find(".time-start,.time-end").focusin(1, ShowTimePicker).click(1, ShowTimePicker);
+	$newElem.find(".time-start,.time-end").focusout(HideTimePicker);
+	$newElem.find(".time-slot-clone").click(CloneTimeSlot);
 
 	//append to list
-	location.append(newElem);
+	location.append($newElem);
 }
 
 function RemoveTimeSlot()
 {
-	var list = $(this).closest(".time-slot-list-container");
+	var $list = $(this).closest(".time-slot-list-container");
 	$(this).closest(".time-slot.list-item").remove();
-	if (list.children().length <= 0)
+	if ($list.children().length <= 0)
 	{
-		AddTimeSlotLoc(list);
+		AddTimeSlotLoc($list);
 	}
 }
 
@@ -236,30 +236,30 @@ function DayButtonClick()
 
 $(".reserve-add").click(AddReserve);
 
-var ReserveTemplate = $(".reserve-template")[0];
+var $ReserveTemplate = $(".reserve-template");
 function AddReserve()
 {
 	//generate new element
-	var newElem = ReserveTemplate.cloneNode(true);
-	newElem.className = "reserve list-item";
+	var $newElem = ReserveTemplate.clone(true);
+	$newElem[0].className = "reserve list-item";
 
-	$(newElem).find(".colour")[0].style.background = "#aaaaaa";
+	$newElem.find(".colour").css("background", "#aaaaaa");
 
 	//bind buttons
-	$(newElem).find(".time-slot-add").click(AddTimeSlot);
-	$(newElem).find(".accordion-button").click(AccordionClick);
-	$(newElem).find(".reserve-remove").click(RemoveReserve);
+	$newElem.find(".time-slot-add").click(AddTimeSlot);
+	$newElem.find(".accordion-button").click(AccordionClick);
+	$newElem.find(".reserve-remove").click(RemoveReserve);
 
 	//add initial children
-	AddTimeSlotLoc($(newElem).find(".time-slot-list-container"));
+	AddTimeSlotLoc($newElem.find(".time-slot-list-container"));
 
 	//append to list
-	$(".reserve-list-container").append(newElem);
+	$(".reserve-list-container").append($newElem);
 }
 
 function RemoveReserve()
 {
-	var list = $(this).closest(".reserve-list-container");
+	//var $list = $(this).closest(".reserve-list-container");
 	$(this).closest(".reserve.list-item").remove();
 
 	AutoCourseNames();
@@ -327,18 +327,18 @@ function SelectWeek()
 
 /* time picker */
 
-$(".list-scroll").scroll(function () { $(ActiveTimeBox).focusout(); } );
+$(".list-scroll").scroll(function () { $ActiveTimeBox.focusout(); } );
 
 $("#time-picker").focusin(ShowTimePicker);
 $("#time-picker").focusout(HideTimePicker);
-var ActiveTimeBox = 0;
+var $ActiveTimeBox = 0;
 function ShowTimePicker(event)
 {
 	$("#time-picker").removeClass("invisible");
 	$("#time-picker").scrollTop(0);
 	if (event.data)
 	{
-		ActiveTimeBox = this;
+		$ActiveTimeBox = $(this);
 		//console.log("Spawn ["+val+"]");
 		
 		UpdateTimePickerPosition();
@@ -354,15 +354,15 @@ function HideTimePicker(event)
 
 function UpdateTimePickerPosition()
 {
-	if (ActiveTimeBox) 
+	if ($ActiveTimeBox) 
 	{
-		$("#time-picker").offset({ top: $(ActiveTimeBox).position().top + ActiveTimeBox.clientHeight + 1, left: ActiveTimeBox.offsetLeft });
+		$("#time-picker").offset({ top: $ActiveTimeBox.position().top + ActiveTimeBox[0].clientHeight + 1, left: $ActiveTimeBox.position().bottom });
 	}
 }
 
 function PickTime()
 {
-	$(ActiveTimeBox).val(this.innerHTML);
+	$ActiveTimeBox.val(this.innerHTML);
 	$(this).focusout();
 }
 

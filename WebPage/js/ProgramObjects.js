@@ -253,3 +253,89 @@ class Course
 	}
 }
 
+class BacktrackLine
+{
+	constructor()
+	{
+		this.Backtrack = function () { };
+		this.Advance = function () { };
+		this.Placer = {};
+	}
+
+	Do()
+	{
+		//console.log("BacktrackLine::Do()");
+		while (true)
+		{
+			var res = this.Placer.Place();
+			if (res)
+			{
+				if (!this.Advance())
+				{
+					//Found solution
+					//console.log("BacktrackLine::Do() == Found Solution ==");
+					return true;
+				}
+			}
+			else
+			{
+				if (!this.Backtrack())
+				{
+					//No solution
+					//console.log("BacktrackLine::Do() == No Solution ==");
+					return false;
+				}
+			}
+		}
+
+	}
+}
+
+class BacktrackPlace
+{
+	constructor()
+	{
+		this.Advance = function () { };
+		this.Reset = function () { };
+	}
+
+	Place()
+	{
+		//console.log("BacktrackPlace::Place()");
+		while (true)
+		{
+			var res = this.Advance();
+			if (res === 1)
+			{
+				//Success
+				//console.log("BacktrackPlace::Place() Success");
+				return true;
+			}
+			else if (res === 3)
+			{
+				//Out of bounds.
+				//console.log("BacktrackPlace::Place() Out of bounds");
+				this.Reset();
+				return false;
+			}
+			//else loop and try advance again
+		}
+	}
+}
+
+
+class Schedule
+{
+	constructor()
+	{
+		this.ActiveSchedule = 0;
+		this.SelectedWeek = "";
+		
+	}
+	
+	InitScheduleGrid()
+	{
+		
+	}
+}
+
