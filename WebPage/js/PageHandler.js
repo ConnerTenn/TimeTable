@@ -299,9 +299,9 @@ function RefreshActiveScheduleVal()
 
 
 var GridHeightOffset = 0;
-$(".schedule-content").mousemove(UpdateMouseLine);
-$(".schedule-content").mouseenter(function () { $(".mouse-line").removeClass("invisible"); GridHeightOffset = $(".schedule-content").offset().top; } );
-$(".schedule-content").mouseleave(function () { $(".mouse-line").addClass("invisible"); });
+$(".schedule-content, .time-column").mousemove(UpdateMouseLine);
+$(".schedule-content, .time-column").mouseenter(function () { $(".mouse-line").removeClass("invisible"); GridHeightOffset = $(".schedule-content").offset().top; } );
+$(".schedule-content, .time-column").mouseleave(function () { $(".mouse-line").addClass("invisible"); });
 
 function UpdateMouseLine(event)
 {
@@ -325,6 +325,7 @@ var ActiveTimeBox = 0;
 function ShowTimePicker(event)
 {
 	$("#time-picker").removeClass("invisible");
+	$("#time-picker").scrollTop(0);
 	if (event.data)
 	{
 		ActiveTimeBox = this;

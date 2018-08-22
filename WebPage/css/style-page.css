@@ -17,8 +17,6 @@ body {
 }
 
 #right-content {
-	overflow-y: scroll; 
-	height:900px;
 }
 
 
@@ -241,7 +239,7 @@ button.gen-schedule {
 	
 	display: grid;
 	grid-template-columns: 75px 1fr;
-	grid-template-rows: 50px 1fr; 
+	grid-template-rows: 40px 1fr; 
 	color:white;
 	text-transform: UPPERCASE;
 	text-align: center;
@@ -249,19 +247,23 @@ button.gen-schedule {
 .schedule-header {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-	border: solid 1px white;
+	background: #273746;
+	/*border: solid 1px white;*/
+	min-width: 650px;
 }
 .time-column {
-	border: solid 1px white;
+	background: #273746;
+	/*border: solid 1px white;*/
 }
 .schedule-content {
 	display: grid;
 	grid-template-columns: 0px 1fr 1fr 1fr 1fr 1fr 1fr 1fr 0px;
 	position: relative; 
-	border: white 1px solid;
+	/*border: white 1px solid;*/
+	border: solid 2px #555555;
 }
 .day-column {
-	border: solid 1px white;
+	border: solid 2px #555555;
 	/*width:50px;*/
 	/*flex: 1 1 auto;*/
 }
@@ -283,31 +285,34 @@ button.gen-schedule {
 	position: absolute;
 	margin: 0px;
 	margin-top: -1px;
-	border-bottom: 1px solid orange;
+	border-bottom: 1px solid #555555;
 	width:100%;
 }
 
 .mouse-line {
-	content: '';
-	display: block; 
 	position: absolute;
 	margin: 0px;
 	margin-top: -1px;
-	border-bottom: 1px solid red;
+	border-bottom: 3px solid red;
 	width: 100%;
 	right: 0px;
-	top: auto;
+}
+.mouse-line::after {
+	content: '';
+	position: absolute;
+	border-bottom: 3px solid orange;
+	left: -75px;
+	width: 75px;
 }
 
 .schedule-item {
 	background-color: transparent;
-	border: 1px solid #555555;
-	/*padding: 5px;*/
+	border: 0px solid;
+	padding: 5px;
 	margin-top: -1px;
 	font-size: 15px;
 	text-align: center;
 	color: white;
-	border-width: 0px;
 	border-left-width: 5px;
 	position: relative;
 	overflow: hidden;
@@ -365,12 +370,12 @@ button.gen-schedule {
 	color: white;
 	background:blue;
 	width:100px;
-	height:200px;
+	height:300px;
 	overflow-y:scroll;
 }
 
 .picker-elem {
-	margin: 5px 2px;
+	margin: 0px 2px;
 	padding: 5px 2px;
 }
 .picker-elem:hover {
@@ -383,6 +388,11 @@ button.gen-schedule {
 	display: block;
 }
 
+.list-scroll {
+	overflow-y: scroll;
+	max-height: 85vh;
+	margin: 10px 0px;
+}
 
 /* === Global Element Properties === */
 
