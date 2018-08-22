@@ -170,9 +170,9 @@ class Section
 	{
 		for (var i = 0; i < this.TimeSlotList.length; i++)
 		{
-			if (!this.TimeSlotList[i].Valid()) { return false; }
+			if (this.TimeSlotList[i].Valid()) { return true; }
 		}
-		return true;
+		return false;
 	}
 	
 	Copy()
@@ -215,6 +215,15 @@ class Course
 	get Section()
 	{
 		return this.SectionList[this.SelectedSection];
+	}
+	
+	Valid()
+	{
+		for (var i = 0; i < this.SectionList.length; i++)
+		{
+			if (this.SectionList[i].Valid()) { return true; }
+		}
+		return false;
 	}
 	
 	CopySimple()

@@ -1,4 +1,5 @@
 <html>
+<link rel="icon" href="https://cdn2.iconfinder.com/data/icons/flat-seo-web-ikooni/128/flat_seo-49-512.png">
 <link rel="stylesheet" type="text/css" href="css/style-page.css">
 <link rel="stylesheet" type="text/css" href="css/dark-theme.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
@@ -9,6 +10,7 @@
 			<div class="colour"></div>
 			<button class="accordion-button"><i class="fas fa-arrow-alt-circle-down"></i></button>
 			<input type="text" class="course-name" placeholder="Course Name">
+			<input type="checkbox" class="course-enable" checked="true" />
 			<button class="course-clone">Clone</button>
 			<button class="course-remove"><i class="fas fa-minus-circle"></i></button>
 		</div>
@@ -24,6 +26,7 @@
 		<div class="accordion-header">
 			<button class="accordion-button"><i class="fas fa-arrow-alt-circle-down"></i></button>
 			<input type="text" class="section-name" placeholder="Section Name">
+			<input type="checkbox" class="section-enable" checked="true" />
 			<button class="section-clone">Clone</button>
 			<button class="section-remove"><i class="fas fa-minus-circle"></i></button>
 		</div>
@@ -49,8 +52,8 @@
 		<select class="week-selector">
 			<option>Week 1</option>
 			<option>Week 2</option>
-			<option>Exam Week</option>
 		</select>
+		<input type="checkbox" class="time-slot-enable" checked="true" />
 		<button class="time-slot-clone">Clone</button>
 		<button class="time-slot-remove"><i class="fas fa-minus-circle"></i></button>
 	</div>

@@ -200,7 +200,7 @@ function AddTimeSlotLoc(location)
 	//bind buttons
 	$(newElem).find(".time-slot-remove").click(RemoveTimeSlot);
 	$(newElem).find("button.day-button").click(DayButtonClick);
-	$(newElem).find(".time-start,.time-end").focusin(1, ShowTimePicker);
+	$(newElem).find(".time-start,.time-end").focusin(1, ShowTimePicker).click(1, ShowTimePicker);
 	$(newElem).find(".time-start,.time-end").focusout(HideTimePicker);
 	$(newElem).find(".time-slot-clone").click(CloneTimeSlot);
 
@@ -327,7 +327,7 @@ function SelectWeek()
 
 /* time picker */
 
-$("#right-content").scroll(UpdateTimePickerPosition);
+$(".list-scroll").scroll(function () { $(ActiveTimeBox).focusout(); } );
 
 $("#time-picker").focusin(ShowTimePicker);
 $("#time-picker").focusout(HideTimePicker);
@@ -356,7 +356,7 @@ function UpdateTimePickerPosition()
 {
 	if (ActiveTimeBox) 
 	{
-		$("#time-picker").offset({ top: $(ActiveTimeBox).offset().top + ActiveTimeBox.clientHeight + 1, left: ActiveTimeBox.offsetLeft });
+		$("#time-picker").offset({ top: $(ActiveTimeBox).position().top + ActiveTimeBox.clientHeight + 1, left: ActiveTimeBox.offsetLeft });
 	}
 }
 

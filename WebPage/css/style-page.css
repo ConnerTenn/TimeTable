@@ -375,6 +375,12 @@ button.gen-schedule {
 
 /* General Element Styling */
 
+.list-scroll {
+	overflow-y: scroll;
+	max-height: 85vh;
+	margin: 10px 0px;
+}
+
 #time-picker {
 	display:block;
 	position:absolute;
@@ -397,12 +403,6 @@ button.gen-schedule {
 	width: 100%;
 	height: 20px;
 	display: block;
-}
-
-.list-scroll {
-	overflow-y: scroll;
-	max-height: 85vh;
-	margin: 10px 0px;
 }
 
 /* === Global Element Properties === */

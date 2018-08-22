@@ -89,8 +89,13 @@ function ReadTimeSlot(timeslots, section)
 		{
 			timeslot.Days += ($timeslot.find(".day-button." + DayNames[i])[0].classList.contains("active") ? 1 : 0) << i;
 		}
-
-		section.TimeSlotList.push(timeslot);
+		
+		if (!timeslot.Valid()) { $timeslot.find(".time-slot-enable").prop("checked", false); }
+		
+		if ($timeslot.find(".time-slot-enable").prop("checked"))
+		{
+			section.TimeSlotList.push(timeslot);
+		}
 	}
 }
 
@@ -118,10 +123,20 @@ function ReadCourseData()
 			
 			ReadTimeSlot(timeslots, section);
 			
-			course.SectionList.push(section);
+			if (!section.Valid()) { $section.find(".section-enable").prop("checked", false); }
+			
+			if ($section.find(".section-enable").prop("checked"))
+			{
+				course.SectionList.push(section);
+			}
 		}
 		
-		RequiredCourseList.push(course);
+		if (!course.Valid()) { $course.find(".course-enable").prop("checked", false); }
+		
+		if ($course.find(".course-enable").prop("checked"))
+		{
+			RequiredCourseList.push(course);
+		}
 	}
 	
 	var reserves = $(".reserve-list-container").children();
@@ -173,6 +188,7 @@ function AdvanceSection()
 	//console.log("AdvanceSection() ");
 	
 	var course = RequiredCourseList[CourseIndex];
+	if (!course) { return 3; }
 	course.SelectedSection++;
 	
 	if (course.SelectedSection >= course.SectionList.length) 
@@ -180,7 +196,7 @@ function AdvanceSection()
 		return 3;
 	}
 	
-	if (!course.Section.Valid()) { return 2; }
+	//if (!course.Section.Valid()) { return 2; }
 	
 	var conflict = false;
 	for (var i = 0; i < CourseIndex; i++)
@@ -202,8 +218,10 @@ function AdvanceSection()
 function ResetSection()
 {
 	//console.log("ResetSection");
-	
-	RequiredCourseList[CourseIndex].SelectedSection = -1;
+	if (RequiredCourseList[CourseIndex]) 
+	{
+		RequiredCourseList[CourseIndex].SelectedSection = -1;
+	}
 }
 
 function GenerateSchedule()
