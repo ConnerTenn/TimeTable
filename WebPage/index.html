@@ -36,7 +36,7 @@
 	</div>
 	<!-- time-slot-template Template -->
 	<div class="time-slot-template hidden">
-		<input type="text" placeholder="Class">
+		<input class="time-slot-name" type="text" placeholder="Class">
 		<button class="day-button sun day-button-S" type="button" onclick="">S</button>
 		<button class="day-button mon" type="button" onclick="">M</button>
 		<button class="day-button tue day-button-T" type="button" onclick="">T</button>
@@ -46,7 +46,7 @@
 		<button class="day-button sat day-button-S" type="button" onclick="">S</button>
 		<input type="text" class="time-start" value="7:00am">
 		<input type="text" class="time-end" value="8:00am">
-		<select class="week-selecter">
+		<select class="week-selector">
 			<option>Week 1</option>
 			<option>Week 2</option>
 			<option>Exam Week</option>
@@ -74,6 +74,7 @@
 	<div class="schedule-item-template hidden">
 		<div class="course-name"></div>
 		<div class="section-name"></div>
+		<div class="time-slot-name"></div>
 	</div>
 </head>
 <!-- Body -->
@@ -108,18 +109,25 @@
 				<div class="schedule-content">
 					<div class="time-divider-container"><div class="time-divider"></div></div>
 					<div class="day-column" column="1">
+						<div class="day-container"></div>
 					</div>
 					<div class="day-column" column="2">
+						<div class="day-container"></div>
 					</div>
 					<div class="day-column" column="3">
+						<div class="day-container"></div>
 					</div>
 					<div class="day-column" column="4">
+						<div class="day-container"></div>
 					</div>
 					<div class="day-column" column="5">
+						<div class="day-container"></div>
 					</div>
 					<div class="day-column" column="6">
+						<div class="day-container"></div>
 					</div>
 					<div class="day-column" column="7">
+						<div class="day-container"></div>
 					</div>
 					<div class="mouse-line"></div>
 				</div>

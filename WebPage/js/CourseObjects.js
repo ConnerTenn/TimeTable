@@ -100,18 +100,22 @@ class TimeSlot
 		this.Start = new Time;
 		this.End = new Time;
 		this.Days = 0b0000000; //Sat Fri Thurs Wed Tues Mon Sun
-		this.Instructor = "";
-		this.Classroom = "";
+		this.Name = "";
+		//this.Instructor = "";
+		//this.Classroom = "";
+		this.Week = "";
 	}
 	
 	Conflict(other)
 	{
-		return (this.Days & other.Days) && ((other.Start.Min >= this.Start.Min && other.Start.Min < this.End.Min) || (other.End.Min > this.Start.Min && other.End.Min <= this.End.Min));
+		return (this.Week == other.Week) && (this.Days & other.Days) && ((other.Start.Min >= this.Start.Min && other.Start.Min < this.End.Min) || (other.End.Min > this.Start.Min && other.End.Min <= this.End.Min));
 	}
 	
 	Copy()
 	{
 		var newTimeSlot = new TimeSlot();
+		newTimeSlot.Name = this.Name;
+		newTimeSlot.Week = this.Week;
 		newTimeSlot.Start.Min = this.Start.Min;
 		newTimeSlot.End.Min = this.End.Min;
 		newTimeSlot.Days = this.Days;
@@ -128,6 +132,7 @@ class TimeSlot
 	{
 		var outStr = "";
 		
+		outStr += "\"" + this.Name + "\" \"" + this.Week + "\" ";
 		for (var i = 0; i < 7; i++)
 		{
 			if (this.Days & (1 << i)) { outStr += DayNames[i] + " "; }

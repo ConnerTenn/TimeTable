@@ -3,8 +3,6 @@
 
 ==== Fixes ====
 [ ] improve time box entry
-[ ] fix scrolling containers
-	course add, reserve add, and generate schedule buttons should not scroll
 
 ==== Features ====
 [ ] change and and remove buttons designs
@@ -23,10 +21,8 @@
 [ ] add duplicate list item controls
 [ ] add course & section enable/disable
 [ ] add timeslot labels
-[ ] Change schedule grid from using css grid
 [ ] add interactivity on schedule canvas
 	[ ] when click on course, scroll into view
-[ ] offset schedule time markers
 
 
 ==== Completed ====
@@ -38,4 +34,8 @@
 [x] coloured courses
 [x] add schedule result switching
 [x] timepicker postion should take scrolling into account
+[x] fix scrolling containers
+	course add, reserve add, and generate schedule buttons should not scroll
+[x] offset schedule time markers
+[x] Change schedule grid from using css grid
 

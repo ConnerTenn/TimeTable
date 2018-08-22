@@ -73,6 +73,26 @@ class BacktrackPlace
 	}
 }
 
+function ReadTimeSlot(timeslots, section)
+{
+	for (var t = 0; t < timeslots.length; t++)
+	{
+		var $timeslot = $(timeslots[t]);
+		var timeslot = new TimeSlot();
+
+		timeslot.Name = $timeslot.find(".time-slot-name").val();
+		timeslot.Week = $timeslot.find(".week-selector").val();
+		timeslot.Start.Min = TimeToMin($timeslot.find(".time-start").val());
+		timeslot.End.Min = TimeToMin($timeslot.find(".time-end").val());
+		timeslot.Days = 0;
+		for (var i = 0; i < 7; i++)
+		{
+			timeslot.Days += ($timeslot.find(".day-button." + DayNames[i])[0].classList.contains("active") ? 1 : 0) << i;
+		}
+
+		section.TimeSlotList.push(timeslot);
+	}
+}
 
 function ReadCourseData()
 {
@@ -96,21 +116,7 @@ function ReadCourseData()
 			section.Name = $section.find(".section-name").val();
 			if (section.Name.length === 0) { section.Name = $section.find(".section-name").attr("placeholder"); }
 			
-			for (var t = 0; t < timeslots.length; t++)
-			{
-				var $timeslot = $(timeslots[t]);
-				var timeslot = new TimeSlot();
-				
-				timeslot.Start.Min = TimeToMin($timeslot.find(".time-start").val());
-				timeslot.End.Min = TimeToMin($timeslot.find(".time-end").val());
-				timeslot.Days = 0;
-				for (var i = 0; i < 7; i++)
-				{
-					timeslot.Days += ($timeslot.find(".day-button." + DayNames[i])[0].classList.contains("active") ? 1 : 0) << i;
-				}
-				
-				section.TimeSlotList.push(timeslot);
-			}
+			ReadTimeSlot(timeslots, section);
 			
 			course.SectionList.push(section);
 		}
@@ -130,21 +136,7 @@ function ReadCourseData()
 		course.Name = $reserve.find(".reserve-name").val();
 		if (course.Name.length === 0) { course.Name = $reserve.find(".reserve-name").attr("placeholder"); }
 		
-		for (var t = 0; t < timeslots.length; t++)
-		{
-			var $timeslot = $(timeslots[t]);
-			var timeslot = new TimeSlot();
-
-			timeslot.Start.Min = TimeToMin($timeslot.find(".time-start").val());
-			timeslot.End.Min = TimeToMin($timeslot.find(".time-end").val());
-			timeslot.Days = 0;
-			for (var i = 0; i < 7; i++)
-			{
-				timeslot.Days += ($timeslot.find(".day-button." + DayNames[i])[0].classList.contains("active") ? 1 : 0) << i;
-			}
-
-			section.TimeSlotList.push(timeslot);
-		}
+		ReadTimeSlot(timeslots, section);
 
 		course.SectionList.push(section);
 		RequiredCourseList.push(course);
@@ -249,7 +241,7 @@ function DrawSchedule()
 {
 	console.log("==============\n Draw Courses\n==============");
 	var scheduleContent = $(".schedule-content");
-	scheduleContent.find(".day-column").children().remove();
+	scheduleContent.find(".day-column").children(".day-container").children().remove();
 	
 	if (ValidSchedules.length)
 	{		
@@ -261,20 +253,21 @@ function DrawSchedule()
 			
 			for (var t = 0; t < course.Section.TimeSlotList.length; t++)
 			{
-				var timeSlot = course.Section.TimeSlotList[t];
+				var timeslot = course.Section.TimeSlotList[t];
 				
 				for (var d = 0; d < 7; d++)
 				{
-					if ((timeSlot.Days >> d) & 1)
+					if ((timeslot.Days >> d) & 1)
 					{
 						var newElem = GridSlotTemplate.cloneNode(true);
 						newElem.className = "schedule-item";
-						//newElem.style = "grid-row:" + TimeToGridCoord(timeSlot.Start) + "/" + TimeToGridCoord(timeSlot.End) + "; grid-column:" + (2+d) + "/" + (2+d) + ";" + 
+						//newElem.style = "grid-row:" + TimeToGridCoord(timeslot.Start) + "/" + TimeToGridCoord(timeslot.End) + "; grid-column:" + (2+d) + "/" + (2+d) + ";" + 
 						//	"background:" + course.Colour + "80; border-color:" + course.Colour + ";";
-						$(newElem).css("background", course.Colour + "80").css("border-color", course.Colour).css("top", TimeToCoord(timeSlot.Start)).css("height", TimeToCoord(timeSlot.End) - TimeToCoord(timeSlot.Start));
+						$(newElem).css("background", course.Colour + "80").css("border-color", course.Colour).css("top", TimeToCoord(timeslot.Start)).css("height", TimeToCoord(timeslot.End) - TimeToCoord(timeslot.Start));
 						$(newElem).find(".course-name").html(course.Name);
-						$(newElem).find(".section-name").html(course.Section.Name);
-						scheduleContent.find(".day-column[column="+(d+1)+"]").append(newElem);
+						$(newElem).find(".section-name").html(course.Section.Name); 
+						$(newElem).find(".time-slot-name").html(timeslot.Name);
+						scheduleContent.find(".day-column[column="+(d+1)+"]").children(".day-container").append(newElem);
 					}
 				}
 			}
