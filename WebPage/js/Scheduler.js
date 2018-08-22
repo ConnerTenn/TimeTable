@@ -185,13 +185,12 @@ function TimeToCoord(time)
 	return (time.Hour - 7 + time.Minutes / 60) * 2 * 30;
 }
 
-var $GridSlotTemplate = $(".schedule-item-template")[0];
-function DrawSchedule()
+function DrawSchedule(target)
 {
 	console.log("==============\n Draw Courses\n==============");
 	console.log("Selected Week:\"" + SelectedWeek + "\"");
-	var scheduleContent = $(".schedule-content");
-	scheduleContent.find(".day-column").children(".day-container").children().remove();
+	var $scheduleContent = target.$(".schedule-content");
+	$scheduleContent.find(".day-column").children(".day-container").children().remove();
 	
 	if (ValidSchedules.length)
 	{		
@@ -209,15 +208,15 @@ function DrawSchedule()
 				{
 					if ((timeslot.Days >> d) & 1 && SelectedWeek == timeslot.Week)
 					{
-						var newElem = $GridSlotTemplate.cloneNode(true);
-						newElem.className = "schedule-item";
+						var $newElem = $GridSlotTemplate.clone(true);
+						$newElem[0].className = "schedule-item";
 						//newElem.style = "grid-row:" + TimeToGridCoord(timeslot.Start) + "/" + TimeToGridCoord(timeslot.End) + "; grid-column:" + (2+d) + "/" + (2+d) + ";" + 
 						//	"background:" + course.Colour + "80; border-color:" + course.Colour + ";";
-						$(newElem).css("background", course.Colour + "80").css("border-color", course.Colour).css("top", TimeToCoord(timeslot.Start)).css("height", TimeToCoord(timeslot.End) - TimeToCoord(timeslot.Start));
-						$(newElem).find(".course-name").html(course.Name);
-						$(newElem).find(".section-name").html(course.Section.Name); 
-						$(newElem).find(".time-slot-name").html(timeslot.Name);
-						scheduleContent.find(".day-column[column="+(d+1)+"]").children(".day-container").append(newElem);
+						$newElem.css("background", course.Colour + "80").css("border-color", course.Colour).css("top", TimeToCoord(timeslot.Start)).css("height", TimeToCoord(timeslot.End) - TimeToCoord(timeslot.Start));
+						$newElem.find(".course-name").html(course.Name);
+						$newElem.find(".section-name").html(course.Section.Name); 
+						$newElem.find(".time-slot-name").html(timeslot.Name);
+						$scheduleContent.find(".day-column[column="+(d+1)+"]").children(".day-container").append($newElem);
 					}
 				}
 			}
@@ -240,7 +239,7 @@ function DoGenSchedule()
 	ActiveSchedule = 0;
 	RefreshActiveScheduleVal(Schedule);
 	
-	DrawSchedule();
+	DrawSchedule(Schedule);
 	
 	console.timeEnd("Do Gen Schedule Time");
 }

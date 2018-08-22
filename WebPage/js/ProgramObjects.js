@@ -1,4 +1,10 @@
 
+var $CourseTemplate = $(".course-template");
+var $SectionTemplate = $(".section-template");
+var $TimeSlotTemplate = $(".time-slot-template");
+var $ReserveTemplate = $(".reserve-template");
+var $GridSlotTemplate = $(".schedule-item-template");
+
 var Colours = [["#b58900", 0], ["#cb4b16", 0], ["#dc322f", 0], ["#d33682", 0], ["#6c71c4", 0], ["#268bd2", 0], ["#2aa198", 0], ["#859900", 0]];
 var DayNames = [["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"], ["sun", "mon", "tue", "wed", "thu", "fri", "sat"]];
 
@@ -348,7 +354,7 @@ class HTMLSchedule
 		this.UpdateScheduleNames(this);
 		for (var i = 0; i < 7; i++)
 		{
-			this.$(".time-divider-container").after("<div class='day-column' column='" + (i+1) + "'><div class='day-container'></div></div>");
+			this.$(".mouse-line").before("<div class='day-column' column='" + (i+1) + "'><div class='day-container'></div></div>");
 		}
 	}
 	
