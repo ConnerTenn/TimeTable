@@ -233,7 +233,7 @@ button.gen-schedule {
 
 
 
-/* === Schedule Table Layout === */
+/* === Schedule Table === */
 
 .schedule {
 	
@@ -320,6 +320,14 @@ button.gen-schedule {
 	position: absolute;
 	overflow: hidden;
 	box-sizing: border-box;
+}
+
+.week-display-selector {
+	border: none;
+	background: white;
+}
+.week-display-selector.active {
+	background: #25b7c4
 }
 
 /*

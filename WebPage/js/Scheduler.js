@@ -240,6 +240,7 @@ var GridSlotTemplate = $(".schedule-item-template")[0];
 function DrawSchedule()
 {
 	console.log("==============\n Draw Courses\n==============");
+	console.log("Selected Week:\"" + SelectedWeek + "\"");
 	var scheduleContent = $(".schedule-content");
 	scheduleContent.find(".day-column").children(".day-container").children().remove();
 	
@@ -257,7 +258,7 @@ function DrawSchedule()
 				
 				for (var d = 0; d < 7; d++)
 				{
-					if ((timeslot.Days >> d) & 1)
+					if ((timeslot.Days >> d) & 1 && SelectedWeek == timeslot.Week)
 					{
 						var newElem = GridSlotTemplate.cloneNode(true);
 						newElem.className = "schedule-item";

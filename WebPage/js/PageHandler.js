@@ -308,6 +308,16 @@ function UpdateMouseLine(event)
 	$(".mouse-line").css("margin-top", event.clientY - GridHeightOffset + (document.documentElement.scrollTop || document.body.scrollTop) + "px");
 }
 
+$(".week-display-selector").click(SelectWeek);
+var SelectedWeek = $(".week-display-selector.active").html();
+function SelectWeek()
+{
+	SelectedWeek = $(this).html();
+	$(".week-display-selector").removeClass("active");
+	$(this).addClass("active");
+	DrawSchedule();
+}
+
 /* === End Schedule Handlers === */
 
 
