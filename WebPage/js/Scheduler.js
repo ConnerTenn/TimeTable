@@ -3,83 +3,39 @@ var RequiredCourseList = [];
 var CourseIndex = 0;
 var ValidSchedules = [];
 
-class BacktrackLine
+
+function ReadTimeSlot(timeslots, section)
 {
-	constructor()
+	for (var t = 0; t < timeslots.length; t++)
 	{
-		this.Backtrack = function() {};
-		this.Advance = function() {};
-		this.Placer = {};
-	}
-	
-	Do()
-	{
-		//console.log("BacktrackLine::Do()");
-		while (true)
+		var $timeslot = $(timeslots[t]);
+		var timeslot = new TimeSlot();
+
+		timeslot.Name = $timeslot.find(".time-slot-name").val();
+		timeslot.Week = $timeslot.find(".week-selector").val();
+		timeslot.Start.Min = TimeToMin($timeslot.find(".time-start").val());
+		timeslot.End.Min = TimeToMin($timeslot.find(".time-end").val());
+		timeslot.Days = 0;
+		for (var i = 0; i < 7; i++)
 		{
-			var res = this.Placer.Place();
-			if (res)
-			{
-				if (!this.Advance())
-				{
-					//Found solution
-					//console.log("BacktrackLine::Do() == Found Solution ==");
-					return true;
-				}				
-			}
-			else
-			{
-				if (!this.Backtrack())
-				{
-					//No solution
-					//console.log("BacktrackLine::Do() == No Solution ==");
-					return false;
-				}
-			}
+			timeslot.Days += ($timeslot.find(".day-button." + DayNames[1][i])[0].classList.contains("active") ? 1 : 0) << i;
 		}
-
-	}
-}
-
-class BacktrackPlace
-{
-	constructor()
-	{
-		this.Advance = function() {};
-		this.Reset = function() {};
-	}
-	
-	Place()
-	{
-		//console.log("BacktrackPlace::Place()");
-		while (true)
+		
+		if (!timeslot.Valid()) { $timeslot.find(".time-slot-enable").prop("checked", false); }
+		
+		if ($timeslot.find(".time-slot-enable").prop("checked"))
 		{
-			var res = this.Advance();
-			if (res === 1)
-			{
-				//Success
-				//console.log("BacktrackPlace::Place() Success");
-				return true;
-			}
-			else if (res === 3)
-			{
-				//Out of bounds.
-				//console.log("BacktrackPlace::Place() Out of bounds");
-				this.Reset();
-				return false;
-			}
-			//else loop and try advance again
+			section.TimeSlotList.push(timeslot);
 		}
 	}
 }
-
 
 function ReadCourseData()
 {
-	var courses = $(".course-list-container").children();
-	for (var c = 0; c < courses.length; c++)
+	var $courses = $(".course-list-container").children();
+	for (var c = 0; c < $courses.length; c++)
 	{
-		var $course = $(courses[c]);
+		var $course = $($courses[c]);
 		var course = new Course();
 		var sections = $course.find(".section-list-container").children();
 		
@@ -96,32 +52,28 @@ function ReadCourseData()
 			section.Name = $section.find(".section-name").val();
 			if (section.Name.length === 0) { section.Name = $section.find(".section-name").attr("placeholder"); }
 			
-			for (var t = 0; t < timeslots.length; t++)
-			{
-				var $timeslot = $(timeslots[t]);
-				var timeslot = new TimeSlot();
-				
-				timeslot.Start.Min = TimeToMin($timeslot.find(".time-start").val());
-				timeslot.End.Min = TimeToMin($timeslot.find(".time-end").val());
-				timeslot.Days = 0;
-				for (var i = 0; i < 7; i++)
-				{
-					timeslot.Days += ($timeslot.find(".day-button." + DayNames[i])[0].classList.contains("active") ? 1 : 0) << i;
-				}
-				
-				section.TimeSlotList.push(timeslot);
-			}
+			ReadTimeSlot(timeslots, section);
 			
-			course.SectionList.push(section);
+			if (!section.Valid()) { $section.find(".section-enable").prop("checked", false); }
+			
+			if ($section.find(".section-enable").prop("checked"))
+			{
+				course.SectionList.push(section);
+			}
 		}
 		
-		RequiredCourseList.push(course);
+		if (!course.Valid()) { $course.find(".course-enable").prop("checked", false); }
+		
+		if ($course.find(".course-enable").prop("checked"))
+		{
+			RequiredCourseList.push(course);
+		}
 	}
 	
-	var reserves = $(".reserve-list-container").children();
-	for (var r = 0; r < reserves.length; r++)
+	var $reserves = $(".reserve-list-container").children();
+	for (var r = 0; r < $reserves.length; r++)
 	{
-		var $reserve = $(reserves[r]);
+		var $reserve = $($reserves[r]);
 		var course = new Course();
 		var section = new Section();
 		var timeslots = $reserve.find(".time-slot-list-container").children();
@@ -130,21 +82,7 @@ function ReadCourseData()
 		course.Name = $reserve.find(".reserve-name").val();
 		if (course.Name.length === 0) { course.Name = $reserve.find(".reserve-name").attr("placeholder"); }
 		
-		for (var t = 0; t < timeslots.length; t++)
-		{
-			var $timeslot = $(timeslots[t]);
-			var timeslot = new TimeSlot();
-
-			timeslot.Start.Min = TimeToMin($timeslot.find(".time-start").val());
-			timeslot.End.Min = TimeToMin($timeslot.find(".time-end").val());
-			timeslot.Days = 0;
-			for (var i = 0; i < 7; i++)
-			{
-				timeslot.Days += ($timeslot.find(".day-button." + DayNames[i])[0].classList.contains("active") ? 1 : 0) << i;
-			}
-
-			section.TimeSlotList.push(timeslot);
-		}
+		ReadTimeSlot(timeslots, section);
 
 		course.SectionList.push(section);
 		RequiredCourseList.push(course);
@@ -181,6 +119,7 @@ function AdvanceSection()
 	//console.log("AdvanceSection() ");
 	
 	var course = RequiredCourseList[CourseIndex];
+	if (!course) { return 3; }
 	course.SelectedSection++;
 	
 	if (course.SelectedSection >= course.SectionList.length) 
@@ -188,7 +127,7 @@ function AdvanceSection()
 		return 3;
 	}
 	
-	if (!course.Section.Valid()) { return 2; }
+	//if (!course.Section.Valid()) { return 2; }
 	
 	var conflict = false;
 	for (var i = 0; i < CourseIndex; i++)
@@ -210,8 +149,10 @@ function AdvanceSection()
 function ResetSection()
 {
 	//console.log("ResetSection");
-	
-	RequiredCourseList[CourseIndex].SelectedSection = -1;
+	if (RequiredCourseList[CourseIndex]) 
+	{
+		RequiredCourseList[CourseIndex].SelectedSection = -1;
+	}
 }
 
 function GenerateSchedule()
@@ -239,17 +180,17 @@ function GenerateSchedule()
 	}
 }
 
-function TimeToGridCoord(time)
+function TimeToCoord(time)
 {
-	return (time.Hour-7)*4+2+Math.floor(time.Minutes/15);
+	return (time.Hour - 7 + time.Minutes / 60) * 2 * 30;
 }
 
-var GridSlotTemplate = $(".grid-slot-template")[0];
-function DrawSchedule()
+function DrawSchedule(target)
 {
 	console.log("==============\n Draw Courses\n==============");
-	var gridContainer = $(".grid-container");
-	gridContainer.children(".grid-item.grid-slot").remove();
+	console.log("Selected Week:\"" + SelectedWeek + "\"");
+	var $scheduleContent = target.$(".schedule-content");
+	$scheduleContent.find(".day-column").children(".day-container").children().remove();
 	
 	if (ValidSchedules.length)
 	{		
@@ -261,19 +202,21 @@ function DrawSchedule()
 			
 			for (var t = 0; t < course.Section.TimeSlotList.length; t++)
 			{
-				var timeSlot = course.Section.TimeSlotList[t];
+				var timeslot = course.Section.TimeSlotList[t];
 				
 				for (var d = 0; d < 7; d++)
 				{
-					if ((timeSlot.Days >> d) & 1)
+					if ((timeslot.Days >> d) & 1 && SelectedWeek == timeslot.Week)
 					{
-						var newElem = GridSlotTemplate.cloneNode(true);
-						newElem.className = "grid-item grid-slot";
-						newElem.style = "grid-row:" + TimeToGridCoord(timeSlot.Start) + "/" + TimeToGridCoord(timeSlot.End) + "; grid-column:" + (2+d) + "/" + (2+d) + ";" + 
-							"background:" + course.Colour + "80; border-color:" + course.Colour + ";";
-						$(newElem).find(".course-name").html(course.Name);
-						$(newElem).find(".section-name").html(course.Section.Name);
-						gridContainer.append(newElem);
+						var $newElem = $GridSlotTemplate.clone(true);
+						$newElem[0].className = "schedule-item";
+						//newElem.style = "grid-row:" + TimeToGridCoord(timeslot.Start) + "/" + TimeToGridCoord(timeslot.End) + "; grid-column:" + (2+d) + "/" + (2+d) + ";" + 
+						//	"background:" + course.Colour + "80; border-color:" + course.Colour + ";";
+						$newElem.css("background", course.Colour + "80").css("border-color", course.Colour).css("top", TimeToCoord(timeslot.Start)).css("height", TimeToCoord(timeslot.End) - TimeToCoord(timeslot.Start));
+						$newElem.find(".course-name").html(course.Name);
+						$newElem.find(".section-name").html(course.Section.Name); 
+						$newElem.find(".time-slot-name").html(timeslot.Name);
+						$scheduleContent.find(".day-column[column="+(d+1)+"]").children(".day-container").append($newElem);
 					}
 				}
 			}
@@ -294,9 +237,9 @@ function DoGenSchedule()
 	GenerateSchedule();
 
 	ActiveSchedule = 0;
-	RefreshActiveScheduleVal();
+	RefreshActiveScheduleVal(Schedule);
 	
-	DrawSchedule();
+	DrawSchedule(Schedule);
 	
 	console.timeEnd("Do Gen Schedule Time");
 }

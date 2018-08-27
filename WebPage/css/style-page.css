@@ -17,8 +17,6 @@ body {
 }
 
 #right-content {
-	overflow-y: scroll; 
-	height:900px;
 }
 
 
@@ -235,48 +233,103 @@ button.gen-schedule {
 
 
 
-/* === Schedule Table Layout === */
+/* === Schedule Table === */
 
-.table {
+.schedule {
 	
 	display: grid;
-	grid-template-columns: 70px 1fr;
-	grid-template-rows: 50px 1fr; 
+	grid-template-columns: auto 1fr;
+	grid-template-rows: 40px 1fr; 
 	color:white;
 	text-transform: UPPERCASE;
-	
+	text-align: center;
 }
-.table-header {
+.schedule-header {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-	border: solid 1px white;
+	background: #273746;
+	/*border: solid 1px white;*/
+	min-width: 280px;
 }
-.time-col{
-	height: 500px;
-	border: solid 1px white;
+.time-column {
+	background: #273746;
+	/*border: solid 1px white;*/
 }
-.table-content {
-	display: flex;
+.schedule-content {
+	display: grid;
+	grid-template-columns: 0px 1fr 1fr 1fr 1fr 1fr 1fr 1fr 0px;
+	position: relative; 
+	/*border: white 1px solid;*/
+	border: solid 2px #555555;
 }
-.day-col {
-	border: solid 1px white;
+.day-column {
+	border: solid 2px #555555;
 	/*width:50px;*/
-	height: 500px;
-	flex: 1 1 auto;
+	/*flex: 1 1 auto;*/
+}
+.day-container {
+	position: relative;
 }
 
-.temp {
-	height:40px;
+.time-divider, .time-label-spacer {
+	height:30px;
+	/*width: 10px;
+	background: olivedrab;*/
 }
 
-.temp::after {
+.time-label {
+	position: relative;
+	top:-10;
+	padding: 0px 3px;
+}
+
+.time-divider::after {
 	content: '';
-	display:block; 
+	display: block; 
 	position: absolute;
 	margin: 0px;
 	margin-top: -1px;
-	border-bottom: 1px solid orange;
+	border-bottom: 1px solid #555555;
 	width:100%;
+}
+
+.mouse-line {
+	position: absolute;
+	margin: 0px;
+	margin-top: -1px;
+	border-bottom: 3px solid red;
+	width: 100%;
+	right: 0px;
+}
+.mouse-line::after {
+	content: '';
+	position: absolute;
+	border-bottom: 3px solid orange;
+	left: -75px;
+	width: 75px;
+}
+
+.schedule-item {
+	background-color: transparent;
+	border: 0px solid;
+	padding: 5px;
+	margin-top: -1px;
+	font-size: 15px;
+	text-align: center;
+	color: white;
+	border-left-width: 5px;
+	position: absolute;
+	overflow: hidden;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.week-display-selector {
+	border: none;
+	background: white;
+}
+.week-display-selector.active {
+	background: #25b7c4
 }
 
 /*
@@ -314,24 +367,21 @@ button.gen-schedule {
 	border-color: white;
 	border-width: 0px;
 	border-left-width: 5px;
-	/*opacity: 0.7;*/
+	/*opacity: 0.7;
 }
 .grid-item.space {
 	
-}
+}*/
 
-
-.mouse-line
-{
-	position: relative;
-	background: red;
-	width: 100%;
-	height: 1px;
-	top: 0;
-}
 
 
 /* General Element Styling */
+
+.list-scroll {
+	overflow-y: scroll;
+	max-height: 85vh;
+	margin: 10px 0px;
+}
 
 #time-picker {
 	display:block;
@@ -339,12 +389,12 @@ button.gen-schedule {
 	color: white;
 	background:blue;
 	width:100px;
-	height:200px;
+	height:300px;
 	overflow-y:scroll;
 }
 
 .picker-elem {
-	margin: 5px 2px;
+	margin: 0px 2px;
 	padding: 5px 2px;
 }
 .picker-elem:hover {
@@ -356,7 +406,6 @@ button.gen-schedule {
 	height: 20px;
 	display: block;
 }
-
 
 /* === Global Element Properties === */
 

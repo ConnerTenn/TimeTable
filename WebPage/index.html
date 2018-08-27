@@ -1,4 +1,5 @@
 <html>
+<link rel="icon" href="https://cdn2.iconfinder.com/data/icons/flat-seo-web-ikooni/128/flat_seo-49-512.png">
 <link rel="stylesheet" type="text/css" href="css/style-page.css">
 <link rel="stylesheet" type="text/css" href="css/dark-theme.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
@@ -9,6 +10,7 @@
 			<div class="colour"></div>
 			<button class="accordion-button"><i class="fas fa-arrow-alt-circle-down"></i></button>
 			<input type="text" class="course-name" placeholder="Course Name">
+			<input type="checkbox" class="course-enable" checked="true" />
 			<button class="course-clone">Clone</button>
 			<button class="course-remove"><i class="fas fa-minus-circle"></i></button>
 		</div>
@@ -24,7 +26,8 @@
 		<div class="accordion-header">
 			<button class="accordion-button"><i class="fas fa-arrow-alt-circle-down"></i></button>
 			<input type="text" class="section-name" placeholder="Section Name">
-			<button class="course-clone">Clone</button>
+			<input type="checkbox" class="section-enable" checked="true" />
+			<button class="section-clone">Clone</button>
 			<button class="section-remove"><i class="fas fa-minus-circle"></i></button>
 		</div>
 		<div class="accordion-content active">
@@ -36,7 +39,7 @@
 	</div>
 	<!-- time-slot-template Template -->
 	<div class="time-slot-template hidden">
-		<input type="text" placeholder="Class">
+		<input class="time-slot-name" type="text" placeholder="Class">
 		<button class="day-button sun day-button-S" type="button" onclick="">S</button>
 		<button class="day-button mon" type="button" onclick="">M</button>
 		<button class="day-button tue day-button-T" type="button" onclick="">T</button>
@@ -46,12 +49,12 @@
 		<button class="day-button sat day-button-S" type="button" onclick="">S</button>
 		<input type="text" class="time-start" value="7:00am">
 		<input type="text" class="time-end" value="8:00am">
-		<select class="week-selecter">
+		<select class="week-selector">
 			<option>Week 1</option>
 			<option>Week 2</option>
-			<option>Exam Week</option>
 		</select>
-		<button class="course-clone">Clone</button>
+		<input type="checkbox" class="time-slot-enable" checked="true" />
+		<button class="time-slot-clone">Clone</button>
 		<button class="time-slot-remove"><i class="fas fa-minus-circle"></i></button>
 	</div>
 </div>
@@ -70,10 +73,11 @@
 			</div>
 		</div>
 	</div>
-	<!-- Grid Item TimeSlot Template -->
-	<div class="grid-slot-template hidden">
+	<!-- Schedule Item TimeSlot Template -->
+	<div class="schedule-item-template hidden">
 		<div class="course-name"></div>
 		<div class="section-name"></div>
+		<div class="time-slot-name"></div>
 	</div>
 </head>
 <!-- Body -->
@@ -81,83 +85,27 @@
 	<div id="main-content">
 		<!-- Schedule Grid Container -->
 		<div id="left-content"> 
-			<button class="schedule-select-dec" style="display:inline-block;">&lt</button>
-			<form type="text" class="schedule-select-disp" style="display:inline-block; background:white;">0/0</form>
-			<button class="schedule-select-inc" style="display:inline-block;">&gt</button>
-			<div class="week-display-selectors">
-				<button class="week-display-selector">Week 1</button>
-				<button class="week-display-selector">Week 2</button>
-				<button class="week-display-selector">Exam Week</button>
-			</div>
-			<div class="mouse-line invisible"></div>
-			<!--<div class="grid-container">
-				<div class="grid-item space">###</div>
-				<div class="grid-item label">Sunday</div>
-				<div class="grid-item label">Monday</div>
-				<div class="grid-item label">Tuesday</div>
-				<div class="grid-item label">Wednesday</div>
-				<div class="grid-item label">Thursday</div>
-				<div class="grid-item label">Friday</div>
-				<div class="grid-item label">Saturday</div>
-			</div>-->
-			
-			<div class="table">
-				<div>####</div>
-				<div class="table-header">
-					<div >Sunday</div>
-					<div >Monday</div>
-					<div >Tuesday</div>
-					<div >Wednesday</div>
-					<div >Thursday</div>
-					<div >Friday</div>
-					<div >Saturday</div>
-				</div>
-				<div class="time-col">
-					<div>7:00am</div>
-					<div>7:30am</div>
-					<div>8:00am</div>
-					<div>8:30am</div>
-					<div>9:00am</div>
-					<div>9:30am</div>
-					<div>10:00am</div>
-					<div>10:30am</div>
-				</div>
-				<div style="position: relative;">
-					<div class="table-content">
-						<div>
-							<div class="temp"></div>
-							<div class="temp"></div>
-							<div class="temp"></div>
-							<div class="temp"></div>
-							<div class="temp"></div>
-							<div class="temp"></div>
-							<div class="temp"></div>
-							<div class="temp"></div>
-							<div class="temp"></div>
+			<div class="schedule-container">
+				<button class="schedule-select-dec" style="display:inline-block;">&lt</button>
+				<form type="text" class="schedule-select-disp" style="display:inline-block; background:white;">0/0</form>
+				<button class="schedule-select-inc" style="display:inline-block;">&gt</button>
+				<div class="week-display-selectors">
+					<button class="week-display-selector active">Week 1</button>
+					<button class="week-display-selector">Week 2</button>
+					<button class="week-display-selector">Exam Week</button>
+				</div>			
+				<div class="schedule">
+					<div>####</div>
+					<div class="schedule-header">
+					</div>
+					<div class="time-column">
+						<div class="time-label-spacer">
+							<div class="time-label"></div>
 						</div>
-						<div class="day-col" column="1">
-							<div class="schedule-slot-container"></div>
-						</div>
-						<div class="day-col">
-							<div class="schedule-slot-container">
-								<div style="position: relative; top:130px; height:40px; background:blue;"></div>				
-							</div>
-						</div>
-						<div class="day-col">
-							<div class="schedule-slot-container"></div>
-						</div>
-						<div class="day-col">
-							<div class="schedule-slot-container"></div>
-						</div>
-						<div class="day-col">
-							<div class="schedule-slot-container"></div>
-						</div>
-						<div class="day-col">
-							<div class="schedule-slot-container"></div>
-						</div>
-						<div class="day-col">
-							<div class="schedule-slot-container"></div>
-						</div>
+					</div>
+					<div class="schedule-content">
+						<div class="time-divider-container"><div class="time-divider"></div></div>
+						<div class="mouse-line invisible"></div>
 					</div>
 				</div>
 			</div>
@@ -167,9 +115,11 @@
 			<button class="course-add"><i class="fas fa-plus-circle"> Course</i></button>
 			<button class="reserve-add"><i class="fas fa-plus-circle"> Reserved Time</i></button>
 			<!-- Container for the list of courses -->
-			<div class="course-list-container">
-			</div>
-			<div class="reserve-list-container">
+			<div class="list-scroll">
+				<div class="course-list-container">
+				</div>
+				<div class="reserve-list-container">
+				</div>
 			</div>
 			<button class="gen-schedule"style="vertical-align:middle"><span>Generate Schedules</span></button>
 		</div>
@@ -179,6 +129,6 @@
 </body>
 </html>
 <script src="vendor/jquery.min.js"></script>
-<script src="js/CourseObjects.js"></script>
+<script src="js/ProgramObjects.js"></script>
 <script src="js/Scheduler.js"></script>
 <script src="js/PageHandler.js"></script>
