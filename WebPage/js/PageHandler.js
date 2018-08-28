@@ -295,6 +295,7 @@ function UpdateMouseLine(event)
 {
 	var target = event.data;
 	target.$(".mouse-line").css("margin-top", event.clientY - target.GridHeightOffset + (document.documentElement.scrollTop || document.body.scrollTop) + "px");
+	target.$(".mouse-line").css("right", "-2px").css("width", (target.$(".time-column").width() + target.$(".schedule-content").width() + 4)+ "px");
 }
 
 //$(".week-display-selector").click(SelectWeek);

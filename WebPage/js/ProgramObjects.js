@@ -364,6 +364,7 @@ class HTMLSchedule
 		target.$(".time-divider-container").children().remove();
 		
 		var shrink = target.$(".schedule-header").width() < 450;
+		
 		for (var i = 1; i < (23 - 7) * 2; i++)
 		{
 			var timestr;
