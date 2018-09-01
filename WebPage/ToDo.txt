@@ -6,6 +6,7 @@
 [ ] fix scrolling
 	[x] course add, reserve add, and generate schedule buttons should not scroll
 	[ ] time picker scrolls off the page
+[ ] fix collapsable list items not working
 
 ==== Features ====
 [ ] change and and remove buttons designs
