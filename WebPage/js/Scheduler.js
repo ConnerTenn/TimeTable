@@ -194,10 +194,10 @@ function DrawSchedule(target)
 	
 	if (ValidSchedules.length)
 	{		
-		console.log("Schedule " + ActiveSchedule + ":");
-		for (var j = 0; j < ValidSchedules[ActiveSchedule].length; j++)
+		console.log("Schedule " + target.ActiveSchedule + ":");
+		for (var j = 0; j < ValidSchedules[target.ActiveSchedule].length; j++)
 		{
-			var course = ValidSchedules[ActiveSchedule][j];
+			var course = ValidSchedules[target.ActiveSchedule][j];
 			console.log(course.toStringSimple());
 			
 			for (var t = 0; t < course.Section.TimeSlotList.length; t++)
@@ -236,10 +236,13 @@ function DoGenSchedule()
 	ReadCourseData();
 	GenerateSchedule();
 
-	ActiveSchedule = 0;
-	RefreshActiveScheduleVal(Schedule);
+	for (var i = 0; i < ScheduleList.length; i++)
+	{
+		ScheduleList[i].ActiveSchedule = 0;
+		ScheduleList[i].RefreshActiveScheduleVal();
 	
-	DrawSchedule(Schedule);
+		DrawSchedule(ScheduleList[i]);
+	}
 	
 	console.timeEnd("Do Gen Schedule Time");
 }

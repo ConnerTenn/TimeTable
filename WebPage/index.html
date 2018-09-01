@@ -79,36 +79,43 @@
 		<div class="section-name"></div>
 		<div class="time-slot-name"></div>
 	</div>
+	<!-- Schedule Container -->
+	<div class="schedule-container-template hidden">
+		<button class="schedule-select-dec" style="display:inline-block;">&lt</button>
+		<form type="text" class="schedule-select-disp" style="display:inline-block; background:white;">0/0</form>
+		<button class="schedule-select-inc" style="display:inline-block;">&gt</button>
+		<div class="week-display-selectors">
+			<button class="week-display-selector active">Week 1</button>
+			<button class="week-display-selector">Week 2</button>
+			<button class="week-display-selector">Exam Week</button>
+		</div>
+		<div class="schedule">
+			<div>####</div>
+			<div class="schedule-header">
+			</div>
+			<div class="time-column">
+				<div class="time-label-spacer">
+					<div class="time-label"></div>
+				</div>
+			</div>
+			<div class="schedule-content">
+				<div class="time-divider-container">
+					<div class="time-divider"></div>
+				</div>
+				<div class="mouse-line invisible"></div>
+			</div>
+		</div>
+	</div>
 </head>
 <!-- Body -->
 <body>
+	<button id="compare-toggle">Compare</button>
 	<div id="main-content">
 		<!-- Schedule Grid Container -->
 		<div id="left-content"> 
-			<div class="schedule-container">
-				<button class="schedule-select-dec" style="display:inline-block;">&lt</button>
-				<form type="text" class="schedule-select-disp" style="display:inline-block; background:white;">0/0</form>
-				<button class="schedule-select-inc" style="display:inline-block;">&gt</button>
-				<div class="week-display-selectors">
-					<button class="week-display-selector active">Week 1</button>
-					<button class="week-display-selector">Week 2</button>
-					<button class="week-display-selector">Exam Week</button>
-				</div>			
-				<div class="schedule">
-					<div>####</div>
-					<div class="schedule-header">
-					</div>
-					<div class="time-column">
-						<div class="time-label-spacer">
-							<div class="time-label"></div>
-						</div>
-					</div>
-					<div class="schedule-content">
-						<div class="time-divider-container"><div class="time-divider"></div></div>
-						<div class="mouse-line invisible"></div>
-					</div>
-				</div>
-			</div>
+			<!-- Schedule Container -->
+		</div>
+		<div id="center-content" style="width:0;">
 		</div>
 		<!-- List Container -->
 		<div id="right-content">

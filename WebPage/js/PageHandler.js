@@ -228,7 +228,7 @@ $(".reserve-add").click(AddReserve);
 function AddReserve()
 {
 	//generate new element
-	var $newElem = ReserveTemplate.clone(true);
+	var $newElem = $ReserveTemplate.clone(true);
 	$newElem[0].className = "reserve list-item";
 
 	$newElem.find(".colour").css("background", "#aaaaaa");
@@ -260,30 +260,32 @@ function RemoveReserve()
 
 /* === Schedule Handlers === */
 
-var ActiveSchedule = 0;
+//var ActiveSchedule = 0;
 //$(".schedule-select-dec").click(DecrementActiveSchedule);
 //$(".schedule-select-inc").click(IncrementActiveSchedule);
 
 function DecrementActiveSchedule(event)
 {
-	ActiveSchedule--;
-	RefreshActiveScheduleVal(event.data);
+	var target = event.data;
+	target.ActiveSchedule--;
+	target.RefreshActiveScheduleVal();
 	
 	if (ValidSchedules.length) { DrawSchedule(target); }
 }
 function IncrementActiveSchedule(event)
 {
-	ActiveSchedule++;
-	RefreshActiveScheduleVal(event.data);
+	var target = event.data;
+	target.ActiveSchedule++;
+	target.RefreshActiveScheduleVal();
 	
 	if (ValidSchedules.length) { DrawSchedule(target); }
 }
 
-function RefreshActiveScheduleVal(target)
+/*function RefreshActiveScheduleVal(target)
 {
-	ActiveSchedule = Math.max(Math.min(ActiveSchedule, ValidSchedules.length - 1), 0);
-	target.$(".schedule-select-disp").html(Math.min(ActiveSchedule + 1, ValidSchedules.length) + "/" + ValidSchedules.length);
-}
+	target.ActiveSchedule = Math.max(Math.min(target.ActiveSchedule, ValidSchedules.length - 1), 0);
+	target.$(".schedule-select-disp").html(Math.min(target.ActiveSchedule + 1, ValidSchedules.length) + "/" + ValidSchedules.length);
+}*/
 
 
 //var GridHeightOffset = 0;
@@ -308,6 +310,27 @@ function SelectWeek(event)
 	target.$(".week-display-selector").removeClass("active");
 	$(this).addClass("active");
 	DrawSchedule(target);
+}
+
+$("#compare-toggle").click(ToggleCompare)
+function ToggleCompare()
+{	
+	if (!$("#compare-toggle").hasClass("active"))
+	{
+		$("#center-content").css("width", "auto");
+		$("#main-content").css("grid-template-columns", "1fr 1fr 500px");
+		var schedule2 = new HTMLSchedule($("#center-content"));
+		ScheduleList.push(schedule2);
+		DrawSchedule(schedule2);
+	}
+	else
+	{
+		$("#center-content").children().remove();
+		$("#center-content").css("width", "0px");
+		$("#main-content").css("grid-template-columns", "1fr auto 500px");
+	}
+	
+	$("#compare-toggle").toggleClass("active");
 }
 
 /* === End Schedule Handlers === */
@@ -376,7 +399,8 @@ function InitTimePicker()
 /* === Init Items === */
 
 //InitScheduleGrid();
-var Schedule = new HTMLSchedule($(".schedule-container:first"));
+var MainSchedule = new HTMLSchedule($("#left-content"));
+var ScheduleList = [ MainSchedule ];
 
 InitTimePicker();
 

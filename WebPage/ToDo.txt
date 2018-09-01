@@ -15,8 +15,8 @@
 	[ ] enable/disable use filled sections
 [ ] list item rearranging
 [ ] schedule comparing
-	simultaneous viewing
-	highlightable schedules
+	[x] simultaneous viewing
+	[ ] highlightable schedules
 [ ] highlight sections being shown on active valid schedule
 [ ] save and load
 [ ] dynamic list animations

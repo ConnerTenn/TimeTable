@@ -4,6 +4,7 @@ var $SectionTemplate = $(".section-template");
 var $TimeSlotTemplate = $(".time-slot-template");
 var $ReserveTemplate = $(".reserve-template");
 var $GridSlotTemplate = $(".schedule-item-template");
+var $ScheduleContainerTemplate = $(".schedule-container-template");
 
 var Colours = [["#b58900", 0], ["#cb4b16", 0], ["#dc322f", 0], ["#d33682", 0], ["#6c71c4", 0], ["#268bd2", 0], ["#2aa198", 0], ["#859900", 0]];
 var DayNames = [["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"], ["sun", "mon", "tue", "wed", "thu", "fri", "sat"]];
@@ -331,14 +332,18 @@ class BacktrackPlace
 
 class HTMLSchedule
 {
-	constructor($root)
+	constructor(location)
 	{
-		this.$Root = $root;
+		var $newElem = $ScheduleContainerTemplate.clone(true);
+		$newElem[0].className = "schedule-container";
+		location.prepend($newElem);
+
+		this.$Root = $newElem;
 		this.ActiveSchedule = 0;
 		this.SelectedWeek = this.$(".week-display-selector.active").html();
 		this.GridHeightOffset = 0;
 		
-		this.InitScheduleGrid();
+		this.InitScheduleGrid(location);
 		this.BindEvents();
 	}
 	
@@ -347,8 +352,9 @@ class HTMLSchedule
 		return this.$Root.find(q);
 	}
 	
-	InitScheduleGrid()
+	InitScheduleGrid(location)
 	{
+		
 		this.UpdateScheduleTimes(this);
 		
 		this.UpdateScheduleNames(this);
@@ -356,6 +362,8 @@ class HTMLSchedule
 		{
 			this.$(".mouse-line").before("<div class='day-column' column='" + (i+1) + "'><div class='day-container'></div></div>");
 		}
+		
+		this.RefreshActiveScheduleVal();
 	}
 	
 	UpdateScheduleTimes(target)
@@ -412,6 +420,12 @@ class HTMLSchedule
 		this.$(".schedule-content, .time-column").mouseleave(this, function (event) { event.data.$(".mouse-line").addClass("invisible"); });
 		
 		$(window).resize(this, this.Resize);
+	}
+	
+	RefreshActiveScheduleVal()
+	{
+		this.ActiveSchedule = Math.max(Math.min(this.ActiveSchedule, ValidSchedules.length - 1), 0);
+		this.$(".schedule-select-disp").html(Math.min(this.ActiveSchedule + 1, ValidSchedules.length) + "/" + ValidSchedules.length);
 	}
 }
 
