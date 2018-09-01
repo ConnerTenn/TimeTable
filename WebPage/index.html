@@ -57,7 +57,6 @@
 		<button class="time-slot-clone">Clone</button>
 		<button class="time-slot-remove"><i class="fas fa-minus-circle"></i></button>
 	</div>
-</div>
 	<!-- Reserve Template -->
 	<div class="reserve-template hidden">
 		<div class="accordion-header">
@@ -132,7 +131,12 @@
 			<button class="gen-schedule"style="vertical-align:middle"><span>Generate Schedules</span></button>
 		</div>
 	</div>
-	<div id="time-picker" class="invisible" tabindex="-1">
+	<div id="popup-container">
+		<div id="time-picker" class="invisible" tabindex="-1"></div>
+		<div id="popup" class="hidden">
+			<div id="popup-content"></div>
+			<button id="popup-close">Close</button>
+		</div>
 	</div>
 </body>
 </html>

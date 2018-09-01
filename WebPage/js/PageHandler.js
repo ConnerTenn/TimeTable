@@ -360,6 +360,8 @@ function ExportSchedule(event)
 {
 	target = event.data;
 
+	ShowExportPopup(target);
+
 	console.log("==============\n Export Schedule\n==============");
 	
 	if (ValidSchedules.length)
@@ -371,6 +373,8 @@ function ExportSchedule(event)
 			console.log("Course:"+course.Name);
 			console.log("Section:"+course.Section.Name);
 			
+			$Popup.children("#popup-content").append("Course:" + course.Name + "\n");
+			
 			for (var t = 0; t < course.Section.TimeSlotList.length; t++)
 			{
 				var timeslot = course.Section.TimeSlotList[t];
@@ -378,10 +382,10 @@ function ExportSchedule(event)
 			}
 		}
 	}
+	
 }
 
 /* === End Schedule Handlers === */
-
 
 
 
@@ -437,6 +441,32 @@ function InitTimePicker()
 	$(".picker-elem").click(PickTime);
 }
 
+
+var $Popup = $("#popup");
+function ShowExportPopup(target)
+{
+	$Popup.removeClass("hidden");
+	$Popup.addClass("export-popup");
+	
+	UpdatePopupPos();
+}
+
+$("#popup-close").click(ClosePopup);
+function ClosePopup()
+{
+	$Popup[0].classList = "hidden";
+	$Popup.children("#popup-container").remove();
+}
+
+$(window).resize(UpdatePopupPos);
+function UpdatePopupPos()
+{
+	var width = Math.min($(document).width() - 200, 300);
+	var height = Math.min($(document).height() - 200, 300);
+	$Popup.offset({ top: $(document).height() / 2 - height / 2, left: $(document).width() / 2 - width / 2 });
+	$Popup.css("width", width);
+	$Popup.css("height", height);
+}
 
 /* === End General Handlers === */
 

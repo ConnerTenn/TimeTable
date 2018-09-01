@@ -407,6 +407,19 @@ button.gen-schedule {
 	display: block;
 }
 
+#popup {
+	position: absolute;
+	background: #74797E;
+	color: white;
+	border-radius: 10px;
+}
+
+#popup-close {
+	position: absolute;
+	right: 10px;
+	bottom: 10px;
+}
+
 /* === Global Element Properties === */
 
 button:focus {

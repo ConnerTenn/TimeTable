@@ -355,9 +355,9 @@ class HTMLSchedule
 	InitScheduleGrid(location)
 	{
 		
-		this.UpdateScheduleTimes(this);
+		this.UpdateScheduleTimes();
 		
-		this.UpdateScheduleNames(this);
+		this.UpdateScheduleNames();
 		for (var i = 0; i < 7; i++)
 		{
 			this.$(".mouse-line").before("<div class='day-column' column='" + (i+1) + "'><div class='day-container'></div></div>");
@@ -366,12 +366,12 @@ class HTMLSchedule
 		this.RefreshActiveScheduleVal();
 	}
 	
-	UpdateScheduleTimes(target)
+	UpdateScheduleTimes()
 	{
-		target.$(".time-column").children(":not(:first)").remove();
-		target.$(".time-divider-container").children().remove();
+		this.$(".time-column").children(":not(:first)").remove();
+		this.$(".time-divider-container").children().remove();
 		
-		var shrink = target.$(".schedule-header").width() < 450;
+		var shrink = this.$(".schedule-header").width() < 450;
 		
 		for (var i = 1; i < (23 - 7) * 2; i++)
 		{
@@ -385,27 +385,27 @@ class HTMLSchedule
 				timestr = ((Math.floor(i / 2) + 6) % 12 + 1) + ":" + (i % 2 ? "30" : "00") + ((i <= 9 ? "am" : "pm"));
 			}
 			
-			target.$(".time-column").append("<div class='time-label-spacer'><div class='time-label'>" + timestr + "</div></div>");
-			target.$(".time-divider-container").append("<div class='time-divider'></div>");
+			this.$(".time-column").append("<div class='time-label-spacer'><div class='time-label'>" + timestr + "</div></div>");
+			this.$(".time-divider-container").append("<div class='time-divider'></div>");
 		}
 
 	}
 	
-	UpdateScheduleNames(target)
+	UpdateScheduleNames()
 	{
-		target.$(".schedule-header").children().remove();
-		var set = (target.$(".schedule-header").width() < 660 ? 1 : 0);
+		this.$(".schedule-header").children().remove();
+		var set = (this.$(".schedule-header").width() < 660 ? 1 : 0);
 		for (var i = 0; i < 7; i++)
 		{
-			target.$(".schedule-header").append("<div>" + DayNames[set][i] + "</div>");
+			this.$(".schedule-header").append("<div>" + DayNames[set][i] + "</div>");
 		}
 	}
 	
 	Resize(event)
 	{
 		var target = event.data
-		target.UpdateScheduleTimes(target);
-		target.UpdateScheduleNames(target);
+		target.UpdateScheduleTimes();
+		target.UpdateScheduleNames();
 	}
 	
 	BindEvents()
