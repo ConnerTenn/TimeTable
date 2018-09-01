@@ -13,6 +13,7 @@
 			<input type="checkbox" class="course-enable" checked="true" />
 			<button class="course-clone">Clone</button>
 			<button class="course-remove"><i class="fas fa-minus-circle"></i></button>
+			<button class="course-clone"><i class="fas fa-clone"></i></button>
 		</div>
 		<div class="accordion-content active">
 			<button class="section-add"><i class="fas fa-plus-circle"> Section</i></button>
@@ -29,6 +30,7 @@
 			<input type="checkbox" class="section-enable" checked="true" />
 			<button class="section-clone">Clone</button>
 			<button class="section-remove"><i class="fas fa-minus-circle"></i></button>
+			<button class="course-clone"><i class="fas fa-clone"></i></button>
 		</div>
 		<div class="accordion-content active">
 			<button class="time-slot-add"><i class="fas fa-plus-circle"> Time Slot</i></button>
@@ -86,16 +88,18 @@
 		<!-- Schedule Grid Container -->
 		<div id="left-content"> 
 			<div class="schedule-container">
-				<button class="schedule-select-dec" style="display:inline-block;">&lt</button>
-				<form type="text" class="schedule-select-disp" style="display:inline-block; background:white;">0/0</form>
-				<button class="schedule-select-inc" style="display:inline-block;">&gt</button>
+				<div class="schedule-select-nav-buttons">
+					<button class="schedule-select-dec" style="display:inline-block;">&lt</button>
+					<form type="button" class="schedule-select-disp" style="display:inline-block;">0/0</form>
+					<button class="schedule-select-inc" style="display:inline-block;">&gt</button>
+				</div>
 				<div class="week-display-selectors">
-					<button class="week-display-selector active">Week 1</button>
-					<button class="week-display-selector">Week 2</button>
-					<button class="week-display-selector">Exam Week</button>
+					<div class="week-display-selector week-display-selector-week1 active">Week 1</div>
+					<div class="week-display-selector">Week 2</div>
+					<div class="week-display-selector week-display-selector-examweek">Exam Week</div>
 				</div>			
-				<div class="schedule">
-					<div>####</div>
+				<div class="schedule">	
+					<div class="time-header">####</div>
 					<div class="schedule-header">
 					</div>
 					<div class="time-column">
