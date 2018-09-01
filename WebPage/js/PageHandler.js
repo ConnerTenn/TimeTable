@@ -81,6 +81,7 @@ function AddCourse()
 
 	AutoCourseNames();
 	AutoSectionNames();
+	AutoTimeSlotNames();
 }
 
 function RemoveCourse()
@@ -104,6 +105,7 @@ function CloneCourse()
 	$(this).closest(".course.list-item").after($newElem);
 	AutoCourseNames();
 	AutoSectionNames();
+	AutoTimeSlotNames();
 }
 
 /* === End Course Handlers === */
@@ -130,6 +132,7 @@ function AddSection()
 	AddSectionLoc($(this).siblings(".section-list-container"));
 
 	AutoSectionNames();
+	AutoTimeSlotNames();
 }
 function AddSectionLoc($location)
 {
@@ -168,6 +171,7 @@ function CloneSection()
 {
 	$(this).closest(".section.list-item").after($(this).closest(".section.list-item").clone(true));
 	AutoSectionNames();
+	AutoTimeSlotNames();
 }
 
 /* === End Section Handlers === */
@@ -176,9 +180,24 @@ function CloneSection()
 
 /* === Time Slot Handlers === */
 
+function AutoTimeSlotNames()
+{
+	var $sections = $(".section.list-item");
+	for (var i = 0; i < $sections.length; i++)
+	{
+		var $timeSlotNames = $($sections[i]).find(".time-slot-name");
+		for (var j = 0; j < $timeSlotNames.length; j++)
+		{
+			$($timeSlotNames[j]).attr("placeholder", "Class " + (j + 1));
+		}
+	}
+}
+
 function AddTimeSlot()
 {
 	AddTimeSlotLoc($(this).siblings(".time-slot-list-container"));
+	
+	AutoTimeSlotNames();
 }
 function AddTimeSlotLoc(location)
 {
@@ -205,11 +224,15 @@ function RemoveTimeSlot()
 	{
 		AddTimeSlotLoc($list);
 	}
+	
+	AutoTimeSlotNames();
 }
 
 function CloneTimeSlot()
 {
 	$(this).closest(".time-slot.list-item").after($(this).closest(".time-slot.list-item").clone(true));
+	
+	AutoTimeSlotNames();
 }
 
 function DayButtonClick()
@@ -331,6 +354,30 @@ function ToggleCompare()
 	}
 	
 	$("#compare-toggle").toggleClass("active");
+}
+
+function ExportSchedule(event)
+{
+	target = event.data;
+
+	console.log("==============\n Export Schedule\n==============");
+	
+	if (ValidSchedules.length)
+	{
+		for (var j = 0; j < ValidSchedules[target.ActiveSchedule].length; j++)
+		{
+			var course = ValidSchedules[target.ActiveSchedule][j];
+			
+			console.log("Course:"+course.Name);
+			console.log("Section:"+course.Section.Name);
+			
+			for (var t = 0; t < course.Section.TimeSlotList.length; t++)
+			{
+				var timeslot = course.Section.TimeSlotList[t];
+				console.log("TimeSlot:"+timeslot.toString());
+			}
+		}
+	}
 }
 
 /* === End Schedule Handlers === */

@@ -18,6 +18,7 @@
 	[x] simultaneous viewing
 	[ ] highlightable schedules
 [ ] highlight sections being shown on active valid schedule
+	[ ] add selected schedule indicator (for when comparing schedules)
 [ ] save and load
 [ ] dynamic list animations
 [ ] add interactivity on schedule canvas

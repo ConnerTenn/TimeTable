@@ -419,6 +419,8 @@ class HTMLSchedule
 		this.$(".schedule-content, .time-column").mouseenter(this, function (event) { var target = event.data; target.$(".mouse-line").removeClass("invisible"); target.GridHeightOffset = target.$(".schedule-content").offset().top; });
 		this.$(".schedule-content, .time-column").mouseleave(this, function (event) { event.data.$(".mouse-line").addClass("invisible"); });
 		
+		this.$(".schedule-export").click(this, ExportSchedule);
+		
 		$(window).resize(this, this.Resize);
 	}
 	

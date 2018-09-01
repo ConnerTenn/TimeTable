@@ -11,7 +11,9 @@ function ReadTimeSlot(timeslots, section)
 		var $timeslot = $(timeslots[t]);
 		var timeslot = new TimeSlot();
 
-		timeslot.Name = $timeslot.find(".time-slot-name").val();
+		timeslot.Name = $timeslot.find(".time-slot-name").val(); 
+		if (timeslot.Name.length === 0) { timeslot.Name = $timeslot.find(".time-slot-name").attr("placeholder"); }
+		
 		timeslot.Week = $timeslot.find(".week-selector").val();
 		timeslot.Start.Min = TimeToMin($timeslot.find(".time-start").val());
 		timeslot.End.Min = TimeToMin($timeslot.find(".time-end").val());
@@ -248,3 +250,9 @@ function DoGenSchedule()
 }
 
 $("button.gen-schedule").click(DoGenSchedule);
+
+
+function UpdateListActiveElemDisplay()
+{
+	
+}
