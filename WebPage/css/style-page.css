@@ -300,14 +300,14 @@ button.gen-schedule {
 	border-bottom: 3px solid red;
 	width: 100%;
 	right: 0px;
-}
+}/*
 .mouse-line::after {
 	content: '';
 	position: absolute;
 	border-bottom: 3px solid orange;
 	left: -75px;
 	width: 75px;
-}
+}*/
 
 .schedule-item {
 	background-color: transparent;
