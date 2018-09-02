@@ -18,12 +18,13 @@
 
 /* === Accordian Handling === */
 
-$(".accordion-button").click(AccordionClick);
+//$(".accordion-button").click(AccordionClick);
 
 function AccordionClick()
 {
-	this.parentElement.nextElementSibling.classList.toggle("active");
-	if (this.parentElement.nextElementSibling.classList.contains("active"))
+	//this.parentElement.nextElementSibling.classList.toggle("active");
+	$(this).parent().siblings(".accordion-content").toggleClass("active");
+	if ($(this).parent().siblings(".accordion-content").hasClass("active"))
 	{
 		this.firstChild.classList.remove("fa-arrow-alt-circle-right")
 		this.firstChild.classList.add("fa-arrow-alt-circle-down");
@@ -33,6 +34,8 @@ function AccordionClick()
 		this.firstChild.classList.remove("fa-arrow-alt-circle-down")
 		this.firstChild.classList.add("fa-arrow-alt-circle-right");
 	}
+	
+	return false;
 }
 
 /* === End Accordian Handling === */
@@ -373,12 +376,13 @@ function ExportSchedule(event)
 			console.log("Course:"+course.Name);
 			console.log("Section:"+course.Section.Name);
 			
-			$Popup.children("#popup-content").append("Course:" + course.Name + "\n");
+			$Popup.children("#popup-content").append(course.Name + " " + course.Section.Name + "<br/>");
 			
 			for (var t = 0; t < course.Section.TimeSlotList.length; t++)
 			{
 				var timeslot = course.Section.TimeSlotList[t];
 				console.log("TimeSlot:"+timeslot.toString());
+				$Popup.children("#popup-content").append("&nbsp&nbsp&nbsp&nbsp" +timeslot.toString() + "<br/>");
 			}
 		}
 	}
@@ -445,6 +449,7 @@ function InitTimePicker()
 var $Popup = $("#popup");
 function ShowExportPopup(target)
 {
+	ClosePopup();
 	$Popup.removeClass("hidden");
 	$Popup.addClass("export-popup");
 	
@@ -452,20 +457,23 @@ function ShowExportPopup(target)
 }
 
 $("#popup-close").click(ClosePopup);
+$Popup.focusout(ClosePopup);
 function ClosePopup()
 {
 	$Popup[0].classList = "hidden";
-	$Popup.children("#popup-container").remove();
+	$Popup.children("#popup-content").html("");
+	$Popup.children("#popup-content").children().remove();
 }
 
 $(window).resize(UpdatePopupPos);
 function UpdatePopupPos()
 {
-	var width = Math.min($(document).width() - 200, 300);
-	var height = Math.min($(document).height() - 200, 300);
+	var width = Math.min($(document).width() - 100, 300);
+	var height = Math.min($(document).height() - 100, 300);
 	$Popup.offset({ top: $(document).height() / 2 - height / 2, left: $(document).width() / 2 - width / 2 });
 	$Popup.css("width", width);
 	$Popup.css("height", height);
+	$Popup.focus();
 }
 
 /* === End General Handlers === */

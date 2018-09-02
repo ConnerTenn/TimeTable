@@ -139,7 +139,7 @@ class TimeSlot
 	{
 		var outStr = "";
 		
-		outStr += "\"" + this.Name + "\" \"" + this.Week + "\" ";
+		outStr += this.Name + "  " + this.Week + " ";
 		for (var i = 0; i < 7; i++)
 		{
 			if (this.Days & (1 << i)) { outStr += DayNames[1][i] + " "; }

@@ -488,6 +488,12 @@ button.gen-schedule {
 	bottom: 10px;
 }
 
+#popup-content {
+	padding: 10px;
+	margin-bottom: 15px;
+	border: white solid 1px;
+}
+
 /* === Global Element Properties === */
 
 button:focus {
