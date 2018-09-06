@@ -338,6 +338,34 @@ function SelectWeek(event)
 	DrawSchedule(target);
 }
 
+/*
+var HoverTimer = 0;
+var $HoverElem = 0;
+$(".schedule-item-template").hover(StartHoverTimer, CancelHoverTimer);
+//$("#schedule-tooltip").hover(ShowScheduleTooltip, HideScheduleTooltip);
+function StartHoverTimer() 
+{
+	//console.log("timer");
+	HoverTimer = setTimeout(ShowScheduleTooltip, 1000);
+	$HoverElem = $(this);
+}
+function CancelHoverTimer() { clearTimeout(HoverTimer); HideScheduleTooltip(); }
+function ShowScheduleTooltip()
+{
+	$("#schedule-tooltip").css("visibility", "visible");
+	$("#schedule-tooltip").offset({ left: $HoverElem.offset().left + $HoverElem.outerWidth()/2, top:$HoverElem.offset().top + $HoverElem.outerHeight()/2 } );
+	//console.log("Show Tooltip");
+	$("#schedule-tooltip").stop().animate({ opacity: 1 }, 200, "linear", null);
+}
+function HideScheduleTooltip()
+{
+	//console.log("Hide Tooltip");
+	$("#schedule-tooltip").stop().animate({ opacity: 0 }, 200, "linear", function () { 
+			$("#schedule-tooltip").css("visibility", "hidden"); 
+		});
+}
+*/
+
 $("#compare-toggle").click(ToggleCompare)
 function ToggleCompare()
 {	
@@ -361,7 +389,7 @@ function ToggleCompare()
 
 function ExportSchedule(event)
 {
-	target = event.data;
+	var target = event.data;
 
 	ShowExportPopup(target);
 

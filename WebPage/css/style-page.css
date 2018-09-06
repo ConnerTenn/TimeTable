@@ -313,6 +313,7 @@ button.gen-schedule {
 	border-bottom: 3px solid red;
 	width: 100%;
 	right: 0px;
+	pointer-events:none;
 }/*
 .mouse-line::after {
 	content: '';
@@ -335,7 +336,18 @@ button.gen-schedule {
 	overflow: hidden;
 	width: 100%;
 	box-sizing: border-box;
+	cursor: pointer;	
 }
+#schedule-tooltip {
+	background: #74797E;
+	width: 50px;
+	height: 100px;
+	position: absolute;
+	visibility: hidden;
+	pointer-events:none;
+	opacity: 0;
+}
+
 .week-display-selectors{
 	display: table;
     table-layout: fixed;

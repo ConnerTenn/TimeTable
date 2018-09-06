@@ -7,6 +7,8 @@
 	[x] course add, reserve add, and generate schedule buttons should not scroll
 	[ ] time picker scrolls off the page
 [ ] fix collapsable list items not working
+[ ] implement visibility css element for hidden and invisible elements (maybe)
+[ ] bind events to templates and use clone(true)
 
 ==== Features ====
 [ ] change and and remove buttons designs

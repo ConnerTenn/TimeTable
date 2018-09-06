@@ -369,7 +369,7 @@ class HTMLSchedule
 	UpdateScheduleTimes()
 	{
 		this.$(".time-column").children(":not(:first)").remove();
-		this.$(".time-divider-container").children().remove();
+		this.$(".time-divider-container").children(":not(:first)").remove();
 		
 		var shrink = this.$(".schedule-header").width() < 450;
 		
