@@ -65,13 +65,13 @@ input[type=text].course-name, input[type=text].section-name, input[type=text].re
 	color: lightgray;
 }
 
-.course-remove, .section-remove, .time-slot-remove, .course-clone{
+.course-remove, .section-remove, .time-slot-remove, .course-clone, .section-clone, .time-slot-clone, .course-enable, .section-enable, .time-slot-enable {
 	float: right;
 }
 
 .course-clone{
-	background: transparent;
-	border: none;
+	/*background: transparent;
+	border: none;*/
 }
 
 /* Accordion Styling */
