@@ -10,9 +10,9 @@
 			<div class="colour"></div>
 			<button class="accordion-button"><i class="fas fa-arrow-alt-circle-down"></i></button>
 			<input type="text" class="course-name" placeholder="Course Name">
-			<button class="course-remove"><i class="fas fa-minus-circle"></i></button>
-			<button class="course-clone"><i class="fas fa-clone"></i></button>
-			<input type="checkbox" class="course-enable" checked="true" />
+			<button class="remove course-remove"><i class="fas fa-minus-circle"></i></button>
+			<button class="clone course-clone"><i class="fas fa-clone"></i></button>
+			<button class="enable course-enable checked"></button>
 		</div>
 		<div class="accordion-content active">
 			<button class="section-add"><i class="fas fa-plus-circle"> Section</i></button>
@@ -26,9 +26,9 @@
 		<div class="accordion-header">
 			<button class="accordion-button"><i class="fas fa-arrow-alt-circle-down"></i></button>
 			<input type="text" class="section-name" placeholder="Section Name">
-			<button class="section-remove"><i class="fas fa-minus-circle"></i></button>
-			<button class="section-clone"><i class="fas fa-clone"></i></button>
-			<input type="checkbox" class="section-enable" checked="true" />
+			<button class="remove section-remove"><i class="fas fa-minus-circle"></i></button>
+			<button class="clone section-clone"><i class="fas fa-clone"></i></button>
+			<button class="enable section-enable checked" ></button>
 		</div>
 		<div class="accordion-content active">
 			<button class="time-slot-add"><i class="fas fa-plus-circle"> Time Slot</i></button>
@@ -53,9 +53,9 @@
 			<option>Week 1</option>
 			<option>Week 2</option>
 		</select>
-		<button class="time-slot-remove"><i class="fas fa-minus-circle"></i></button>
-		<button class="time-slot-clone"><i class="fas fa-clone"></i></button>
-		<input type="checkbox" class="time-slot-enable" checked="true" />
+		<button class="remove time-slot-remove"><i class="fas fa-minus-circle"></i></button>
+		<button class="clone time-slot-clone"><i class="fas fa-clone"></i></button>
+		<button class="enable time-slot-enable checked" ></button>
 	</div>
 	<!-- Reserve Template -->
 	<div class="reserve-template hidden">
@@ -63,7 +63,9 @@
 			<div class="colour"></div>
 			<button class="accordion-button"><i class="fas fa-arrow-alt-circle-down"></i></button>
 			<input type="text" class="reserve-name" placeholder="Reserved Time">
-			<button class="reserve-remove"><i class="fas fa-minus-circle"></i></button>
+			<button class="remove reserve-remove"><i class="fas fa-minus-circle"></i></button>
+			<button class="clone reserve-clone"><i class="fas fa-clone"></i></button>
+			<button class="enable reserve-enable checked" ></button>
 		</div>
 		<div class="accordion-content active">
 			<button class="time-slot-add"><i class="fas fa-plus-circle"> Time Slot</i></button>

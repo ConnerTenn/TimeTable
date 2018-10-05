@@ -23,9 +23,9 @@ function ReadTimeSlot(timeslots, section)
 			timeslot.Days += ($timeslot.find(".day-button." + DayNames[1][i])[0].classList.contains("active") ? 1 : 0) << i;
 		}
 		
-		if (!timeslot.Valid()) { $timeslot.find(".time-slot-enable").prop("checked", false); }
+		if (!timeslot.Valid()) { $timeslot.find(".time-slot-enable").removeClass("checked"); }
 		
-		if ($timeslot.find(".time-slot-enable").prop("checked"))
+		if ($timeslot.find(".time-slot-enable").hasClass("checked"))
 		{
 			section.TimeSlotList.push(timeslot);
 		}
@@ -56,17 +56,17 @@ function ReadCourseData()
 			
 			ReadTimeSlot(timeslots, section);
 			
-			if (!section.Valid()) { $section.find(".section-enable").prop("checked", false); }
+			if (!section.Valid()) { $section.find(".section-enable").removeClass("checked"); }
 			
-			if ($section.find(".section-enable").prop("checked"))
+			if ($section.find(".section-enable").hasClass("checked"))
 			{
 				course.SectionList.push(section);
 			}
 		}
 		
-		if (!course.Valid()) { $course.find(".course-enable").prop("checked", false); }
+		if (!course.Valid()) { $course.find(".course-enable").removeClass("checked"); }
 		
-		if ($course.find(".course-enable").prop("checked"))
+		if ($course.find(".course-enable").hasClass("checked"))
 		{
 			RequiredCourseList.push(course);
 		}

@@ -65,13 +65,36 @@ input[type=text].course-name, input[type=text].section-name, input[type=text].re
 	color: lightgray;
 }
 
-.course-remove, .section-remove, .time-slot-remove, .course-clone, .section-clone, .time-slot-clone, .course-enable, .section-enable, .time-slot-enable {
+.remove, .clone, .enable {
 	float: right;
 }
 
-.course-clone{
-	/*background: transparent;
+.clone {
+	/*background: none;
 	border: none;*/
+	content: "<i class='fas fa-clone'></i>";
+}
+.clone:hover {
+	content: "";
+}
+
+.enable {
+	background: #555555;
+	border: none;
+	border-radius: 50%;
+	width: 18px;
+	height: 18px;
+	border: solid 2px lightgray;
+	box-sizing: border-box;
+}
+.enable:hover {
+	background: darkgray;
+}
+.enable.checked {
+	background: #00aadd;
+}
+.enable.checked:hover {
+	background: #00bbee;
 }
 
 /* Accordion Styling */
@@ -259,10 +282,12 @@ button.gen-schedule {
 	background: #273746;
 	/*border: solid 1px white;*/
 	min-width: 280px;
+	padding-top: 10px;
 }
 
 .time-header{
 	background: #273746;
+	padding-top: 10px;
 }
 .time-column {
 	background: #273746;
@@ -365,22 +390,22 @@ button.gen-schedule {
 	text-align: center;
 	display: table-cell;
 	vertical-align: middle;
-	border-bottom: 2px solid darkgray;
+	/*border-bottom: 2px solid darkgray;*/
 }
 
 .week-display-selector-week1{
 	border-top-left-radius: 7px;
-	border-right: 2px solid darkgray;
+	/*border-right: 2px solid darkgray;*/
 }
 
 .week-display-selector-examweek{
 	border-top-right-radius: 7px;
-	border-left: 2px solid darkgray;
+	/*border-left: 2px solid darkgray;*/
 }
 
 .week-display-selector.active {
 	background: #273746;
-	border-bottom: none;
+	/*border-bottom: none;*/
 }
 
 .schedule-select-inc, .schedule-select-dec, .schedule-select-disp{
@@ -506,6 +531,35 @@ button.gen-schedule {
 	border: white solid 1px;
 }
 
+#compare-toggle {
+	background: #E74C3C;
+	color: white;
+	border-radius: 10px;
+	font-size: 15px;
+	padding: 8px;
+	border: none;
+	cursor: pointer;
+}
+#compare-toggle:hover {
+	background: #F75C4C;
+}
+#compare-toggle.active {
+	background: #25b7c4;
+}
+
+.schedule-export {
+	background: #54595E;
+	color: white;
+	border-radius: 10px;
+	font-size: 15px;
+	padding: 8px;
+	border: none;
+	cursor: pointer;
+}
+.schedule-export:hover{
+	background: #74797E;
+}
+
 /* === Global Element Properties === */
 
 button:focus {
@@ -529,6 +583,4 @@ input[type=text] {
 	display: none;
 }
 
-#compare-toggle.active {
-	background: #25b7c4;
-}
+
