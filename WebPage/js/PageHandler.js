@@ -417,6 +417,12 @@ function ToggleCompare()
 		$("#center-content").children().remove();
 		$("#center-content").css("width", "0px");
 		$("#main-content").css("grid-template-columns", "1fr auto 500px");
+		ScheduleList.pop();
+	}
+	
+	for (var i = 0; i < ScheduleList.length; i++)
+	{
+		ScheduleList[i].Resize({ data: ScheduleList[i]});
 	}
 	
 	$("#compare-toggle").toggleClass("active");
@@ -540,6 +546,7 @@ function UpdatePopupPos()
 	var width = Math.min($(document).width() - 100, 300);
 	var height = Math.min($(document).height() - 100, 300);
 	$Popup.offset({ top: $(document).height() / 2 - height / 2, left: $(document).width() / 2 - width / 2 });
+	//$Popup.offset({ top: "50%", left: "50%"});
 	$Popup.css("width", width);
 	$Popup.css("height", height);
 	$Popup.focus();

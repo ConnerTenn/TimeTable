@@ -371,7 +371,7 @@ class HTMLSchedule
 		this.$(".time-column").children(":not(:first)").remove();
 		this.$(".time-divider-container").children(":not(:first)").remove();
 		
-		var shrink = this.$(".schedule-header").width() < 450;
+		var shrink = this.$(".schedule-header").width()*2 < 450*2;
 		
 		for (var i = 1; i < (23 - 7) * 2; i++)
 		{
@@ -394,7 +394,7 @@ class HTMLSchedule
 	UpdateScheduleNames()
 	{
 		this.$(".schedule-header").children().remove();
-		var set = (this.$(".schedule-header").width() < 660 ? 1 : 0);
+		var set = (this.$(".schedule-header").width()*2 < 660*2 ? 1 : 0);
 		for (var i = 0; i < 7; i++)
 		{
 			this.$(".schedule-header").append("<div>" + DayNames[set][i] + "</div>");

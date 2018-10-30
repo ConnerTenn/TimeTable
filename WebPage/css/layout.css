@@ -18,7 +18,7 @@
 
 /* === Dynamic List Styling === */
 
-.course-remove {
+.course-remove, .reserve-remove {
 	margin-right: 5px;
 }
 
@@ -46,6 +46,9 @@ input[type=text].course-name, input[type=text].section-name, input[type=text].re
 
 .remove, .clone, .enable {
 	float: right;
+}
+.clone, .enable {
+	margin-right: 5px;
 }
 
 .enable {
