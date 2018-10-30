@@ -1,0 +1,50 @@
+body {
+	padding: 20px;
+}
+.slides {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	width: 300px;
+}
+.slide {
+	padding: 15px;
+	background-color: #2F2F2F;
+	margin-bottom: 15px;
+	text-align: center;
+	color: #FFF;
+	border: 2px solid #444;
+	opacity: 0.5;
+}
+
+
+.contractor {
+	border: 1px solid red;
+	
+}
+
+.expander {
+	border: 1px solid blue;
+}
+/*.slide-placeholder:after, .expander::after {
+	content: " ";
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 15px;
+	background-color: #FFF;
+}*/
+
+.slide2 {
+	height: 30px;
+}
+.slide3 {
+	height: 50px;
+}
+.slide4 {
+	height: 90px;
+}
+.slide5 {
+	height: 35px;
+}

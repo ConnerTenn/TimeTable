@@ -1,0 +1,48 @@
+:root {
+	--black: #060606;
+	--dark-grey: #303030;
+	--grey: #888888;
+	--light-grey: #C0C0C0;
+	
+	--dark-red: #660000;
+	--red: #A00000;
+	--light-red: #C00000;
+	--dark-green: #006600;
+	--green: #00A000;
+	--light-green: #00C000;
+	--dark-blue: #000066;
+	--blue: #0000A0;
+	--light-blue: #0000C0;
+}
+
+body {
+	background: var(--black);
+}
+
+
+table{
+	border-spacing: 0;
+	border-collapse: collapse;
+}
+
+td {
+	width: 50px;
+	height: 50px;
+}
+
+.black { background: var(--black); }
+.dark-grey { background: var(--dark-grey); }
+.grey { background: var(--grey); }
+.light-grey { background: var(--light-grey); }
+
+.dark-red { background: var(--dark-red); }
+.red { background: var(--red); }
+.light-red { background: var(--light-red); }
+
+.dark-green { background: var(--dark-green); }
+.green { background: var(--green); }
+.light-green { background: var(--light-green); }
+
+.dark-blue { background: var(--dark-blue); }
+.blue { background: var(--blue); }
+.light-blue { background: var(--light-blue); }

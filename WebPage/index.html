@@ -1,82 +1,151 @@
 <html>
-<link rel="stylesheet" type="text/css" href="css/style-page.css">
+<link rel="icon" href="https://cdn2.iconfinder.com/data/icons/flat-seo-web-ikooni/128/flat_seo-49-512.png">
+<link rel="stylesheet" type="text/css" href="css/layout.css">
+<link rel="stylesheet" type="text/css" href="css/dark-theme.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 <head>
 	<!-- Course Template -->
-	<div class="CourseTemplate">
-		<div class="accordionHeader">
-			<button class="accordionButton"><i class="fas fa-arrow-alt-circle-down"></i></button>
+	<div class="course-template hidden">
+		<div class="accordion-header">
+			<div class="colour"></div>
+			<button class="accordion-button"><i class="fas fa-arrow-alt-circle-down"></i></button>
 			<input type="text" class="course-name" placeholder="Course Name">
-			<button class="courseRemove"><i class="fas fa-minus-circle"></i></button>
+			<button class="remove course-remove"><i class="fas fa-minus-circle"></i></button>
+			<button class="clone course-clone"><i class="fas fa-clone"></i></button>
+			<button class="enable course-enable checked"></button>
 		</div>
-		<div class="accordionContent active">
-			<button class="sectionAdd"><i class="fas fa-plus-circle"></i></button>
+		<div class="accordion-content active">
+			<button class="section-add"><i class="fas fa-plus-circle"> Section</i></button>
 			<!-- Container for the list of sections -->
-			<div class="SectionListContainer">
+			<div class="section-list-container">
 			</div>
 		</div>
 	</div>
 	<!-- Section Template -->
-	<div class="SectionTemplate">
-		<div class="accordionHeader">
-			<button class="accordionButton"><i class="fas fa-arrow-alt-circle-down"></i></button>
+	<div class="section-template hidden">
+		<div class="accordion-header">
+			<button class="accordion-button"><i class="fas fa-arrow-alt-circle-down"></i></button>
 			<input type="text" class="section-name" placeholder="Section Name">
-			<button class="sectionRemove"><i class="fas fa-minus-circle"></i></button>
+			<button class="remove section-remove"><i class="fas fa-minus-circle"></i></button>
+			<button class="clone section-clone"><i class="fas fa-clone"></i></button>
+			<button class="enable section-enable checked" ></button>
 		</div>
-		<div class="accordionContent active">
-			<button class="timeSlotAdd"><i class="fas fa-plus-circle"></i></button>
+		<div class="accordion-content active">
+			<button class="time-slot-add"><i class="fas fa-plus-circle"> Time Slot</i></button>
 			<!-- Container for the list of timeslots -->
-			<div class="TimeSlotListContainer">
+			<div class="time-slot-list-container">
 			</div>
 		</div>
 	</div>
-	<!-- TimeSlotTemplate Template -->
-	<div class="TimeSlotTemplate">
+	<!-- time-slot-template Template -->
+	<div class="time-slot-template hidden">
+		<input class="time-slot-name" type="text" placeholder="Class">
 		<button class="day-button sun day-button-S" type="button" onclick="">S</button>
 		<button class="day-button mon" type="button" onclick="">M</button>
-		<button class="day-button tue" type="button" onclick="">T</button>
+		<button class="day-button tue day-button-T" type="button" onclick="">T</button>
 		<button class="day-button wed day-button-W" type="button" onclick="">W</button>
-		<button class="day-button thu" type="button" onclick="">T</button>
+		<button class="day-button thu day-button-T" type="button" onclick="">T</button>
 		<button class="day-button fri day-button-F" type="button" onclick="">F</button>
 		<button class="day-button sat day-button-S" type="button" onclick="">S</button>
-		<input type="text" class="time-start" value="7:00am" onfocus="this.select()">
-		<input type="text" class="time-end" value="8:00am" onfocus="this.select()">
-		<button class="timeslotRemove"><i class="fas fa-minus-circle"></i></button>
+		<input type="text" class="time-start" value="7:00am">
+		<input type="text" class="time-end" value="8:00am">
+		<select class="week-selector">
+			<option>Week 1</option>
+			<option>Week 2</option>
+		</select>
+		<button class="remove time-slot-remove"><i class="fas fa-minus-circle"></i></button>
+		<button class="clone time-slot-clone"><i class="fas fa-clone"></i></button>
+		<button class="enable time-slot-enable checked" ></button>
 	</div>
-	<!-- Grid Item TimeSlot Template -->
-	<div class="gridSlotTemplate">
+	<!-- Reserve Template -->
+	<div class="reserve-template hidden">
+		<div class="accordion-header">
+			<div class="colour"></div>
+			<button class="accordion-button"><i class="fas fa-arrow-alt-circle-down"></i></button>
+			<input type="text" class="reserve-name" placeholder="Reserved Time">
+			<button class="remove reserve-remove"><i class="fas fa-minus-circle"></i></button>
+			<button class="clone reserve-clone"><i class="fas fa-clone"></i></button>
+			<button class="enable reserve-enable checked" ></button>
+		</div>
+		<div class="accordion-content active">
+			<button class="time-slot-add"><i class="fas fa-plus-circle"> Time Slot</i></button>
+			<!-- Container for the list of timeslots -->
+			<div class="time-slot-list-container">
+			</div>
+		</div>
+	</div>
+	<!-- Schedule Item TimeSlot Template -->
+	<div class="schedule-item-template hidden">
 		<div class="course-name"></div>
 		<div class="section-name"></div>
+		<div class="time-slot-name"></div>
+	</div>
+	<!-- Schedule Container -->
+	<div class="schedule-container-template hidden">
+		<div class="schedule-select-nav-buttons">
+			<button class="schedule-select-dec" style="display:inline-block;">&lt</button>
+			<form type="text" class="schedule-select-disp" style="display:inline-block;">0/0</form>
+			<button class="schedule-select-inc" style="display:inline-block;">&gt</button>
+		</div>
+		<div class="week-display-selectors">
+			<div class="week-display-selector week-display-selector-week1 active">Week 1</div>
+			<div class="week-display-selector">Week 2</div>
+			<div class="week-display-selector week-display-selector-examweek">Exam Week</div>
+		</div>
+		<div class="schedule">
+			<div class="time-header"> </div>
+			<div class="schedule-header">
+			</div>
+			<div class="time-column">
+				<div class="time-label-spacer">
+					<div class="time-label"></div>
+				</div>
+			</div>
+			<div class="schedule-content">
+				<div class="time-divider-container">
+					<div class="time-divider"></div>
+				</div>
+				<div class="mouse-line invisible"></div>
+			</div>
+		</div>
+		<button class="schedule-export">Export</button>
 	</div>
 </head>
 <!-- Body -->
 <body>
+	<button id="compare-toggle">Compare</button>
 	<div id="main-content">
 		<!-- Schedule Grid Container -->
 		<div id="left-content"> 
-			<div class="grid-container">
-				<div class="grid-item space">###</div>
-				<div class="grid-item label">Sunday</div>
-				<div class="grid-item label">Monday</div>
-				<div class="grid-item label">Tuesday</div>
-				<div class="grid-item label">Wednesday</div>
-				<div class="grid-item label">Thursday</div>
-				<div class="grid-item label">Friday</div>
-				<div class="grid-item label">Saturday</div>
-			</div>
+			<!-- Schedule Container -->
+		</div>
+		<div id="center-content" style="width:0;">
 		</div>
 		<!-- List Container -->
 		<div id="right-content">
-			<button class="courseAdd"><i class="fas fa-plus-circle"></i></button>
+			<button class="course-add"><i class="fas fa-plus-circle"> Course</i></button>
+			<button class="reserve-add"><i class="fas fa-plus-circle"> Reserved Time</i></button>
 			<!-- Container for the list of courses -->
-			<div class="CourseListContainer">
+			<div class="list-scroll">
+				<div class="course-list-container">
+				</div>
+				<div class="reserve-list-container">
+				</div>
 			</div>
-			<button class="genSchedule">Generate Schedules</button>
+			<button class="gen-schedule"style="vertical-align:middle"><span>Generate Schedules</span></button>
 		</div>
+	</div>
+	<div id="popup-container" class="inv">
+		<div id="time-picker" class="invisible" tabindex="-1"></div>
+		<div id="popup" class="hidden" tabindex="-1">
+			<div id="popup-content"></div>
+			<button id="popup-close">Close</button>
+		</div>
+		<div id="schedule-tooltip"></div>
 	</div>
 </body>
 </html>
 <script src="vendor/jquery.min.js"></script>
-<script src="js/CourseObjects.js"></script>
+<script src="js/ProgramObjects.js"></script>
 <script src="js/Scheduler.js"></script>
 <script src="js/PageHandler.js"></script>
