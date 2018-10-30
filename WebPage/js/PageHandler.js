@@ -462,13 +462,15 @@ function ExportSchedule(event)
 
 $(".list-scroll").scroll(function () { $ActiveTimeBox.focusout(); } );
 
-$("#time-picker").focusin(ShowTimePicker);
-$("#time-picker").focusout(HideTimePicker);
+var $TimePicker = $("#time-picker")
+$TimePicker.focusin(ShowTimePicker);
+$TimePicker.focusout(HideTimePicker);
 var $ActiveTimeBox = 0;
 function ShowTimePicker(event)
 {
-	$("#time-picker").removeClass("invisible");
-	$("#time-picker").scrollTop(0);
+	$TimePicker.removeClass("invisible");
+	$TimePicker.addClass("visible");
+	$TimePicker.scrollTop(0);
 	if (event.data)
 	{
 		$ActiveTimeBox = $(this);
@@ -482,14 +484,15 @@ function HideTimePicker(event)
 {
 	//ActiveTimeBox = 0;
 	//console.log("Spawn ["+val+"]");
-	$("#time-picker").addClass("invisible");
+	$TimePicker.addClass("invisible");
+	$TimePicker.removeClass("inv");
 }
 
 function UpdateTimePickerPosition()
 {
 	if ($ActiveTimeBox) 
 	{
-		$("#time-picker").offset({ top: $ActiveTimeBox.position().top + $ActiveTimeBox[0].clientHeight + 1, left: $ActiveTimeBox.position().left });
+		$TimePicker.offset({ top: $ActiveTimeBox.position().top + $ActiveTimeBox[0].clientHeight + 1, left: $ActiveTimeBox.position().left });
 	}
 }
 
@@ -503,17 +506,19 @@ function InitTimePicker()
 {
 	for (var i = 0; i < (23-7)*2; i++)
 	{
-		$("#time-picker").append("<div class=\"picker-elem\">" + ((Math.floor(i/2)+6)%12+1) + ":" + (i%2 ? "30" : "00") + ((i<=9?"am":"pm")) + "</div>");
+		$TimePicker.append("<div class=\"picker-elem\">" + ((Math.floor(i/2)+6)%12+1) + ":" + (i%2 ? "30" : "00") + ((i<=9?"am":"pm")) + "</div>");
 	}
 	$(".picker-elem").click(PickTime);
 }
 
+/* Popup */
 
 var $Popup = $("#popup");
 function ShowExportPopup(target)
 {
 	ClosePopup();
 	$Popup.removeClass("hidden");
+	$Popup.addClass("visible");
 	$Popup.addClass("export-popup");
 	
 	UpdatePopupPos();
@@ -523,7 +528,8 @@ $("#popup-close").click(ClosePopup);
 $Popup.focusout(ClosePopup);
 function ClosePopup()
 {
-	$Popup[0].classList = "hidden";
+	$Popup.addClass("hidden");
+	$Popup.removeClass("inv");
 	$Popup.children("#popup-content").html("");
 	$Popup.children("#popup-content").children().remove();
 }

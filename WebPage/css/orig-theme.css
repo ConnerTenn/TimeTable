@@ -1,10 +1,6 @@
 
 /* === Main Page Layout === */
 
-:root{
-	--back-frame: #060600
-}
-
 body {
   background-color: rgb(30, 30, 30, 1);
 }
@@ -93,6 +89,7 @@ input[type=text].course-name, input[type=text].section-name, input[type=text].re
 }
 
 .accordion-content {
+	padding-top: 10px;
 	/* transform: scaley(0); */
 	background: voilet;
 	display: none;
@@ -103,18 +100,26 @@ input[type=text].course-name, input[type=text].section-name, input[type=text].re
 }
 
 .course.list-item>.accordion-content {
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
 .section.list-item>.accordion-content {
+	padding-right: 10px;
+	padding-left: 10px;
 }
 
 .reserve.list-item>.accordion-content {
+	padding-right: 10px;
+	padding-left: 10px;
 }
 
 /* Course */
 
 .course.list-item {
 	background-color: #273746;
+	margin-top: 10px;
+	padding: 7px;
 	border-radius: 10px;
 }
 
@@ -122,6 +127,8 @@ input[type=text].course-name, input[type=text].section-name, input[type=text].re
 
 .section.list-item {
 	background-color: #34495E;
+	margin-top: 5px;
+	padding: 7px;
 	border-radius: 10px;
 }
 
@@ -129,6 +136,8 @@ input[type=text].course-name, input[type=text].section-name, input[type=text].re
 
 .time-slot.list-item {
 	background-color: #2E4053;
+	margin-top: 3.5px;
+	padding: 6px 0px 6px 5px;
 	border-radius: 10px;
 }
 
@@ -478,6 +487,9 @@ button.gen-schedule {
 }
 
 .colour {
+	width: 100%;
+	height: 20px;
+	display: block;
 }
 
 #popup {
@@ -485,7 +497,6 @@ button.gen-schedule {
 	background: #74797E;
 	color: white;
 	border-radius: 10px;
-	outline: none;
 }
 
 #popup-close {
@@ -497,7 +508,7 @@ button.gen-schedule {
 #popup-content {
 	padding: 10px;
 	margin-bottom: 15px;
-	/*border: white solid 1px;*/
+	border: white solid 1px;
 }
 
 #compare-toggle {

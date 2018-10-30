@@ -1,10 +1,6 @@
 
 /* === Main Page Layout === */
 
-body {
-	
-  background-color: black;
-}
 
 #main-content {
   display: grid;
@@ -12,7 +8,6 @@ body {
 }
 
 #left-content, #right-content {
-  /*border: 1px solid rgba(0, 0, 0, 0.8);*/
   padding: 10px;
 }
 
@@ -23,34 +18,23 @@ body {
 
 /* === Dynamic List Styling === */
 
+.course-remove {
+	margin-right: 5px;
+}
+
 .accordion-button, .course-remove, .section-remove, .time-slot-remove, .reserve-remove {
-	/*padding-top: 30%;*/
 	align: center;
-	/*background-color: teal;*/
-	background: transparent;
 	padding: 2px 1px;
-    border: none;
-    color: white;
-    font-size: 16px;
+	font-size: 16px;
     cursor: pointer;
 }
 
 .course-add, .section-add, .time-slot-add, .reserve-add {
-	/*padding-top: 30%;*/
 	align: center;
-	/*background-color: teal;*/
-	background: #44494E;
 	padding: 6px;
-	border-radius: 3px;
 	margin-right: 5px;
-    border: none;
-    color: white;
     font-size: 16px;
     cursor: pointer;
-}
-
-.course-add:hover, .section-add:hover, .time-slot-add:hover, .reserve-add:hover {
-	background: #54595E
 }
 
 input[type=text].course-name, input[type=text].section-name, input[type=text].reserve-name {
@@ -58,50 +42,19 @@ input[type=text].course-name, input[type=text].section-name, input[type=text].re
 	text-align: left;
 	font-size: 1em;
 	padding: 2px;
-	background: transparent;
-	color: white;
-}
-.course-name::placeholder, .section-name::placeholder, .reserve-name::placeholder {
-	color: lightgray;
 }
 
 .remove, .clone, .enable {
 	float: right;
 }
 
-.clone {
-	/*background: none;
-	border: none;*/
-	content: "<i class='fas fa-clone'></i>";
-}
-.clone:hover {
-	content: "";
-}
-
 .enable {
-	background: #555555;
-	border: none;
-	border-radius: 50%;
 	width: 18px;
 	height: 18px;
-	border: solid 2px lightgray;
 	box-sizing: border-box;
-}
-.enable:hover {
-	background: darkgray;
-}
-.enable.checked {
-	background: #00aadd;
-}
-.enable.checked:hover {
-	background: #00bbee;
 }
 
 /* Accordion Styling */
-
-.accordion-header {
-	background: transparent;
-}
 
 .accordion-button-minus {
 	float:right;
@@ -109,12 +62,9 @@ input[type=text].course-name, input[type=text].section-name, input[type=text].re
 
 .accordion-content {
 	padding-top: 10px;
-	/* transform: scaley(0); */
-	background: voilet;
 	display: none;
 }
 .accordion-content.active {
-	/*transform: scaley(1);*/
 	display: block;
 }
 
@@ -136,28 +86,25 @@ input[type=text].course-name, input[type=text].section-name, input[type=text].re
 /* Course */
 
 .course.list-item {
-	background-color: #273746;
 	margin-top: 10px;
 	padding: 7px;
-	border-radius: 10px;
 }
 
 /* Section */
 
 .section.list-item {
-	background-color: #34495E;
 	margin-top: 5px;
 	padding: 7px;
-	border-radius: 10px;
 }
 
 /* Time Slot */
 
 .time-slot.list-item {
-	background-color: #2E4053;
-	margin-top: 3.5px;
-	padding: 6px 0px 6px 5px;
-	border-radius: 10px;
+	padding: 3px 5px 3px 6px;
+}
+.time-slot.list-item>* {
+	margin-top: 3px;
+	margin-bottom: 3px;
 }
 
 input[type=text].time-start, input[type=text].time-end{
@@ -169,18 +116,11 @@ input[type=text].time-start, input[type=text].time-end{
 }
 
 .day-button{
-	border: none;
-	border-radius: 50%;
 	width: 24px;
 	height: 24px;
 	font-size: 14px;
-	font-weight: bold; 
-	/*background: OLIVE;*/
-	/*background: -webkit-linear-gradient(left, #25c481, #25b7c4);
-	background: linear-gradient(to right, #25c481, #25b7c4);*/
-	background: #25b7c4;
+	font-weight: bold;
 	cursor: pointer;
-	color: white;
 	padding-right: 2.5%;
 }
 .day-button-W{
@@ -195,25 +135,12 @@ input[type=text].time-start, input[type=text].time-end{
 	padding-right: 2%;
 }
 
-.day-button:hover{
-	background: lightblue;
-}
-.day-button.active
-{
-	background: #E74C3C;
-}
-.day-button.active:hover
-{
-	background: MOCCASIN;
-}
 
 /* Reserve */
 
 .reserve.list-item {
-	background-color: #34495E;
 	margin-top: 10px;
 	padding: 7px;
-	border-radius: 10px;
 }
 
 /* Generate Button */
@@ -225,42 +152,38 @@ button.gen-schedule {
 
 .gen-schedule {
 	display: inline-block;
-  border-radius: 10px;
-  background-color: #E74C3C;
-  border: none;
-  color: #FFFFFF;
-  text-align: center;
-  font-size: 18px;
-  padding: 10px;
-  width: 50%;
-  transition: all 0.5s;
-  cursor: pointer;
-  margin: 5px;
+	text-align: center;
+	font-size: 18px;
+	padding: 10px;
+	width: 50%;
+	transition: all 0.5s;
+	cursor: pointer;
+	margin: 5px;
 }
 
 .gen-schedule span {
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 0.5s;
+	cursor: pointer;
+	display: inline-block;
+	position: relative;
+	transition: 0.5s;
 }
 
 .gen-schedule span:after {
-  content: '\00bb';
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -20px;
-  transition: 0.5s;
+	content: '\00bb';
+	position: absolute;
+	opacity: 0;
+	top: 0;
+	right: -20px;
+	transition: 0.5s;
 }
 
 .gen-schedule:hover span {
-  padding-right: 25px;
+  	padding-right: 25px;
 }
 
 .gen-schedule:hover span:after {
-  opacity: 1;
-  right: 0;
+	opacity: 1;
+	right: 0;
 }
 
 
@@ -268,42 +191,26 @@ button.gen-schedule {
 /* === Schedule Table === */
 
 .schedule {
-	
 	display: grid;
 	grid-template-columns: auto 1fr;
-	grid-template-rows: 40px 1fr; 
-	color:white;
+	grid-template-rows: 40px 1fr;
 	text-transform: UPPERCASE;
 	text-align: center;
 }
 .schedule-header {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-	background: #273746;
-	/*border: solid 1px white;*/
 	min-width: 280px;
 	padding-top: 10px;
 }
 
 .time-header{
-	background: #273746;
 	padding-top: 10px;
-}
-.time-column {
-	background: #273746;
-	/*border: solid 1px white;*/
 }
 .schedule-content {
 	display: grid;
 	grid-template-columns: 0px 1fr 1fr 1fr 1fr 1fr 1fr 1fr 0px;
 	position: relative; 
-	/*border: white 1px solid;*/
-	border: solid 2px #555555;
-}
-.day-column {
-	border: solid 2px #555555;
-	/*width:50px;*/
-	/*flex: 1 1 auto;*/
 }
 .day-container {
 	position: relative;
@@ -311,8 +218,6 @@ button.gen-schedule {
 
 .time-divider, .time-label-spacer {
 	height:30px;
-	/*width: 10px;
-	background: olivedrab;*/
 }
 
 .time-label {
@@ -327,7 +232,6 @@ button.gen-schedule {
 	position: absolute;
 	margin: 0px;
 	margin-top: -1px;
-	border-bottom: 1px solid #555555;
 	width:100%;
 }
 
@@ -335,28 +239,16 @@ button.gen-schedule {
 	position: absolute;
 	margin: 0px;
 	margin-top: -1px;
-	border-bottom: 3px solid red;
 	width: 100%;
 	right: 0px;
 	pointer-events:none;
-}/*
-.mouse-line::after {
-	content: '';
-	position: absolute;
-	border-bottom: 3px solid orange;
-	left: -75px;
-	width: 75px;
-}*/
+}
 
 .schedule-item {
-	background-color: transparent;
-	border: 0px solid;
 	padding: 5px;
 	margin-top: -1px;
 	font-size: 15px;
 	text-align: center;
-	color: white;
-	border-left-width: 5px;
 	position: absolute;
 	overflow: hidden;
 	width: 100%;
@@ -364,7 +256,6 @@ button.gen-schedule {
 	cursor: pointer;	
 }
 #schedule-tooltip {
-	background: #74797E;
 	width: 50px;
 	height: 100px;
 	position: absolute;
@@ -381,49 +272,24 @@ button.gen-schedule {
 }
 
 .week-display-selector {
-	border: none;
-	background: #555555;
 	height: 30px;
 	cursor: pointer;
 	display: inline-block;
-	color: white;
 	text-align: center;
 	display: table-cell;
 	vertical-align: middle;
-	/*border-bottom: 2px solid darkgray;*/
-}
-
-.week-display-selector-week1{
-	border-top-left-radius: 7px;
-	/*border-right: 2px solid darkgray;*/
-}
-
-.week-display-selector-examweek{
-	border-top-right-radius: 7px;
-	/*border-left: 2px solid darkgray;*/
-}
-
-.week-display-selector.active {
-	background: #273746;
-	/*border-bottom: none;*/
 }
 
 .schedule-select-inc, .schedule-select-dec, .schedule-select-disp{
-	border: none;
-	border-radius: 4px;
-	background: #555555;
 	width:8.5%;
 	font-size: 16px;
 	padding: 5px;
 	width: 10%;
-	color: white;
 }
 
 .schedule-select-disp{
 	cursor: default;
-	background: transparent;
 	font-size: 1.1em;
-	color: white;
 	font-weight: bold;
 	text-align: center;
 }
@@ -437,48 +303,6 @@ button.gen-schedule {
 	width: 100%;
 }
 
-/*
-.grid-slot {
-	background: #E74C3C;
-}
-
-.grid-container {
-  display: grid;
-  grid-template-columns: auto 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  background-color: transparent;
-  
-}
-.grid-item {
-  background-color: transparent;
-  border: 1px solid #555555;
-  padding: 5px;
-  font-size: 15px;
-  text-align: center;
-  color: white;
-}
-.grid-item.label {
-	font-family: Courier New;
-	font-weight: bold;
-	border: 0px;
-	background-color: #273746;
-	text-transform: UPPERCASE;
-}
-.grid-item.time {
-	background-color: #273746;
-	border: 0px;
-}
-.grid-item.grid-slot {
-	background: white;
-	border-color: white;
-	border-width: 0px;
-	border-left-width: 5px;
-	/*opacity: 0.7;
-}
-.grid-item.space {
-	
-}*/
-
-
 
 /* General Element Styling */
 
@@ -491,8 +315,6 @@ button.gen-schedule {
 #time-picker {
 	display:block;
 	position:absolute;
-	color: white;
-	background:blue;
 	width:100px;
 	height:300px;
 	overflow-y:scroll;
@@ -502,21 +324,18 @@ button.gen-schedule {
 	margin: 0px 2px;
 	padding: 5px 2px;
 }
-.picker-elem:hover {
-	background: #25b7c4
-}
 
 .colour {
 	width: 100%;
-	height: 20px;
+	height: 27px;
+	border-radius: 5px;
+	margin-bottom: -24px;
+	margin-left: -3px;
 	display: block;
 }
 
 #popup {
 	position: absolute;
-	background: #74797E;
-	color: white;
-	border-radius: 10px;
 }
 
 #popup-close {
@@ -528,37 +347,23 @@ button.gen-schedule {
 #popup-content {
 	padding: 10px;
 	margin-bottom: 15px;
-	border: white solid 1px;
 }
 
 #compare-toggle {
-	background: #E74C3C;
-	color: white;
-	border-radius: 10px;
 	font-size: 15px;
 	padding: 8px;
-	border: none;
 	cursor: pointer;
-}
-#compare-toggle:hover {
-	background: #F75C4C;
-}
-#compare-toggle.active {
-	background: #25b7c4;
+	position: absolute;
+	top: 13px;
+	left: 15;
 }
 
 .schedule-export {
-	background: #54595E;
-	color: white;
-	border-radius: 10px;
 	font-size: 15px;
 	padding: 8px;
-	border: none;
 	cursor: pointer;
 }
-.schedule-export:hover{
-	background: #74797E;
-}
+
 
 /* === Global Element Properties === */
 
@@ -566,10 +371,7 @@ button:focus {
 	outline:0;
 }
 input[type=text] {
-    /*width: 60px;*/
     padding: 5px;
-    border: none;
-    border-radius: 4px;
     resize: vertical;
 	display: inline-block;
 	font-size: 10px;
@@ -584,3 +386,13 @@ input[type=text] {
 }
 
 
+.inv {
+	visibility: none;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+.visible {
+	visibility: visible;
+}
