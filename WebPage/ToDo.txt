@@ -26,7 +26,9 @@
 [ ] dynamic list animations
 [ ] add interactivity on schedule canvas
 	[ ] when click on course, scroll into view
-
+[ ] add course simultaneous view
+	- shows placements of all course
+	[ ] select to place 
 
 ==== Completed ====
 [x] Add horizontal line that follows mouse cursor
