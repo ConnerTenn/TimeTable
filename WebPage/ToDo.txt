@@ -28,4 +28,7 @@
 [ ] add interactivity on schedule canvas
 	[ ] when click on course, scroll into view
 	[ ] ability to disable section
+[ ] add course simultaneous view
+	- shows placements of all course
+	[ ] select to place 
 
