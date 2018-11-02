@@ -137,7 +137,13 @@ input[type=text].course-name, input[type=text].section-name, input[type=text].re
 	background-color: #2E4053;
 	border-radius: 10px;
 }
-
+input[type=text].time-slot-name {
+	box-sizing: border-box;
+	font-size: 1em;
+	padding: 2px;
+	height: 25px;
+	width: 180px;
+}
 input[type=text].time-start, input[type=text].time-end{
 	width: 80px;
 	display: inline-block;
