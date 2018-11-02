@@ -85,9 +85,15 @@ function ReadCourseData()
 		if (course.Name.length === 0) { course.Name = $reserve.find(".reserve-name").attr("placeholder"); }
 		
 		ReadTimeSlot(timeslots, section);
-
+		
 		course.SectionList.push(section);
-		RequiredCourseList.push(course);
+		
+		if (!course.Valid()) { $reserve.find(".reserve-enable").removeClass("checked"); }
+
+		if ($reserve.find(".reserve-enable").hasClass("checked"))
+		{
+			RequiredCourseList.push(course);
+		}
 	}
 	
 	console.log("===============\n Found Courses\n===============");

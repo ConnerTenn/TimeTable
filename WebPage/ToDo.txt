@@ -6,12 +6,12 @@
 [ ] fix scrolling
 	[x] course add, reserve add, and generate schedule buttons should not scroll
 	[ ] time picker scrolls off the page
-[ ] fix collapsable list items not working
-[ ] implement visibility css element for hidden and invisible elements (maybe)
-[ ] bind events to templates and use clone(true)
+	[ ] Auto scroll when add course
+[ ] duplicate generated schedule
+	- May occur when reserve times overlap
 
 ==== Features ====
-[ ] change and and remove buttons designs
+[ ] change add and remove buttons designs
 [ ] add undo and redo
 [ ] add settings
 	[ ] enable/disable mouse line
@@ -22,27 +22,13 @@
 	[ ] highlightable schedules
 [ ] highlight sections being shown on active valid schedule
 	[ ] add selected schedule indicator (for when comparing schedules)
+[ ] error and notification popup
 [ ] save and load
 [ ] dynamic list animations
 [ ] add interactivity on schedule canvas
 	[ ] when click on course, scroll into view
+	[ ] ability to disable section
 [ ] add course simultaneous view
 	- shows placements of all course
 	[ ] select to place 
-
-==== Completed ====
-[x] Add horizontal line that follows mouse cursor
-[x] make nameing consistant
-[x] Add support for displaying multiple valid schedules
-[x] add time drop down menu
-[x] Add reserved time periods
-[x] coloured courses
-[x] add schedule result switching
-[x] timepicker postion should take scrolling into account
-[x] offset schedule time markers
-[x] Change schedule grid from using css grid
-[x] add duplicate list item controls
-[x] add course & section enable/disable
-[x] add timeslot labels
-[x] add multi week scheduler and exam scheduler
 

@@ -45,12 +45,18 @@ input[type=text].course-name, input[type=text].section-name, input[type=text].re
 	background: transparent;
 	color: white;
 }
-.course-name::placeholder, .section-name::placeholder, .reserve-name::placeholder {
+.course-name::placeholder, .reserve-name::placeholder {
+	color: #273746;
+	font-weight: bold;
+}
+.section-name::placeholder {
 	color: lightgray;
+	font-weight: bold;
 }
 
 .remove, .clone, .enable {
 	float: right;
+	cursor: pointer;
 }
 
 .clone {
@@ -66,8 +72,8 @@ input[type=text].course-name, input[type=text].section-name, input[type=text].re
 .enable {
 	background: #555555;
 	border: none;
-	border-radius: 50%;
-	width: 18px;
+	border-radius: 30%;
+	width: 25px;
 	height: 18px;
 	border: solid 2px lightgray;
 	box-sizing: border-box;
@@ -131,7 +137,13 @@ input[type=text].course-name, input[type=text].section-name, input[type=text].re
 	background-color: #2E4053;
 	border-radius: 10px;
 }
-
+input[type=text].time-slot-name {
+	box-sizing: border-box;
+	font-size: 1em;
+	padding: 2px;
+	height: 25px;
+	width: 180px;
+}
 input[type=text].time-start, input[type=text].time-end{
 	width: 80px;
 	display: inline-block;
@@ -463,7 +475,7 @@ button.gen-schedule {
 	display:block;
 	position:absolute;
 	color: white;
-	background:blue;
+	background:#303030;
 	width:100px;
 	height:300px;
 	overflow-y:scroll;
