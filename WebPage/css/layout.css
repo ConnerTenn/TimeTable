@@ -311,7 +311,7 @@ button.gen-schedule {
 
 .list-scroll {
 	overflow-y: scroll;
-	max-height: 85vh;
+	max-height: 95vh;
 	margin: 10px 0px;
 }
 
@@ -398,4 +398,15 @@ input[type=text] {
 
 .visible {
 	visibility: visible;
+}
+
+.money-maker {
+	margin-top: 20px;
+	width: 100%;
+	height: 100px;
+	background: darkcyan;
+	text-align: center;
+	color: white;
+	box-sizing: border-box;
+	padding: 8%;
 }
